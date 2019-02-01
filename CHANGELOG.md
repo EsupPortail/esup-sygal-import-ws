@@ -62,3 +62,7 @@ des acteurs.
     
     On n'exclue plus les financements pour lesquels l'année n'est pas renseignée. 
     Quand le cas se présente on force par la 1ère année d'inscription administrative en thèse.
+
+## v1.2.4 (01/02/2019)
+
+- [BUGFIX] Correction du numéro de version '1.2.2' retournée par le WS alors qu'il était en version 1.2.3. 
