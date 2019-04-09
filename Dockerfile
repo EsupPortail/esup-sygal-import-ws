@@ -1,3 +1,8 @@
+###########################################################################################
+#
+#                               Image pour le dev.
+#
+###########################################################################################
 
 ARG PHP_VERSION
 
@@ -15,7 +20,7 @@ ADD docker/apache-ports.conf    ${APACHE_CONF_DIR}/ports.conf
 ADD docker/apache-site.conf     ${APACHE_CONF_DIR}/sites-available/app.conf
 ADD docker/apache-site-ssl.conf ${APACHE_CONF_DIR}/sites-available/app-ssl.conf
 ADD docker/fpm/pool.d/app.conf  ${PHP_CONF_DIR}/fpm/pool.d/app.conf
-ADD docker/fpm/conf.d/app.ini   ${PHP_CONF_DIR}/fpm/conf.d/
+ADD docker/fpm/conf.d/app.ini   ${PHP_CONF_DIR}/fpm/conf.d/90-app.ini
 
 RUN a2ensite app app-ssl && \
     service php${PHP_VERSION}-fpm reload
