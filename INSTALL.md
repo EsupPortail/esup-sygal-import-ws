@@ -107,36 +107,16 @@ cp -n database.local.php.dist database.local.php
 
 ### Configuration PHP pour le WS
 
-Créez/corrigez le fichier de config PHP `/etc/php/7.0/fpm/conf.d/90-app.ini` comme suit :
+Si vous êtes sur un serveur de PROD, corrigez les lignes suivantes du fichier de config PHP 
+`/etc/php/7.0/fpm/conf.d/90-app.ini` :
 
-    date.timezone = Europe/Paris
-    short_open_tag = Off
-    expose_php = Off
-    #display_startup_errors = On
-    #error_reporting = E_ALL & ~E_DEPRECATED & ~E_NOTICE
     display_errors = Off
-    # NB: ne peut-être supérieur au memory_limit du php.ini
-    memory_limit = 256M
-    
-    ;opcache.error_log=/var/log/php_opcache_error.log
+    ...
+    error_reporting = 0
+    ...
     opcache.enable = 1
-    opcache.memory_consumption = 256
-    opcache.interned_strings_buffer = 8
-    opcache.max_wasted_percentage = 5
-    opcache.max_accelerated_files = 16000
-    ; http://php.net/manual/en/opcache.configuration.php#ini.opcache.revalidate-freq
-    ; defaults to zend opcache checking every 180 seconds for PHP file changes
-    ; set to zero to check every second if you are doing alot of frequent
-    ; php file edits/developer work
-    ; opcache.revalidate_freq=0
-    opcache.revalidate_freq = 180
-    opcache.fast_shutdown = 0
-    opcache.enable_cli = 0
-    opcache.save_comments = 1
-    opcache.enable_file_override = 1
-    opcache.validate_timestamps = 1
-    opcache.huge_code_pages = 0
-    
+    ...
+    xdebug.enable = 0
 
 ### Interface d'admin Apigility
 
@@ -146,10 +126,6 @@ Assurez-vous de bien désactiver le mode développement :
 composer development-disable
 ```
 
-Pour passer en mode développement et ouvrir l'accès à cette interface de modification du WS :
-```bash
-composer development-enable
-``` 
 
 
 Base de données
@@ -173,9 +149,10 @@ Chacun des répertoires contient :
 Réseau
 ------
 
-Vous devez autoriser le serveur sur lequel est installé le WS à être interrogé. par le serveur sur lequel est installé 
+Vous devez autoriser le serveur sur lequel est installé le WS à être interrogé par le serveur sur lequel est installé 
 SyGAL. 
 Il est conseillé de restreindre cette autorisation à cette seule adresse IP d'origine.
+
 
 
 Test
