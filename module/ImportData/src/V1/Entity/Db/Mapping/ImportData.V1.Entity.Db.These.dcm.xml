@@ -2,7 +2,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity name="ImportData\V1\Entity\Db\These" table="SYGAL_THESE">
+    <entity name="ImportData\V1\Entity\Db\These" table="SYGAL_THESE_2">
         <id    name="id"                      type="string"   column="ID"/>
         <field name="sourceId"                type="string"   column="SOURCE_ID"            length="6"      nullable="true"/>
         <field name="etatThese"               type="string"   column="ETA_THS"              length="1"      nullable="true"/>
@@ -12,7 +12,6 @@
         <field name="title"                   type="string"   column="LIB_THS"              length="800"    nullable="true"/>
         <field name="codeLNG"                 type="string"   column="COD_LNG"              length="4"      nullable="true"/>
         <field name="datePremiereInsc"        type="datetime" column="DAT_DEB_THS"                          nullable="true"/>
-        <field name="anneeUnivPremiereInsc"   type="integer"  column="COD_ANU_PRM_IAE"                      nullable="true"/>
         <field name="uniteRechId"             type="string"   column="UNITE_RECH_ID"        length="10"     nullable="true"/>
         <field name="ecoleDoctId"             type="string"   column="ECOLE_DOCT_ID"        length="4"      nullable="true"/>
         <field name="libPaysCotut"            type="string"   column="LIB_PAY"              length="40"     nullable="true"/>
