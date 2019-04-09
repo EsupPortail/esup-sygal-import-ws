@@ -1,34 +1,50 @@
-# Installation du web service `sygal-import-ws`
+Installation du web service `sygal-import-ws`
+=============================================
 
 
-## Applicatif
-
+Applicatif
+----------
 
 ### Première obtention des sources et installation du serveur 
 
-Sur un serveur Debian Stretch, lancez les commandes suivantes pour obtenir les sources du WS :
+*NB: la procédure proposée ici part d'un serveur *Debian Stretch* tout nu et couvre l'installation de tous les packages 
+requis.* Si ce n'était pas le cas, merci de le signaler.
+
+En `root` sur votre serveur, pour obtenir les sources du WS, lancez l'une des commandes suivantes en fonction 
+du site sur lequel vous lisez la présente page :
 ```bash
-git clone https://git.unicaen.fr/open-source/sygal-import-WS.git /var/www/sygal-import-WS
+# Si vous êtes sur git.unicaen.fr :
+git clone https://git.unicaen.fr/open-source/sygal-import-ws.git /app
+
+# Si vous êtes sur github.com :
+git clone https://github.com/EsupPortail/sygal-import-ws.git /app
 ```
+
+*NB: merci de respecter dans un premier temps le choix de `/app` comme répertoire d'installation. 
+Libre à vous une fois que tout fonctionne de changer d'emplacement et de modifier en conséquence les configs
+nécessaires.*
+
+### Configuration du serveur
 
 Ensuite, placez-vous dans le répertoire des sources et jetez un oeil au script `Dockerfile.sh`.
 Ce script est en quelque sorte l'équivalent du `Dockerfile` du WS traduit en bash. 
 (Vous y verrez que le dépôt git d'une image Docker Unicaen est cloné pour lancer 
 son script `Dockerfile.sh` qui est lui aussi l'équivalent du `Dockerfile` de l'image 
 traduit en bash.)
+
 Lancez le script `Dockerfile.sh` :
 ```bash
-cd /var/www/sygal-import-WS
-source Dockerfile.sh
+cd /app
+bash Dockerfile.sh 7.0
 ```
 
 Ensuite, vérifiez et ajustez si besoin sur votre serveur les fichiers de configs suivants,
 créés par le script `Dockerfile.sh` :
 - ${APACHE_CONF_DIR}/ports.conf
-- ${APACHE_CONF_DIR}/sites-available/sygal-import-ws.conf
-- ${APACHE_CONF_DIR}/sites-available/sygal-import-ws-ssl.conf  
-- ${PHP_CONF_DIR}/fpm/pool.d/sygal-import-ws.conf
-- ${PHP_CONF_DIR}/fpm/conf.d/
+- ${APACHE_CONF_DIR}/sites-available/app.conf
+- ${APACHE_CONF_DIR}/sites-available/app-ssl.conf  
+- ${PHP_CONF_DIR}/fpm/pool.d/app.conf
+- ${PHP_CONF_DIR}/fpm/conf.d/90-app.ini
 
 NB: Vérifiez dans le script `Dockerfile.sh` que vous venez de lancer mais normalement 
 `APACHE_CONF_DIR=/etc/apache2` et `PHP_CONF_DIR=/etc/php/7.0`.
@@ -83,12 +99,15 @@ doivent être complétés puis renommés :
   - **database.local.php.dist** : qui est utilisé pour la connection à la BDD.
     - clés `host`, `dbname`, `port`, `user`, `password` : les infos d'accès à la BDD.
  
-Une fois ces fichiers complétés, changez leur extension `.php.dist` en `.php`.
-
+Une fois ces fichiers complétés, supprimez l'extension `.dist`, ex :
+```bash
+cp -n local.php.dist          local.php 
+cp -n database.local.php.dist database.local.php
+```
 
 ### Configuration PHP pour le WS
 
-Créez/corrigez le fichier de config PHP `/etc/php/7.0/fpm/conf.d/99-sygal-import-WS.ini` comme suit :
+Créez/corrigez le fichier de config PHP `/etc/php/7.0/fpm/conf.d/90-app.ini` comme suit :
 
     date.timezone = Europe/Paris
     short_open_tag = Off
@@ -133,10 +152,11 @@ composer development-enable
 ``` 
 
 
-## Base de données
+Base de données
+---------------
 
-Le WS interroge des vues que vous devez créer dans la base de données de votre logiciel de scolarité (Apogée, Physalis), ou autre part
-si c'est possible, à vous de voir.
+Le WS interroge des vues que vous devez créer dans la base de données de votre logiciel de scolarité (Apogée, Physalis), 
+ou autre part si c'est possible, à vous de voir.
 
 En fonction du logiciel de scolarité que votre établissement utilise, intéressez-vous dans le répertoire [`data/sql`](data/sql) 
 à l'un des répertoires suivants :
@@ -147,3 +167,19 @@ Chacun des répertoires contient :
 - Un script pour créer les vues communes à tous les établissements ayant le logiciel de scolarité en question.
 - Un script pour créer les vues propres à un établissement en particulier.
   Si votre établissement ne figure pas dans la liste, il faudra écrire les vues adaptées à votre contexte.
+
+
+
+Réseau
+------
+
+Vous devez autoriser le serveur sur lequel est installé le WS à être interrogé. par le serveur sur lequel est installé 
+SyGAL. 
+Il est conseillé de restreindre cette autorisation à cette seule adresse IP d'origine.
+
+
+Test
+----
+
+Reportez-vous au [README.md](README.md) pour tester l'appel du WS en ligne de commande depuis le serveur
+sur lequel est installé SyGAL.
