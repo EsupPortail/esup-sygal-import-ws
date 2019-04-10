@@ -506,25 +506,31 @@ select distinct
 /
 
 create view SYGAL_ROLE_TR as
-select 'A', 'A' from dual union
-  select 'B', 'B' from dual union
-  select 'C', 'C' from dual union
-  select 'D', 'D' from dual union
-  select 'K', 'K' from dual union
-  select 'M', 'M' from dual union
-  select 'P', 'P' from dual union
-  select 'R', 'R' from dual
+  with tmp(FROM_COD_ROJ, TO_COD_ROJ) as (
+    select 'A', 'A' from dual union -- A : Membre absent
+    select 'B', 'B' from dual union -- B : Co-encadrant
+    select 'C', 'C' from dual union -- C : Chef de laboratoire
+    select 'D', 'D' from dual union -- D : Directeur de thèse
+    select 'K', 'K' from dual union -- K : Co-directeur de thèse
+    select 'M', 'M' from dual union -- M : Membre du jury
+    select 'P', 'P' from dual union -- P : Président du jury
+    select 'R', 'R' from dual       -- R : Rapporteur du jury
+    )
+    select * from tmp
 /
 
 create view SYGAL_ROLE_NOMENC as
-select 'A', 'Absent',     'Membre absent'         from dual union
-  select 'B', 'Co-encadr',  'Co-encadrant'          from dual union
-  select 'C', 'Chef Labo',  'Chef de laboratoire'   from dual union
-  select 'D', 'Directeur',  'Directeur de thèse'    from dual union
-  select 'K', 'Co-direct',  'Co-directeur de thèse' from dual union
-  select 'M', 'Membre',     'Membre du jury'        from dual union
-  select 'P', 'Président',  'Président du jury'     from dual union
-  select 'R', 'Rapporteur', 'Rapporteur du jury'    from dual
+  with tmp(COD_ROJ, LIC_ROJ, LIB_ROJ) as (
+    select 'A', 'Absent',     'Membre absent'         from dual union
+    select 'B', 'Co-encadr',  'Co-encadrant'          from dual union
+    select 'C', 'Chef Labo',  'Chef de laboratoire'   from dual union
+    select 'D', 'Directeur',  'Directeur de thèse'    from dual union
+    select 'K', 'Co-direct',  'Co-directeur de thèse' from dual union
+    select 'M', 'Membre',     'Membre du jury'        from dual union
+    select 'P', 'Président',  'Président du jury'     from dual union
+    select 'R', 'Rapporteur', 'Rapporteur du jury'    from dual
+  )
+  select * from tmp
 /
 
 create view SYGAL_ROLE_JURY as
@@ -679,39 +685,42 @@ with inscription_admin as (
 /
 
 create view SYGAL_ORIGINE_FINANCEMENT as
-select '10', 'apogee', '10', 'SALARIE',     'Etudiant salarié'                         from dual union all
-  select '11', 'apogee', '11', 'SANS FIN',    'Sans financement'                         from dual union all
-  select '13', 'apogee', '13', 'DOT EPSCP',   'Dotation des EPSCP'                       from dual union all
-  select '14', 'apogee', '14', 'DOT EPST',    'Dotation des EPST'                        from dual union all
-  select '15', 'apogee', '15', 'POLYTECH',    'Programmes Spé. Normaliens, Polytechnici' from dual union all
-  select '16', 'apogee', '16', 'HANDICAP',    'Programme Spécifique Handicap'            from dual union all
-  select '17', 'apogee', '17', 'DEFENSE',     'Ministère de la Défense (dont DGA)'       from dual union all
-  select '18', 'apogee', '18', 'AGRICULTUR',  'Ministère de l''Agriculture'              from dual union all
-  select '19', 'apogee', '19', 'AFF ETRANG',  'Ministère des Affaires Etrangères'        from dual union all
-  select '20', 'apogee', '20', 'SANTE',       'Ministère de la Santé'                    from dual union all
-  select '21', 'apogee', '21', 'AUTRES MIN',  'Autres Ministères'                        from dual union all
-  select '22', 'apogee', '22', 'DOT EPIC',    'Dotation des EPIC'                        from dual union all
-  select '23', 'apogee', '23', 'DOT EPA',     'Dotation des EPA'                         from dual union all
-  select '24', 'apogee', '24', 'NORMANDIE',   'Région Normandie'                         from dual union all
-  select '25', 'apogee', '25', 'AUT COLLEC',  'Autre Collectivité Territoriale'          from dual union all
-  select '26', 'apogee', '26', 'ANR',         'ANR'                                      from dual union all
-  select '27', 'apogee', '27', 'IDEX',        'IDEX'                                     from dual union all
-  select '28', 'apogee', '28', 'PIA',         'Autres dispositifs du PIA (dont LABEX)'   from dual union all
-  select '29', 'apogee', '29', 'AUT AFFPR',   'Autres Finan. Pub. d''Agences Françaises' from dual union all
-  select '30', 'apogee', '30', 'FI PUB PRV',  'Financements Mixtes Public Privé'         from dual union all
-  select '31', 'apogee', '31', 'CIFRE',       'Conventions CIFRE'                        from dual union all
-  select '32', 'apogee', '32', 'PART RECH',   'Partenariat de Recherche'                 from dual union all
-  select '33', 'apogee', '33', 'MECENAT',     'Mécénat y compris Fondations et Asso.'    from dual union all
-  select '34', 'apogee', '34', 'ERC',         'ERC'                                      from dual union all
-  select '35', 'apogee', '35', 'MARIE CURI',  'Actions Marie Sklodowska Curie'           from dual union all
-  select '36', 'apogee', '36', 'ERASMUS',     'ERASMUS'                                  from dual union all
-  select '37', 'apogee', '37', 'AUT PRO EU',  'Autre Programme Européen'                 from dual union all
-  select '38', 'apogee', '38', 'GOUV EUROP',  'Gouvernement Etranger Européen'           from dual union all
-  select '39', 'apogee', '39', 'GOUV NON E',  'Gouvernement Etranger Hors Europe'        from dual union all
-  select '40', 'apogee', '40', 'AUT FI ETR',  'Autres Financements Etrangers'            from dual union all
-  select '41', 'apogee', '41', 'ENT ETR',     'Entreprise Etrangère'                     from dual union all
-  select '42', 'apogee', '42', 'ORG FC',      'Financements Organismes FC'               from dual union all
-  select '43', 'apogee', '43', 'ORG INTER',   'Organismes Internationaux'                from dual
+  with tmp(ID, SOURCE_ID, COD_OFI, LIC_OFI, LIB_OFI) as (
+    select '10', 'apogee', '10', 'SALARIE',     'Etudiant salarié'                         from dual union all
+    select '11', 'apogee', '11', 'SANS FIN',    'Sans financement'                         from dual union all
+    select '13', 'apogee', '13', 'DOT EPSCP',   'Dotation des EPSCP'                       from dual union all
+    select '14', 'apogee', '14', 'DOT EPST',    'Dotation des EPST'                        from dual union all
+    select '15', 'apogee', '15', 'POLYTECH',    'Programmes Spé. Normaliens, Polytechnici' from dual union all
+    select '16', 'apogee', '16', 'HANDICAP',    'Programme Spécifique Handicap'            from dual union all
+    select '17', 'apogee', '17', 'DEFENSE',     'Ministère de la Défense (dont DGA)'       from dual union all
+    select '18', 'apogee', '18', 'AGRICULTUR',  'Ministère de l''Agriculture'              from dual union all
+    select '19', 'apogee', '19', 'AFF ETRANG',  'Ministère des Affaires Etrangères'        from dual union all
+    select '20', 'apogee', '20', 'SANTE',       'Ministère de la Santé'                    from dual union all
+    select '21', 'apogee', '21', 'AUTRES MIN',  'Autres Ministères'                        from dual union all
+    select '22', 'apogee', '22', 'DOT EPIC',    'Dotation des EPIC'                        from dual union all
+    select '23', 'apogee', '23', 'DOT EPA',     'Dotation des EPA'                         from dual union all
+    select '24', 'apogee', '24', 'NORMANDIE',   'Région Normandie'                         from dual union all
+    select '25', 'apogee', '25', 'AUT COLLEC',  'Autre Collectivité Territoriale'          from dual union all
+    select '26', 'apogee', '26', 'ANR',         'ANR'                                      from dual union all
+    select '27', 'apogee', '27', 'IDEX',        'IDEX'                                     from dual union all
+    select '28', 'apogee', '28', 'PIA',         'Autres dispositifs du PIA (dont LABEX)'   from dual union all
+    select '29', 'apogee', '29', 'AUT AFFPR',   'Autres Finan. Pub. d''Agences Françaises' from dual union all
+    select '30', 'apogee', '30', 'FI PUB PRV',  'Financements Mixtes Public Privé'         from dual union all
+    select '31', 'apogee', '31', 'CIFRE',       'Conventions CIFRE'                        from dual union all
+    select '32', 'apogee', '32', 'PART RECH',   'Partenariat de Recherche'                 from dual union all
+    select '33', 'apogee', '33', 'MECENAT',     'Mécénat y compris Fondations et Asso.'    from dual union all
+    select '34', 'apogee', '34', 'ERC',         'ERC'                                      from dual union all
+    select '35', 'apogee', '35', 'MARIE CURI',  'Actions Marie Sklodowska Curie'           from dual union all
+    select '36', 'apogee', '36', 'ERASMUS',     'ERASMUS'                                  from dual union all
+    select '37', 'apogee', '37', 'AUT PRO EU',  'Autre Programme Européen'                 from dual union all
+    select '38', 'apogee', '38', 'GOUV EUROP',  'Gouvernement Etranger Européen'           from dual union all
+    select '39', 'apogee', '39', 'GOUV NON E',  'Gouvernement Etranger Hors Europe'        from dual union all
+    select '40', 'apogee', '40', 'AUT FI ETR',  'Autres Financements Etrangers'            from dual union all
+    select '41', 'apogee', '41', 'ENT ETR',     'Entreprise Etrangère'                     from dual union all
+    select '42', 'apogee', '42', 'ORG FC',      'Financements Organismes FC'               from dual union all
+    select '43', 'apogee', '43', 'ORG INTER',   'Organismes Internationaux'                from dual
+  )
+  select * from tmp
 /
 
 create view SYGAL_TITRE_ACCES as
