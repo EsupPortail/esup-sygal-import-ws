@@ -2,7 +2,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity name="ImportData\V1\Entity\Db\These" table="SYGAL_THESE_2">
+    <entity name="ImportData\V1\Entity\Db\These" table="SYGAL_THESE">
         <id    name="id"                      type="string"   column="ID"/>
         <field name="sourceId"                type="string"   column="SOURCE_ID"            length="6"      nullable="true"/>
         <field name="etatThese"               type="string"   column="ETA_THS"              length="1"      nullable="true"/>
