@@ -1163,6 +1163,21 @@ return [
                 ],
                 'validators' => [],
             ],
+            2 => [
+                'required' => false,
+                'validators' => [],
+                'filters' => [
+                    0 => [
+                        'name' => \Zend\Filter\StringTrim::class,
+                        'options' => [],
+                    ],
+                    1 => [
+                        'name' => \Zend\Filter\StripTags::class,
+                        'options' => [],
+                    ],
+                ],
+                'name' => 'ine',
+            ],
         ],
         'ImportData\\V1\\Rest\\Individu\\Validator' => [
             0 => [
