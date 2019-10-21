@@ -18,6 +18,11 @@ class Doctorant
     protected $individuId;
 
     /**
+     * @var string
+     */
+    protected $ine;
+
+    /**
      * @return int
      */
     public function getId()
@@ -63,5 +68,13 @@ class Doctorant
     public function setIndividuId($individuId)
     {
         $this->individuId = $individuId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIne()
+    {
+        return $this->ine;
     }
 }
