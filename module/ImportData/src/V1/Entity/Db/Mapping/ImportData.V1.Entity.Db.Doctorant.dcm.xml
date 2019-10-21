@@ -6,6 +6,6 @@
         <id name="id"               type="string"                      column="ID" />
         <field name="sourceId"      type="string"       length="6"      column="SOURCE_ID"      nullable="true"/>
         <field name="individuId"    type="string"                      column="INDIVIDU_ID"    nullable="true"/>
-
+        <field name="ine"           type="string"       length="64"    column="INE"    nullable="true"/>
     </entity>
 </doctrine-mapping>
