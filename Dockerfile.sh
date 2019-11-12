@@ -1,10 +1,23 @@
 #!/usr/bin/env bash
 
 #
-# Script d'install d'un serveur, inspiré du Dockerfile.
+# Script d'install d'un serveur, traduction du Dockerfile.
 #
 
-DIR=$(cd `dirname $0` && pwd)
+usage() {
+  cat << EOF
+Script d'install d'un serveur, traduction du Dockerfile.
+Usage: $0 <version de PHP>
+EOF
+  exit 0;
+}
+
+[[ -z "$1" ]] && usage
+
+################################################################################################################
+
+PHP_VERSION="$1"
+APP_DIR=$(cd `dirname $0` && pwd)
 
 set -e
 
@@ -18,21 +31,25 @@ apt-get install -y \
 export UNICAEN_IMAGE_TMP_DIR=/tmp/docker-unicaen-image
 git clone https://git.unicaen.fr/open-source/docker/unicaen-image.git ${UNICAEN_IMAGE_TMP_DIR}
 cd ${UNICAEN_IMAGE_TMP_DIR}
-source Dockerfile.sh
+. Dockerfile.sh ${PHP_VERSION}
 
 
-cd ${DIR}
+cd ${APP_DIR}
 
 # NB: Variables d'env positionnées par ${UNICAEN_IMAGE_TMP_DIR}/Dockerfile.sh
 # APACHE_CONF_DIR=/etc/apache2 \
-# PHP_CONF_DIR=/etc/php/7.0
+# PHP_CONF_DIR=/etc/php/$1
 
 # Configuration Apache et FPM
 cp docker/apache-ports.conf    ${APACHE_CONF_DIR}/ports.conf
-cp docker/apache-site.conf     ${APACHE_CONF_DIR}/sites-available/sygal-import-ws.conf
-cp docker/apache-site-ssl.conf ${APACHE_CONF_DIR}/sites-available/sygal-import-ws-ssl.conf
-cp docker/fpm/pool.d/app.conf  ${PHP_CONF_DIR}/fpm/pool.d/sygal-import-ws.conf
-cp docker/fpm/conf.d/app.ini   ${PHP_CONF_DIR}/fpm/conf.d/
+cp docker/apache-site.conf     ${APACHE_CONF_DIR}/sites-available/app.conf
+cp docker/apache-site-ssl.conf ${APACHE_CONF_DIR}/sites-available/app-ssl.conf
+cp docker/fpm/pool.d/app.conf  ${PHP_CONF_DIR}/fpm/pool.d/app.conf
+cp docker/fpm/conf.d/app.ini   ${PHP_CONF_DIR}/fpm/conf.d/90-app.ini
 
-a2ensite sygal-import-ws sygal-import-ws-ssl && \
-    service php7.0-fpm reload
+sed -i -re 's/SetEnv APPLICATION_ENV "(development|test)"/SetEnv APPLICATION_ENV "production"/' \
+    ${APACHE_CONF_DIR}/sites-available/app-ssl.conf
+
+a2ensite app app-ssl && \
+    service apache2 reload && \
+    service php${PHP_VERSION}-fpm reload

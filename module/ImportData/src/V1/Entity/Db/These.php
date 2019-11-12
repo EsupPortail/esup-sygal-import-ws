@@ -18,7 +18,6 @@ class These
     protected $title;
     protected $codeLNG;
     protected $datePremiereInsc;
-    protected $anneeUnivPremiereInsc;
     protected $uniteRechId;
     protected $ecoleDoctId;
     protected $libPaysCotut;
@@ -111,14 +110,6 @@ class These
     public function getDatePremiereInsc()
     {
         return $this->datePremiereInsc;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAnneeUnivPremiereInsc()
-    {
-        return $this->anneeUnivPremiereInsc;
     }
 
     /**

@@ -5,10 +5,12 @@ services:
     container_name: sygal-import-ws-container
     build:
       context: .
+      args:
+        PHP_VERSION: 7.0
     ports:
      - "8080:80"
      - "8443:443"
     volumes:
-     - .:/var/www/sygal-import-ws
-    working_dir: /var/www/sygal-import-ws
+     - .:/app
+    working_dir: /app
     network_mode: bridge
