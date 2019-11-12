@@ -12,7 +12,6 @@
         <field name="title"                   type="string"   column="LIB_THS"              length="800"    nullable="true"/>
         <field name="codeLNG"                 type="string"   column="COD_LNG"              length="4"      nullable="true"/>
         <field name="datePremiereInsc"        type="datetime" column="DAT_DEB_THS"                          nullable="true"/>
-        <field name="anneeUnivPremiereInsc"   type="integer"  column="COD_ANU_PRM_IAE"                      nullable="true"/>
         <field name="uniteRechId"             type="string"   column="UNITE_RECH_ID"        length="10"     nullable="true"/>
         <field name="ecoleDoctId"             type="string"   column="ECOLE_DOCT_ID"        length="4"      nullable="true"/>
         <field name="libPaysCotut"            type="string"   column="LIB_PAY"              length="40"     nullable="true"/>

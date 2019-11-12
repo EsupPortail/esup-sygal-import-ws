@@ -19,12 +19,7 @@ return [
         'authentication' => [
             'adapters' => [
                 'basic' => [
-                    'adapter' => \ZF\MvcAuth\Authentication\HttpAdapter::class,
                     'options' => [
-                        'accept_schemes' => [
-                            0 => 'basic',
-                        ],
-                        'realm' => 'api',
                         'htpasswd' => __DIR__ . '/../users.htpasswd',
                     ],
                 ],

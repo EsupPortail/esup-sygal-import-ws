@@ -6,7 +6,7 @@
 -- Web Service d'import de données
 -- -------------------------------
 --
--- Vues Physalis INSA.
+-- Vues Physalis propre à votre établissement, à personnaliser.
 --
 
 /*
