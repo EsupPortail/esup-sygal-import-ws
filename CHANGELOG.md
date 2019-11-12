@@ -7,7 +7,17 @@ v1.2.6 (21/10/2019)
 ### Améliorations
 
 - Prise en compte de l'INE (identifiant national étudiant) ajouté dans la vue SYGAL_DOCTORANT. 
-  Utile pour l'enquête ministérielle. 
+  Utile pour l'enquête ministérielle.
+- Chaque établissement peut fournir à SyGAL le libellé du "tribunal compétent" 
+  mentionné dans la convention de mise en ligne générée par l'application.  
+  
+### Corrections
+
+- Abandon de la colonne `COD_ANU_PRM_IAE` dans `SYGAL_THESE` qui est redondante du fait qu'une vue
+  `SYGAL_THESE_ANNEE_UNIV` existe. De plus, cette colonne remontait une année de 1ere inscription erronée en cas 
+  de changement de discipline. 
+- Correction de la vue `SYGAL_ACTEUR` pour éviter des doublons (rarissimes) dans la colonne `ID` pouvant 
+  faire échouer l'import dans SyGAL.  
 
 
 v1.2.5 (09/04/2019)
