@@ -11,7 +11,7 @@
 
 
 --
--- La vue SYGAL_MV_EMAIL est chargée de fournir les adresses électroniques des individus gravitant autour des thèses.
+-- SYGAL_MV_EMAIL est chargée de fournir les adresses électroniques des individus gravitant autour des thèses.
 -- Par défaut, on crée une vue ne ramenant rien.
 --
 -- Les solutions possibles sont :
@@ -29,7 +29,7 @@ create view SYGAL_MV_EMAIL as
 
 
 
-create view SYGAL_SOURCE as
+create view V_SYGAL_SOURCE as
 select
     'apogee' as id,
     'apogee' as code,
@@ -38,7 +38,7 @@ select
   from dual
 /
 
-create view SYGAL_VARIABLE as
+create view V_SYGAL_VARIABLE as
 select
     'apogee'            as source_id,       -- Id de la source
     cod_vap             as id,
@@ -65,10 +65,10 @@ select
     DATE_DEB_VALIDITE,
     DATE_FIN_VALIDITE
   from
-    SYGAL_VARIABLE_MANU
+    V_SYGAL_VARIABLE_MANU
 /
 
-create view SYGAL_INDIVIDU as
+create view V_SYGAL_INDIVIDU as
 select distinct
     'apogee'                                            as source_id,       -- Id de la source
     'doctorant'                                         as type,
@@ -174,7 +174,7 @@ select distinct
   )
 /
 
-create view SYGAL_DOCTORANT as
+create view V_SYGAL_DOCTORANT as
 select distinct
     'apogee' as source_id, -- Id de la source
     ind.cod_etu                                         as id,            -- Identifiant du doctorant
@@ -201,7 +201,7 @@ select distinct
         and cod_etu is not null
 /
 
-create view SYGAL_THESE as
+create view V_SYGAL_THESE as
   with inscription_administrative as (
     select distinct
       ths.cod_ind,
@@ -250,7 +250,7 @@ create view SYGAL_THESE as
       ths.lib_ths,                                      -- Titre de la these
       ths.cod_lng,                                      -- Code langue etrangere du titre
       ths.dat_deb_ths,                                  -- Date de 1ere inscription
-      null as cod_anu_prm_iae,                          -- DEPRECATED (cf. SYGAL_THESE_ANNEE_UNIV)
+      null as cod_anu_prm_iae,                          -- DEPRECATED (cf. V_SYGAL_THESE_ANNEE_UNIV)
 
       edo.cod_nat_edo as ecole_doct_id,                 -- Identifiant de l'ecole doctorale
       ths.cod_eqr as unite_rech_id,                     -- Identifiant de l'unité de recherche principale
@@ -303,7 +303,7 @@ create view SYGAL_THESE as
         anc.cod_dip_anc is null
 /
 
-create view SYGAL_STRUCTURE as
+create view V_SYGAL_STRUCTURE as
 select
     'apogee' as source_id,                  -- Id de la source
     'ecole-doctorale' as TYPE_STRUCTURE_ID, -- Type de structure
@@ -416,7 +416,7 @@ select
   where per.tem_ext_int_per = 'X'
 /
 
-create view SYGAL_ECOLE_DOCT as
+create view V_SYGAL_ECOLE_DOCT as
 select distinct
     'apogee' as source_id,            -- Id de la source
     edo.cod_nat_edo as structure_id,  -- Id de la structure
@@ -424,7 +424,7 @@ select distinct
   from ecole_doctorale edo
 /
 
-create view SYGAL_UNITE_RECH as
+create view V_SYGAL_UNITE_RECH as
 select distinct
     'apogee' as source_id,        -- Id de la source
     eqr.cod_eqr as structure_id,  -- Id de la structure
@@ -432,7 +432,7 @@ select distinct
   from equipe_rch eqr
 /
 
-create view SYGAL_ETABLISSEMENT as
+create view V_SYGAL_ETABLISSEMENT as
 select distinct
     'apogee' as source_id,        -- Id de la source
     etb.cod_etb as structure_id,  -- Id de la structure
@@ -505,7 +505,7 @@ select distinct
   where per.tem_ext_int_per = 'X'
 /
 
-create view SYGAL_ROLE_TR as
+create view V_SYGAL_ROLE_TR as
   with tmp(FROM_COD_ROJ, TO_COD_ROJ) as (
     select 'A', 'A' from dual union -- A : Membre absent
     select 'B', 'B' from dual union -- B : Co-encadrant
@@ -519,7 +519,7 @@ create view SYGAL_ROLE_TR as
     select * from tmp
 /
 
-create view SYGAL_ROLE_NOMENC as
+create view V_SYGAL_ROLE_NOMENC as
   with tmp(COD_ROJ, LIC_ROJ, LIB_ROJ) as (
     select 'A', 'Absent',     'Membre absent'         from dual union
     select 'B', 'Co-encadr',  'Co-encadrant'          from dual union
@@ -533,26 +533,26 @@ create view SYGAL_ROLE_NOMENC as
   select * from tmp
 /
 
-create view SYGAL_ROLE_JURY as
+create view V_SYGAL_ROLE_JURY as
 select distinct
     rtr.TO_COD_ROJ as COD_ROJ,
     sr.LIB_ROJ,
     sr.LIC_ROJ
   from role_jury ar
-    join SYGAL_ROLE_TR rtr on ar.COD_ROJ = rtr.FROM_COD_ROJ
-    join SYGAL_ROLE_NOMENC sr on sr.COD_ROJ = rtr.TO_COD_ROJ
+    join V_SYGAL_ROLE_TR rtr on ar.COD_ROJ = rtr.FROM_COD_ROJ
+    join V_SYGAL_ROLE_NOMENC sr on sr.COD_ROJ = rtr.TO_COD_ROJ
 /
 
-create view SYGAL_ROLE as
+create view V_SYGAL_ROLE as
 select
     'apogee' as source_id, -- Id de la source
     COD_ROJ as id,         -- Id du rôle
     LIB_ROJ,
     LIC_ROJ
-  from SYGAL_ROLE_JURY
+  from V_SYGAL_ROLE_JURY
 /
 
-create view SYGAL_ACTEUR as
+create view V_SYGAL_ACTEUR as
 with acteur as (
     select
       'D_' || rowid as id,
@@ -632,15 +632,15 @@ with acteur as (
     per.tem_hab_rch_per,                                                                              -- HDR (O/N)
     act.tem_rap_recu                                                                                  -- Rapport recu (O/N)
   from acteur                  act
-    join SYGAL_ROLE_JURY       roj on roj.cod_roj = act.cod_roj
+    join V_SYGAL_ROLE_JURY       roj on roj.cod_roj = act.cod_roj
     join personnel             per on per.cod_per = act.cod_per
     left join corps_per        cps on cps.cod_cps = nvl ( act.cod_cps, per.cod_cps )
     left join etablissement    etb on etb.cod_etb = nvl ( act.cod_etb, per.cod_etb )
     left join pays             pay on pay.cod_pay = etb.cod_pay_adr_etb
-    left join SYGAL_ROLE_JURY  rjc on rjc.cod_roj = act.cod_roj_compl
+    left join V_SYGAL_ROLE_JURY  rjc on rjc.cod_roj = act.cod_roj_compl
 /
 
-create view SYGAL_FINANCEMENT as
+create view V_SYGAL_FINANCEMENT as
 with inscription_admin as (
     select
       iae.cod_ind,
@@ -684,7 +684,7 @@ with inscription_admin as (
       tfi.quotite_tfi
 /
 
-create view SYGAL_ORIGINE_FINANCEMENT as
+create view V_SYGAL_ORIGINE_FINANCEMENT as
   with tmp(ID, SOURCE_ID, COD_OFI, LIC_OFI, LIB_OFI) as (
     select '10', 'apogee', '10', 'SALARIE',     'Etudiant salarié'                         from dual union all
     select '11', 'apogee', '11', 'SANS FIN',    'Sans financement'                         from dual union all
@@ -723,7 +723,7 @@ create view SYGAL_ORIGINE_FINANCEMENT as
   select * from tmp
 /
 
-create view SYGAL_TITRE_ACCES as
+create view V_SYGAL_TITRE_ACCES as
 with inscription_administrative as (
     select
       iae.cod_ind,
@@ -810,7 +810,7 @@ with inscription_administrative as (
     tac.titre_acces_interne_externe is not null
 /
 
-create view SYGAL_THESE_ANNEE_UNIV as
+create view V_SYGAL_THESE_ANNEE_UNIV as
 with old_these as (
     select distinct
       cod_ind,

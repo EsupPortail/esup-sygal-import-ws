@@ -15,7 +15,7 @@
 --   - Adresse mail de contact de la BU
 --   - Adresse mail de contact du bureau des doctorats
 --
-create or replace view SYGAL_VARIABLE_MANU as
+create view V_SYGAL_VARIABLE_MANU as
   select
     'apogee' as source_id,
     'EMAIL_ASSISTANCE' as id,
@@ -50,7 +50,7 @@ create or replace view SYGAL_VARIABLE_MANU as
 --
 -- Vue traduisant les codes rôles en usage dans votre établissement vers les codes compris par SyGAL.
 --
-create or replace view SYGAL_ROLE_TR as
+create view V_SYGAL_ROLE_TR as
   with tmp(FROM_COD_ROJ, TO_COD_ROJ) as (
       select 'A', 'A' from dual union -- A : Membre absent
       select 'B', 'B' from dual union -- B : Co-encadrant
