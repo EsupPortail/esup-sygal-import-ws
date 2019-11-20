@@ -5,12 +5,14 @@
  * The previous config file has been stored in ./config/modules.config.old
  */
 return [
+    'Zend\Log',
     'Zend\\Cache',
     'Zend\\Form',
     'Zend\\Db',
     'Zend\\Filter',
     'Zend\\Hydrator',
     'Zend\\InputFilter',
+    'Zend\Mvc\Console',
     'Zend\\Paginator',
     'Zend\\Router',
     'Zend\\Validator',

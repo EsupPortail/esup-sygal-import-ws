@@ -9,15 +9,15 @@
 -- Vues communes à tous les établissements ayant Physalis.
 --
 
-/*
-create view SYGAL_SOURCE as
-  ...
-*/
 
-/*
-create view SYGAL_VARIABLE as
-  ...
-*/
+create view V_SYGAL_SOURCE as
+select
+    'physalis' as id,
+    'physalis' as code,
+    'Physalis' as libelle,
+    1        as importable
+from dual
+/
 
 /*
 create view SYGAL_INDIVIDU as

@@ -23,7 +23,9 @@
         "doctrine/doctrine-orm-module": "^1.1",
         "zendframework/zend-console": "^2.7",
         "unicaen/oracle": "^1.2",
-        "doctrine/common": "^2.7"
+        "doctrine/common": "^2.7",
+        "zendframework/zend-mvc-console": "^1.2",
+        "zendframework/zend-log": "^2.11"
     },
     "require-dev": {
         "zendframework/zend-developer-tools": "^1.1",
