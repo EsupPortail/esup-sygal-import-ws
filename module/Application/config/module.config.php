@@ -1,15 +1,56 @@
 <?php
-/**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2014-2016 Zend Technologies USA Inc. (http://www.zend.com)
- */
 
 namespace Application;
 
+use Application\Controller\ConsoleController;
+use Application\Service\TableService;
+use Application\Service\TableServiceFactory;
 use Doctrine\DBAL\Logging\EchoSQLLogger;
+use ImportData\V1\Entity\Db\Acteur;
+use ImportData\V1\Entity\Db\Doctorant;
+use ImportData\V1\Entity\Db\EcoleDoctorale;
+use ImportData\V1\Entity\Db\Etablissement;
+use ImportData\V1\Entity\Db\Financement;
+use ImportData\V1\Entity\Db\Individu;
+use ImportData\V1\Entity\Db\Role;
+use ImportData\V1\Entity\Db\Structure;
+use ImportData\V1\Entity\Db\These;
+use ImportData\V1\Entity\Db\TheseAnneeUniv;
+use ImportData\V1\Entity\Db\TitreAcces;
+use ImportData\V1\Entity\Db\UniteRecherche;
+use ImportData\V1\Entity\Db\Variable;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
+    'log' => [
+        'console_logger' => [
+            'writers' => [
+                'stream' => [
+                    'name' => 'stream',
+                    'priority' => 1,
+                    'options' => [
+                        'stream' => 'php://output',
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'services_to_entity_classes' => [
+        'structure'        => Structure::class,
+        'etablissement'    => Etablissement::class,
+        'ecole-doctorale'  => EcoleDoctorale::class,
+        'unite-recherche'  => UniteRecherche::class,
+        'individu'         => Individu::class,
+        'doctorant'        => Doctorant::class,
+        'these'            => These::class,
+        'these-annee-univ' => TheseAnneeUniv::class,
+        'role'             => Role::class,
+        'acteur'           => Acteur::class,
+        'variable'         => Variable::class,
+        //'origine-financement' => n'est plus importé.
+        'financement'      => Financement::class,
+        'titre-acces'      => TitreAcces::class,
+    ],
     'doctrine' => [
         'sql_logger_collector' => [
             'orm_default' => [
@@ -22,9 +63,28 @@ return [
         'invokables' => [
             'echooooo' => EchoSQLLogger::class,
         ],
+        'factories' => [
+            TableService::class => TableServiceFactory::class,
+        ],
     ],
-
-
+    'console' => [
+        'router' => [
+            'routes' => [
+                'update-service-tables' => [
+                    'options' => [
+                        'route'    => 'update-service-tables [--services=] [--verbose]',
+                        'defaults' => [
+                            /**
+                             * @see ConsoleController::updateServiceTablesAction()
+                             */
+                            'controller' => Controller\ConsoleController::class,
+                            'action'     => 'update-service-tables',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
     'router' => [
         'routes' => [
             'home' => [
@@ -42,6 +102,7 @@ return [
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
+            Controller\ConsoleController::class => Controller\ConsoleControllerFactory::class,
         ],
     ],
     'view_manager' => [

@@ -1,7 +1,17 @@
 Journal des modifications
 =========================
 
-v1.2.6 (21/10/2019)
+1.3.0 (20/11/2019)
+------------------
+
+### Améliorations
+
+- Transformation des vues SYGAL_* en tables pour réduire les temps de réponses du web service.
+  L'utilisation de vues V_SYGAL_* perdure néanmoins comme source de données de ces tables.
+  Le contenu de ces tables est mis à jour par un script PHP à CRONer.
+
+
+v1.2.6 (12/11/2019)
 -------------------
 
 ### Améliorations
