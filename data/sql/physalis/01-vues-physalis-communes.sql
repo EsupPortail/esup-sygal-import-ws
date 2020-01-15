@@ -198,6 +198,130 @@ left outer join grhum.etudiant e on d.ETUD_NUMERO =  e.ETUD_NUMERO;
 
 --------------------------------------------------------------------------------
 
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_ECOLE_DOCT" ("STRUCTURE_ID", "SOURCE_ID", "ID") AS 
+  SELECT 
+distinct
+etab_cot.c_structure   AS STRUCTURE_ID,
+'physalis' as source_id,
+etab_cot.c_structure as   ID
+
+
+FROM  GRHUM.REPART_ASSOCIATION RA 
+LEFT OUTER JOIN GRHUM.ASSOCIATION A_COT ON A_COT.ASS_ID = RA.ASS_ID
+LEFT OUTER JOIN grhum.structure_ulr etab_cot on etab_cot.pers_id = ra.pers_id
+
+
+-- adresse de l etablissement de cotutelle
+LEFT OUTER JOIN GRHUM.REPART_PERSONNE_ADRESSE RPA_COT ON RPA_COT.PERS_ID = etab_cot.PERS_ID AND RPA_COT.RPA_PRINCIPAL = 'O'
+LEFT OUTER JOIN GRHUM.ADRESSE AD_cot ON RPA_COT.ADR_ORDRE = AD_cot.ADR_ORDRE
+LEFT OUTER JOIN GRHUM.PAYS P_cot ON P_cot.C_PAYS = AD_cot.C_PAYS
+
+WHERE  A_COT.ASS_CODE = 'D_ED_R'
+ ;
+
+--------------------------------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_ETABLISSEMENT" ("STRUCTURE_ID", "SOURCE_ID", "ID", "CODE") AS 
+  SELECT 
+distinct
+etab_cot.c_structure   AS STRUCTURE_ID,
+'physalis' as source_id,
+etab_cot.c_structure as   ID,
+etab_cot.c_structure  as code
+
+
+FROM  GRHUM.REPART_ASSOCIATION RA 
+LEFT OUTER JOIN GRHUM.ASSOCIATION A_COT ON A_COT.ASS_ID = RA.ASS_ID
+LEFT OUTER JOIN grhum.structure_ulr etab_cot on etab_cot.pers_id = ra.pers_id
+
+
+-- adresse de l etablissement de cotutelle
+LEFT OUTER JOIN GRHUM.REPART_PERSONNE_ADRESSE RPA_COT ON RPA_COT.PERS_ID = etab_cot.PERS_ID AND RPA_COT.RPA_PRINCIPAL = 'O'
+LEFT OUTER JOIN GRHUM.ADRESSE AD_cot ON RPA_COT.ADR_ORDRE = AD_cot.ADR_ORDRE
+LEFT OUTER JOIN GRHUM.PAYS P_cot ON P_cot.C_PAYS = AD_cot.C_PAYS
+
+WHERE  A_COT.ASS_CODE = 'D_COT_ETAB'
+ 
+ union
+ 
+ select th.MJT_ORDRE || th.CP_ORDRE || th.ID_THESE  AS STRUCTURE_ID,
+ 'physalis' as source_id,
+ th.MJT_ORDRE || th.CP_ORDRE || th.ID_THESE  AS ID,
+ th.MJT_ORDRE || th.CP_ORDRE || th.ID_THESE as code
+ from RECHERCHE.MEMBRE_JURY_THESE th
+ where th.LIBELLE_STRUCT_EXTERNE is not null 
+ 
+ union
+ 
+ select distinct th.C_RNE  AS STRUCTURE_ID,
+ 'physalis' as source_id,
+ th.C_RNE AS ID,
+ th.C_RNE as code
+ from RECHERCHE.MEMBRE_JURY_THESE th
+ where th.C_RNE is not null
+ ;
+
+--------------------------------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_FINANCEMENT" ("ID", "SOURCE_ID", "THESE_ID", "FINANCEUR", "QUOTITE_FINANCEMENT", "DATE_DEBUT_FINANCEMENT", "DATE_FIN_FINANCEMENT", "ANNEE_ID", "ORIGINE_FINANCEMENT_ID", "COMPLEMENT_FINANCEMENT") AS 
+  select id_these|| f.id_financement as ID  , 
+       'physalis' as source_id,
+       id_these   as these_id,
+       --           as annee_id,
+       -- p.PERS_LIBELLE as employeur, 
+     --  p2.PERS_LIBELLE as financeur, 
+     0 as financeur,
+       -- ra2.RAS_QUOTITE as quotite_financeur,
+       0 as quotite_financement,
+        f.DATE_DEBUT_FINANCEMENT  as date_debut_financement , 
+        f.DATE_FIN_FINANCEMENT as date_fin_financement,
+        
+        
+        case 
+        when f.DATE_DEBUT_FINANCEMENT  is not null then  extract (YEAR from  f.DATE_DEBUT_FINANCEMENT) 
+        else  2019 
+        end as annee_id,
+  --      ann.ANNEE_UNIV
+         typef.ID_SYGAL as origine_financement_id,
+        'NON RENSEIGNE' as COMPLEMENT_FINANCEMENT
+from recherche.doctorant_these dt
+
+
+
+--left outer join RECHERCHE.doctorant doc on doc.ID_DOCTORANT = dt.ID_DOCTORANT
+--left outer join V_SYGAL_THESE_ANNEE_UNIV ann on ann.THESE_ID = dt.ID_THESE
+
+
+left outer join accords.avenant a on a.con_ordre = dt.con_ordre
+
+-- financement
+left outer join RECHERCHE.DOCTORANT_FINANCEMENT f on f.AVT_ORDRE = a.avt_ordre
+left outer join grhum.repart_association ra on ra.ras_id = f.ras_id
+left outer join grhum.personne p on p.pers_id = ra.pers_id
+left outer join V_SYGAL_PHYSALIS_FINANCEMENT typef on  typef.ID_PHYSALIS = f.ID_TYPE_FINANCEMENT
+
+-- financeur
+left outer join recherche.doctorant_financeur f2 on f.ID_FINANCEMENT = f2.ID_FINANCEMENT
+left outer join grhum.repart_association ra2 on ra2.ras_id = f2.ras_id
+left outer join grhum.personne p2 on p2.pers_id = ra2.pers_id
+
+where typef.ID_SYGAL is not null and f.DATE_DEBUT_FINANCEMENT is not null;
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
 
 
 
