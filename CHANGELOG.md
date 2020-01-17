@@ -1,7 +1,7 @@
 Journal des modifications
 =========================
 
-1.3.1 (?????????/01/2020)
+1.3.1 (17/01/2020)
 ------------------
 
 - Le tribunal local compétent n'étant plus mentionné sur la convention de diffusion de la thèse, il n'est plus nécessaire 
@@ -18,34 +18,6 @@ Journal des modifications
   L'utilisation de vues V_SYGAL_* perdure néanmoins comme source de données de ces tables.
   Le contenu de ces tables est mis à jour par un script PHP à CRONer.
 
-
-UNIVROUEN : assistance-sygal-univ-rouen@normandie-univ.fr :
-------------------------------------
-lynda.letetu@univ-rouen.fr
-catherine.godard@univ-rouen.fr
-marie.landry@univ-rouen.fr
-coleen.boust@univ-rouen.fr
-marion.ghislain@univ-rouen.fr
-sandra.tamion@univ-rouen.fr
-claire.leboeuf@univ-rouen.fr
-philippe.aubry@univ-rouen.fr
-mathieu.maubois@univ-rouen.fr
-camille.henaux@univ-rouen.fr
-
-UNIVLEHAVRE : assistance-sygal-univ-lehavre@normandie-univ.fr
-------------------------------------
-isabelle.thomas@univ-lehavre.fr
-sandrine.conin@univ-lehavre.fr
-christine.lebodo@univ-lehavre.fr
-sophie.mandeville@univ-lehavre.fr
-
-INSARouen : assistance-sygal-insa-rouen@normandie-univ.fr
-------------------------------------
-marie.briandy@insa-rouen.fr
-rachel.maeght@insa-rouen.fr
-julien.marchand@insa-rouen.fr
-
-Groupe UNICAEN, derrière assistance-sygal-unicaen@normandie-univ.fr
 
 v1.2.6 (12/11/2019)
 -------------------
