@@ -6,7 +6,9 @@
 -- Web Service d'import de données
 -- -------------------------------
 --
--- Vues Apogée propre à votre établissement, à personnaliser.
+-- Vues Apogée propre à votre établissement.
+--
+-- ATTENTION: script à personnaliser!
 --
 
 --
@@ -30,7 +32,7 @@ create view V_SYGAL_VARIABLE_MANU as
     'apogee' as source_id,
     'EMAIL_BU' as id,
     'EMAIL_BU' as cod_vap,
-    'Adresse mail de contact de la BU' as lib_vap,
+    'Adresse mail de contact pour les aspects BU' as lib_vap,
     'bu@univ.fr' as par_vap, ------------------------------------------> à personnaliser
     to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
     to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
@@ -40,8 +42,8 @@ create view V_SYGAL_VARIABLE_MANU as
     'apogee' as source_id,
     'EMAIL_BDD' as id,
     'EMAIL_BDD' as cod_vap,
-    'Adresse mail de contact du bureau des doctorats' as lib_vap,
-    'bdd@univ.fr' as par_vap, -----------------------------------------> à personnaliser
+    'Adresse mail de contact pour les aspects Doctorat' as lib_vap,
+    'doctorat@univ.fr' as par_vap, -----------------------------------------> à personnaliser
     to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
     to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
   from dual
