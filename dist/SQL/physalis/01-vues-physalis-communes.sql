@@ -19,7 +19,7 @@ select
 from dual
 /
 
-  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_ACTEUR" ("ID", "SOURCE_ID", "INDIVIDU_ID", "THESE_ID", "ACTEUR_ETABLISSEMENT_ID", "COD_PAY_ETB", "LIB_CPS", "LIB_PAY_ETB", "COD_PER", "COD_CPS", "ROLE_ID", "COD_ROJ_COMPL", "LIB_ROJ_COMPL", "TEM_HAB_RCH_PER", "TEM_RAP_RECU") AS 
+CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_ACTEUR" ("ID", "SOURCE_ID", "INDIVIDU_ID", "THESE_ID", "ACTEUR_ETABLISSEMENT_ID", "COD_PAY_ETB", "LIB_CPS", "LIB_PAY_ETB", "COD_PER", "COD_CPS", "ROLE_ID", "COD_ROJ_COMPL", "LIB_ROJ_COMPL", "TEM_HAB_RCH_PER", "TEM_RAP_RECU") AS
   SELECT 
    i.no_individu||2 || T.ID_THESE || ro.id as ID,
  'physalis' as SOURCE_ID,
@@ -187,18 +187,20 @@ left outer join API_SCOLARITE.SYGAL_ROLE_TMP ro on ro.ID = a.ass_id
 WHERE-- T.ID_THESE = 13 -- a modifier
 -- membre du jury sauf invité
  ASS_ID_PERE = (select ass_id from GRHUM.ASSOCIATION where ass_code = 'D_JURY')
-AND ASS_CODE != 'D_JR_INV';
+AND ASS_CODE != 'D_JR_INV'
+;
+
 --------------------------------------------------------------------------------
 
-  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_DOCTORANT" ("ID", "SOURCE_ID", "INDIVIDU_ID", "INE") AS 
+CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_DOCTORANT" ("ID", "SOURCE_ID", "INDIVIDU_ID", "INE") AS
   select D.NO_INDIVIDU ||1 as ID , 'physalis' as SOURCE_ID, d.NO_INDIVIDU ||1 as INDIVIDU_ID , e.ETUD_CODE_INE as ine
 from RECHERCHE.DOCTORANT d
-left outer join grhum.etudiant e on d.ETUD_NUMERO =  e.ETUD_NUMERO;
-
+left outer join grhum.etudiant e on d.ETUD_NUMERO =  e.ETUD_NUMERO
+;
 
 --------------------------------------------------------------------------------
 
-  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_ECOLE_DOCT" ("STRUCTURE_ID", "SOURCE_ID", "ID") AS 
+CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_ECOLE_DOCT" ("STRUCTURE_ID", "SOURCE_ID", "ID") AS
   SELECT 
 distinct
 etab_cot.c_structure   AS STRUCTURE_ID,
@@ -217,11 +219,11 @@ LEFT OUTER JOIN GRHUM.ADRESSE AD_cot ON RPA_COT.ADR_ORDRE = AD_cot.ADR_ORDRE
 LEFT OUTER JOIN GRHUM.PAYS P_cot ON P_cot.C_PAYS = AD_cot.C_PAYS
 
 WHERE  A_COT.ASS_CODE = 'D_ED_R'
- ;
+;
 
 --------------------------------------------------------------------------------
 
-  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_ETABLISSEMENT" ("STRUCTURE_ID", "SOURCE_ID", "ID", "CODE") AS 
+CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_ETABLISSEMENT" ("STRUCTURE_ID", "SOURCE_ID", "ID", "CODE") AS
   SELECT 
 distinct
 etab_cot.c_structure   AS STRUCTURE_ID,
@@ -259,11 +261,11 @@ WHERE  A_COT.ASS_CODE = 'D_COT_ETAB'
  th.C_RNE as code
  from RECHERCHE.MEMBRE_JURY_THESE th
  where th.C_RNE is not null
- ;
+;
 
 --------------------------------------------------------------------------------
 
-  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_FINANCEMENT" ("ID", "SOURCE_ID", "THESE_ID", "FINANCEUR", "QUOTITE_FINANCEMENT", "DATE_DEBUT_FINANCEMENT", "DATE_FIN_FINANCEMENT", "ANNEE_ID", "ORIGINE_FINANCEMENT_ID", "COMPLEMENT_FINANCEMENT") AS 
+CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_FINANCEMENT" ("ID", "SOURCE_ID", "THESE_ID", "FINANCEUR", "QUOTITE_FINANCEMENT", "DATE_DEBUT_FINANCEMENT", "DATE_FIN_FINANCEMENT", "ANNEE_ID", "ORIGINE_FINANCEMENT_ID", "COMPLEMENT_FINANCEMENT") AS
   select id_these|| f.id_financement as ID  , 
        'physalis' as source_id,
        id_these   as these_id,
@@ -305,13 +307,12 @@ left outer join recherche.doctorant_financeur f2 on f.ID_FINANCEMENT = f2.ID_FIN
 left outer join grhum.repart_association ra2 on ra2.ras_id = f2.ras_id
 left outer join grhum.personne p2 on p2.pers_id = ra2.pers_id
 
-where typef.ID_SYGAL is not null and f.DATE_DEBUT_FINANCEMENT is not null;
+where typef.ID_SYGAL is not null and f.DATE_DEBUT_FINANCEMENT is not null
+;
 
 --------------------------------------------------------------------------------
 
-
-
-  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_INDIVIDU" ("ID", "TYPE", "SOURCE_ID", "CIV", "LIB_NOM_PAT_IND", "LIB_NOM_USU_IND", "LIB_PR1_IND", "LIB_PR2_IND", "LIB_PR3_IND", "EMAIL", "DATE_NAI_IND", "LIB_NAT", "COD_PAY_NAT", "SUPANN_ID") AS 
+CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_INDIVIDU" ("ID", "TYPE", "SOURCE_ID", "CIV", "LIB_NOM_PAT_IND", "LIB_NOM_USU_IND", "LIB_PR1_IND", "LIB_PR2_IND", "LIB_PR3_IND", "EMAIL", "DATE_NAI_IND", "LIB_NAT", "COD_PAY_NAT", "SUPANN_ID") AS
   SELECT 
  distinct( i.no_individu) || 1 AS ID,
  'doctorant' as TYPE,
@@ -394,21 +395,18 @@ WHERE-- T.ID_THESE = 13 -- a modifier
 AND ASS_CODE != 'D_JR_INV'  --AND to_char(T.DATE_SOUTENANCE ,'YYYY')='2016'
 ;
 
-
 --------------------------------------------------------------------------------
 
-  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_MV_EMAIL" ("LAST_UPDATE", "ID", "EMAIL") AS 
+CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_MV_EMAIL" ("LAST_UPDATE", "ID", "EMAIL") AS
   with tmp(LAST_UPDATE, ID, EMAIL) as (
     select null, null, null from dual
     )
-    select "LAST_UPDATE","ID","EMAIL" from tmp where 0=1;
-
+    select "LAST_UPDATE","ID","EMAIL" from tmp where 0=1
+;
 
 --------------------------------------------------------------------------------
 
-
-
-  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_ORIGINE_FINANCEMENT" ("ID", "SOURCE_ID", "COD_OFI", "LIC_OFI", "LIB_OFI") AS 
+CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_ORIGINE_FINANCEMENT" ("ID", "SOURCE_ID", "COD_OFI", "LIC_OFI", "LIB_OFI") AS
   with tmp(ID, SOURCE_ID, COD_OFI, LIC_OFI, LIB_OFI) as (
     select '10', 'physalis', '10', 'SALARIE',     'Etudiant salarié'                         from dual union all
     select '11', 'physalis', '11', 'SANS FIN',    'Sans financement'                         from dual union all
@@ -444,14 +442,12 @@ AND ASS_CODE != 'D_JR_INV'  --AND to_char(T.DATE_SOUTENANCE ,'YYYY')='2016'
     select '42', 'physalis', '42', 'ORG FC',      'Financements Organismes FC'               from dual union all
     select '43', 'physalis', '43', 'ORG INTER',   'Organismes Internationaux'                from dual
   )
-  select "ID","SOURCE_ID","COD_OFI","LIC_OFI","LIB_OFI" from tmp;
-
+  select "ID","SOURCE_ID","COD_OFI","LIC_OFI","LIB_OFI" from tmp
+;
 
 --------------------------------------------------------------------------------
 
-
-
-  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_PHYSALIS_FINANCEMENT" ("ID_PHYSALIS", "ID_SYGAL") AS 
+CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_PHYSALIS_FINANCEMENT" ("ID_PHYSALIS", "ID_SYGAL") AS
   select  RECHERCHE.TYPE_FINANCEMENT.ID_TYPE_FINANCEMENT as id_physalis   ,
 CASE RECHERCHE.TYPE_FINANCEMENT.ID_TYPE_FINANCEMENT
 
@@ -486,14 +482,12 @@ WHEN 82  THEN 43
 WHEN 83  THEN 31
 else   11
 end as id_sygal
-from RECHERCHE.TYPE_FINANCEMENT;
-
+from RECHERCHE.TYPE_FINANCEMENT
+;
 
 --------------------------------------------------------------------------------
 
-
-
-  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_ROLE" ("ID", "SOURCE_ID", "LIB_ROJ", "LIC_ROJ") AS 
+CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_ROLE" ("ID", "SOURCE_ID", "LIB_ROJ", "LIC_ROJ") AS
   SELECT case ID
         when 301 THEN 'D'
         when 314 THEN 'K'
@@ -505,14 +499,11 @@ from RECHERCHE.TYPE_FINANCEMENT;
         end as ID,
         "SOURCE_ID","LIB_ROJ","LIC_ROJ" 
   from sygal_role_tmp
- ;
-
+;
 
 --------------------------------------------------------------------------------
 
-
-
-  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_STRUCTURE" ("SOURCE_ID", "TYPE_STRUCTURE_ID", "ID", "SIGLE", "LIBELLE", "CODE_PAYS", "LIBELLE_PAYS") AS 
+CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_STRUCTURE" ("SOURCE_ID", "TYPE_STRUCTURE_ID", "ID", "SIGLE", "LIBELLE", "CODE_PAYS", "LIBELLE_PAYS") AS
   select 
 distinct
 'physalis' as source_id,
@@ -608,12 +599,11 @@ WHERE  A_COT.ASS_CODE = 'D_LAB_THESE'
  'FRANCE' as libelle_pays
  from RECHERCHE.MEMBRE_JURY_THESE th left outer join   grhum.rne  r on th.c_rne = r.c_rne
  where th.C_RNE is not null
- ;
-
+;
 
 --------------------------------------------------------------------------------
 
-  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_THESE" ("ID", "SOURCE_ID", "DOCTORANT_ID", "COD_DIS", "DAT_DEB_THS", "DAT_FIN_CFD_THS", "DAT_PREV_SOU", "DAT_SOU_THS", "ETA_THS", "LIB_INT1_DIS", "LIB_THS", "UNITE_RECH_ID", "ECOLE_DOCT_ID", "COD_NEG_TRE", "CORRECTION_POSSIBLE", "DAT_AUT_SOU_THS", "LIB_ETB_COT", "LIB_PAY", "TEM_AVENANT", "TEM_SOU_AUT_THS", "COD_LNG", "ETA_RPD_THS", "COD_ANU_PRM_IAE") AS 
+CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_THESE" ("ID", "SOURCE_ID", "DOCTORANT_ID", "COD_DIS", "DAT_DEB_THS", "DAT_FIN_CFD_THS", "DAT_PREV_SOU", "DAT_SOU_THS", "ETA_THS", "LIB_INT1_DIS", "LIB_THS", "UNITE_RECH_ID", "ECOLE_DOCT_ID", "COD_NEG_TRE", "CORRECTION_POSSIBLE", "DAT_AUT_SOU_THS", "LIB_ETB_COT", "LIB_PAY", "TEM_AVENANT", "TEM_SOU_AUT_THS", "COD_LNG", "ETA_RPD_THS", "COD_ANU_PRM_IAE") AS
   select ID,
         SOURCE_ID,
         DOCTORANT_ID,
@@ -696,12 +686,12 @@ LEFT OUTER JOIN grhum.structure_ulr etab_cot2 on etab_cot2.pers_id = ra2.pers_id
 LEFT OUTER JOIN ACCORDS.contrat_partenaire cp2 on cp2.con_ordre = con.con_ordre and cp2.pers_id = ra2.pers_id
 
 WHERE  A_COT1.ASS_CODE = 'D_ED_R' AND A_COT2.ASS_CODE = 'D_LAB_THESE' )
-where rn = 1;
+where rn = 1
+;
 
 --------------------------------------------------------------------------------
 
-
-  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_THESE_ANNEE_UNIV" ("SOURCE_ID", "ID", "THESE_ID", "ANNEE_UNIV") AS 
+CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_THESE_ANNEE_UNIV" ("SOURCE_ID", "ID", "THESE_ID", "ANNEE_UNIV") AS
   select
   'physalis' as SOURCE_ID     ,
   th.ID_THESE||so.fann_key as ID,
@@ -719,15 +709,12 @@ and ( so.FGRA_CODE='D' )
 
 -- or so.FGRA_CODE is not null
 order  by id asc
-
-
-
 --where rn = 1;
 ;
 
 --------------------------------------------------------------------------------
 
-  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_TITRE_ACCES" ("SOURCE_ID", "ID", "THESE_ID", "TYPE_ETB_TITRE_ACCES", "TITRE_ACCES_INTERNE_EXTERNE", "LIBELLE_TITRE_ACCES", "CODE_DEPT_TITRE_ACCES", "LIBELLE_ETB_TITRE_ACCES", "CODE_PAYS_TITRE_ACCES") AS 
+CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_TITRE_ACCES" ("SOURCE_ID", "ID", "THESE_ID", "TYPE_ETB_TITRE_ACCES", "TITRE_ACCES_INTERNE_EXTERNE", "LIBELLE_TITRE_ACCES", "CODE_DEPT_TITRE_ACCES", "LIBELLE_ETB_TITRE_ACCES", "CODE_PAYS_TITRE_ACCES") AS
   select 'physalis' as source_id  ,
 ID,
 these_id,
@@ -764,18 +751,11 @@ from RECHERCHE.DOCTORANT e left outer join  garnuche.historique h on  e.etud_num
                            
     )
 where rn = 1
-
-
-
---grant select on grhum.type_etablissement_ulr  to api_scolarite
 ;
-
-
 
 --------------------------------------------------------------------------------
 
-
-  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_UNITE_RECH" ("STRUCTURE_ID", "SOURCE_ID", "ID") AS 
+CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_UNITE_RECH" ("STRUCTURE_ID", "SOURCE_ID", "ID") AS
   SELECT 
 distinct
 etab_cot.c_structure   AS STRUCTURE_ID,
@@ -794,97 +774,4 @@ LEFT OUTER JOIN GRHUM.ADRESSE AD_cot ON RPA_COT.ADR_ORDRE = AD_cot.ADR_ORDRE
 LEFT OUTER JOIN GRHUM.PAYS P_cot ON P_cot.C_PAYS = AD_cot.C_PAYS
 
 WHERE  A_COT.ASS_CODE = 'D_LAB_THESE'
- ;
-
-
---------------------------------------------------------------------------------
-
-
-  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_VARIABLE" ("SOURCE_ID", "ID", "COD_VAP", "LIB_VAP", "PAR_VAP", "DATE_DEB_VALIDITE", "DATE_FIN_VALIDITE") AS 
-  select
-    'physalis' as source_id,
-    'ETB_LIB' as id,
-    'ETB_LIB' as cod_vap,
-    'Nom de l''établissement de référence' as lib_vap,
-    'INSA Rouen Normandie' as par_vap,
-    to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
-    to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
-  from dual
-  union all
-  select
-    'physalis' as source_id,
-    'ETB_LIB_NOM_RESP' as id,
-    'ETB_LIB_NOM_RESP' as cod_vap,
-    'Nom du responsable de l''établissement' as lib_vap,
-    'M. Mourad BOUKHALFA' as par_vap,
-    to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
-    to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
-  from dual
-  union all
-  select
-    'physalis' as source_id,
-    'ETB_LIB_TIT_RESP' as id,
-    'ETB_LIB_TIT_RESP' as cod_vap,
-    'Titre du responsable de l''établissement' as lib_vap,
-    'Directeur' as par_vap,
-    to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
-    to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
-  from dual
-  union all
-  select
-    'physalis' as source_id,
-    'ETB_ART_ETB_LIB' as id,
-    'ETB_ART_ETB_LIB' as cod_vap,
-    'Article du nom de l''etb de référence' as lib_vap,
-    'Le' as par_vap,
-    to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
-    to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
-  from dual
-  union all
-  select
-    'physalis' as source_id,
-    'EMAIL_ASSISTANCE' as id,
-    'EMAIL_ASSISTANCE' as cod_vap,
-    'Adresse mail de l''assistance utilisateur' as lib_vap,
-    'assistance-sygal@insa-rouen.fr' as par_vap,
-    to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
-    to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
-  from dual
-  union all
-  select
-    'physalis' as source_id,
-    'EMAIL_BU' as id,
-    'EMAIL_BU' as cod_vap,
-    'Adresse mail de contact de la BU' as lib_vap,
-    'scd.theses@insa-rouen.fr' as par_vap,
-    to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
-    to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
-  from dual
-  union all
-  select
-    'physalis' as source_id,
-    'EMAIL_BDD' as id,
-    'EMAIL_BDD' as cod_vap,
-    'Adresse mail de contact du bureau des doctorats' as lib_vap,
-    'recherche.doctorat@insa-rouen.fr' as par_vap,
-    to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
-    to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
-  from dual
- ;
-
-
---------------------------------------------------------------------------------
-
-
-  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_VARIABLE_MANU" ("SOURCE_ID", "ID", "COD_VAP", "LIB_VAP", "PAR_VAP", "DATE_DEB_VALIDITE", "DATE_FIN_VALIDITE") AS 
-  select
-        'physalis' as source_id,
-        'TRIBUNAL_COMPETENT' as id,
-        'TRIBUNAL_COMPETENT' as cod_vap,
-        'Tribunal compétent' as lib_vap,
-        'Le Tribunal Administratif de Caen' as par_vap, --< à adapter
-        to_date('1900-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
-        to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
-    from dual;
-
-∕
+;

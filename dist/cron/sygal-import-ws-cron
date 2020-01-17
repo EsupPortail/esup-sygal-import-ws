@@ -1,0 +1,10 @@
+#
+# Web service d'import pour SyGAL.
+#
+
+APP_DIR=/var/www/sygal-import-ws
+LOG_FILE=/tmp/sygal-import-ws.log
+
+##### Mise à jour des tables sources des services #####
+*/5 * * * *   root /usr/bin/php ${APP_DIR}/public/index.php update-service-tables 1> ${LOG_FILE} 2>&1
+## (toutes les 5 minutes)
