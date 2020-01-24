@@ -24,6 +24,8 @@ class Etablissement
      */
     private $structureId;
 
+    private $sourceInsertDate;
+
     /**
      * @var string
      */
@@ -38,27 +40,11 @@ class Etablissement
     }
 
     /**
-     * @param string $id
-     */
-    public function setId(string $id)
-    {
-        $this->id = $id;
-    }
-
-    /**
      * @return string
      */
     public function getSourceId(): string
     {
         return $this->sourceId;
-    }
-
-    /**
-     * @param string $sourceId
-     */
-    public function setSourceId(string $sourceId)
-    {
-        $this->sourceId = $sourceId;
     }
 
     /**
@@ -70,14 +56,6 @@ class Etablissement
     }
 
     /**
-     * @param string $structureId
-     */
-    public function setStructureId(string $structureId)
-    {
-        $this->structureId = $structureId;
-    }
-
-    /**
      * @return string
      */
     public function getCode(): string
@@ -86,10 +64,10 @@ class Etablissement
     }
 
     /**
-     * @param string $code
+     * @return mixed
      */
-    public function setCode(string $code)
+    public function getSourceInsertDate()
     {
-        $this->code = $code;
+        return $this->sourceInsertDate;
     }
 }

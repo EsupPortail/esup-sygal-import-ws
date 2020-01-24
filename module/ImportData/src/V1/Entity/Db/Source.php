@@ -18,20 +18,14 @@ class Source
     protected $libelle;
     protected $importable;
 
+    private $sourceInsertDate;
+
     /**
      * @return int
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
@@ -43,27 +37,11 @@ class Source
     }
 
     /**
-     * @param mixed $libelle
-     */
-    public function setLibelle($libelle)
-    {
-        $this->libelle = $libelle;
-    }
-
-    /**
      * @return mixed
      */
     public function getImportable()
     {
         return $this->importable;
-    }
-
-    /**
-     * @param mixed $importable
-     */
-    public function setImportable($importable)
-    {
-        $this->importable = $importable;
     }
 
     /**
@@ -75,10 +53,10 @@ class Source
     }
 
     /**
-     * @param mixed $code
+     * @return mixed
      */
-    public function setCode($code)
+    public function getSourceInsertDate()
     {
-        $this->code = $code;
+        return $this->sourceInsertDate;
     }
 }

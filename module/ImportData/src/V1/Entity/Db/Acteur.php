@@ -22,20 +22,14 @@ class Acteur
     protected $temoinHDR;
     protected $temoinRapport;
 
+    private $sourceInsertDate;
+
     /**
      * @return mixed
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
@@ -47,27 +41,11 @@ class Acteur
     }
 
     /**
-     * @param mixed $sourceId
-     */
-    public function setSourceId($sourceId)
-    {
-        $this->sourceId = $sourceId;
-    }
-
-    /**
      * @return mixed
      */
     public function getTheseId()
     {
         return $this->theseId;
-    }
-
-    /**
-     * @param mixed $theseId
-     */
-    public function setTheseId($theseId)
-    {
-        $this->theseId = $theseId;
     }
 
     /**
@@ -79,27 +57,11 @@ class Acteur
     }
 
     /**
-     * @param mixed $roleId
-     */
-    public function setRoleId($roleId)
-    {
-        $this->roleId = $roleId;
-    }
-
-    /**
      * @return mixed
      */
     public function getIndividuId()
     {
         return $this->individuId;
-    }
-
-    /**
-     * @param mixed $individuId
-     */
-    public function setIndividuId($individuId)
-    {
-        $this->individuId = $individuId;
     }
 
     /**
@@ -111,30 +73,15 @@ class Acteur
     }
 
     /**
-     * @param mixed $acteurEtablissementId
-     * @return Acteur
-     */
-    public function setActeurEtablissementId($acteurEtablissementId)
-    {
-        $this->acteurEtablissementId = $acteurEtablissementId;
-
-        return $this;
-    }
-
-    /**
+     * return $this;
+     * }
+     *
+     * /**
      * @return mixed
      */
     public function getCodeRoleJury()
     {
         return $this->codeRoleJury;
-    }
-
-    /**
-     * @param mixed $codeRoleJury
-     */
-    public function setCodeRoleJury($codeRoleJury)
-    {
-        $this->codeRoleJury = $codeRoleJury;
     }
 
     /**
@@ -146,27 +93,11 @@ class Acteur
     }
 
     /**
-     * @param mixed $libRoleJury
-     */
-    public function setLibRoleJury($libRoleJury)
-    {
-        $this->libRoleJury = $libRoleJury;
-    }
-
-    /**
      * @return mixed
      */
     public function getCodeQualite()
     {
         return $this->codeQualite;
-    }
-
-    /**
-     * @param mixed $codeQualite
-     */
-    public function setCodeQualite($codeQualite)
-    {
-        $this->codeQualite = $codeQualite;
     }
 
     /**
@@ -178,27 +109,11 @@ class Acteur
     }
 
     /**
-     * @param mixed $libQualite
-     */
-    public function setLibQualite($libQualite)
-    {
-        $this->libQualite = $libQualite;
-    }
-
-    /**
      * @return mixed
      */
     public function getTemoinHDR()
     {
         return $this->temoinHDR;
-    }
-
-    /**
-     * @param mixed $temoinHDR
-     */
-    public function setTemoinHDR($temoinHDR)
-    {
-        $this->temoinHDR = $temoinHDR;
     }
 
     /**
@@ -210,10 +125,10 @@ class Acteur
     }
 
     /**
-     * @param mixed $temoinRapport
+     * @return mixed
      */
-    public function setTemoinRapport($temoinRapport)
+    public function getSourceInsertDate()
     {
-        $this->temoinRapport = $temoinRapport;
+        return $this->sourceInsertDate;
     }
 }

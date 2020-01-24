@@ -15,5 +15,7 @@
         <field name="libQualite"                type="string"   column="LIB_CPS"                    length="40"     nullable="true"/>
         <field name="temoinHDR"                 type="string"   column="TEM_HAB_RCH_PER"            length="1"      nullable="true"/>
         <field name="temoinRapport"             type="string"   column="TEM_RAP_RECU"               length="1"      nullable="true"/>
+
+        <field name="sourceInsertDate" type="datetime" column="SOURCE_INSERT_DATE"/>
     </entity>
 </doctrine-mapping>

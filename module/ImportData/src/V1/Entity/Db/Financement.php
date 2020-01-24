@@ -19,6 +19,8 @@ class Financement
     protected $dateDebutFinancement;
     protected $dateFinFinancement;
 
+    private $sourceInsertDate;
+
     /**
      * @return mixed
      */
@@ -89,5 +91,13 @@ class Financement
     public function getDateFinFinancement()
     {
         return $this->dateFinFinancement;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSourceInsertDate()
+    {
+        return $this->sourceInsertDate;
     }
 }

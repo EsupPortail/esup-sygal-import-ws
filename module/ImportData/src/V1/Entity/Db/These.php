@@ -34,6 +34,8 @@ class These
     private $dateAbandon;
     private $dateTransfert;
 
+    private $sourceInsertDate;
+
     /**
      * @return mixed
      */
@@ -224,5 +226,13 @@ class These
     public function getDateTransfert()
     {
         return $this->dateTransfert;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSourceInsertDate()
+    {
+        return $this->sourceInsertDate;
     }
 }

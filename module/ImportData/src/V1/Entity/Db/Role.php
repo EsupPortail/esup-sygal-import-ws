@@ -14,20 +14,14 @@ class Role
     protected $libLongRole;
     protected $libCourtRole;
 
+    private $sourceInsertDate;
+
     /**
      * @return mixed
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
@@ -39,27 +33,11 @@ class Role
     }
 
     /**
-     * @param mixed $sourceId
-     */
-    public function setSourceId($sourceId)
-    {
-        $this->sourceId = $sourceId;
-    }
-
-    /**
      * @return mixed
      */
     public function getLibLongRole()
     {
         return $this->libLongRole;
-    }
-
-    /**
-     * @param mixed $libLongRole
-     */
-    public function setLibLongRole($libLongRole)
-    {
-        $this->libLongRole = $libLongRole;
     }
 
     /**
@@ -71,10 +49,10 @@ class Role
     }
 
     /**
-     * @param mixed $libCourtRole
+     * @return mixed
      */
-    public function setLibCourtRole($libCourtRole)
+    public function getSourceInsertDate()
     {
-        $this->libCourtRole = $libCourtRole;
+        return $this->sourceInsertDate;
     }
 }

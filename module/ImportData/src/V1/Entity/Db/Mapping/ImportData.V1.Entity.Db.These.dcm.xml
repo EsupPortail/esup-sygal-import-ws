@@ -27,5 +27,7 @@
         <field name="correctionAutorisee"     type="string"   column="CORRECTION_POSSIBLE"  length="1"      nullable="true"/>
         <field name="dateAbandon"             type="datetime" column="DAT_ABANDON"                          nullable="true"/>
         <field name="dateTransfert"           type="datetime" column="DAT_TRANSFERT_DEP"                    nullable="true"/>
+
+        <field name="sourceInsertDate" type="datetime" column="SOURCE_INSERT_DATE"/>
     </entity>
 </doctrine-mapping>
