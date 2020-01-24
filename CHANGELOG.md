@@ -1,6 +1,13 @@
 Journal des modifications
 =========================
 
+1.3.2 (24/01/2020)
+------------------
+
+- Thèses : ajout des dates d'abandon et de transfert.
+- Les dates d'insertion des données dans les tables `SYGAL_*` sont désormais retournées par le web service ;
+  cela permettra côté SyGAL de détecter un problème dans le CRONage du script de remplissage de ces tables).
+
 1.3.1 (17/01/2020)
 ------------------
 

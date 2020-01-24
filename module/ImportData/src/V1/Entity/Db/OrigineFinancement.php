@@ -15,6 +15,8 @@ class OrigineFinancement
     protected $licOfi;
     protected $libOfi;
 
+    private $sourceInsertDate;
+
     /**
      * @return mixed
      */
@@ -53,5 +55,13 @@ class OrigineFinancement
     public function getLibOfi()
     {
         return $this->libOfi;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSourceInsertDate()
+    {
+        return $this->sourceInsertDate;
     }
 }

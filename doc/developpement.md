@@ -8,52 +8,35 @@ Ajouter un champ dans un service
 
 Exemple : ajouter l'INE des doctorants.
 
-Marche à suivre :
+### Marche à suivre
 
-- Dans la base de données :
+- Dans la base de données source (ex: Apogée) :
 
-    - Modifier dans la base de données source (ex: Apogée) la vue `SYGAL_DOCTORANT` pour ajouter la 
-      colonne.
+    - Modifier la vue `V_SYGAL_DOCTORANT` pour ajouter la nouvelle colonne.
+
+    - Modifier la vue `SYGAL_DOCTORANT` pour ajouter la nouvelle colonne, exemple : 
+    `alter table SYGAL_DOCTORANT add INE VARCHAR(20);`
 
 - Dans les sources PHP :
 
     - Mettre à jour le mapping Doctorant dans le fichier  
       `module/ImportData/src/V1/Entity/Db/Mapping/ImportData.V1.Entity.Db.Doctorant.dcm.xml` 
       
-    - Mettre à jour l'entité Doctorant dans le fichier 
+    - Ajouter la nouvelle propriété `$ine` ainsi que son getter associé `getIne()` dans la classe d'entité   
       `module/ImportData/src/V1/Entity/Db/Doctorant.php`
        
-      NB: pas besoin d'accesseurs, les colonnes étant découvertes automatiquement
-      via le mapping.
+      NB: pas besoin de setter puisqu'il s'agit d'une vue en base de données.
 
-- Via l'interface graphique d'admin Apigility
-    
-    - Lancer le web service dans Docker :
-      `docker-compose up sygal-import-ws`  
-   
-    - Passer en mode développement :
-      `docker-compose exec sygal-import-ws vendor/bin/zf-development-mode enable`   
-      
-    - Ouvrir l'interface d'admin dans un navigateur :
-      `https://localhost:8443`
-      
-      NB: le numéro de port dépend de la config `docker-compose.yml`.
-      
-    - Autoriser l'interface d'admin à écrire dans les fichiers de config
-      du web service :
-      `sudo chown -R www-data:ww-data module/ImportData/config`
-   
-    - Sélectionner le service "Doctorant" et aller dans l'onglet "Fields"
-      pour ajouter le champ `ine`.
-    
-    - Rétablir les autorisations d'accès au fichiers :
-      `sudo chown -R gauthierb:gauthierb module/ImportData/config`
-      
-    - Ne pas oublier de désactiver le mode développement :
-      `docker-compose exec sygal-import-ws vendor/bin/zf-development-mode disable`
+### Tests
 
 - En ligne de commande :
-    
+
+    - Lancer si besoin le web service dans Docker :
+      `docker-compose up sygal-import-ws`  
+   
+    - Lancer le script PHP de remplissage des tables `SYGAL_*` à partir des vues `V_SYGAL_*` :
+      `docker-compose exec sygal-import-ws php public/index.php update-service-tables --services=these --verbose`
+  
     - Vérifier que le nouveau champ figure dans la réponse du web service, ex :
     `curl --insecure --header "Accept: application/json" --header "Authorization: Basic c3lnYWwtYXBwOmF6ZXJ0eQ==" https://localhost:8443/doctorant`
 

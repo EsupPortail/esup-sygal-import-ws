@@ -26,7 +26,7 @@ create table SYGAL_ACTEUR
     LIB_CPS VARCHAR2(40),
     TEM_HAB_RCH_PER VARCHAR2(1) not null,
     TEM_RAP_RECU VARCHAR2(1),
-    INSERTED_ON DATE default sysdate not null
+    SOURCE_INSERT_DATE DATE default sysdate not null
 )
 /
 
@@ -36,7 +36,7 @@ create table SYGAL_DOCTORANT
     ID NUMBER(8),
     INDIVIDU_ID NUMBER(8),
     INE VARCHAR2(12),
-    INSERTED_ON DATE default sysdate not null
+    SOURCE_INSERT_DATE DATE default sysdate not null
 )
 /
 
@@ -45,7 +45,7 @@ create table SYGAL_ECOLE_DOCT
     SOURCE_ID VARCHAR2(50 char),
     STRUCTURE_ID VARCHAR2(4),
     ID VARCHAR2(4),
-    INSERTED_ON DATE default sysdate not null
+    SOURCE_INSERT_DATE DATE default sysdate not null
 )
 /
 
@@ -55,7 +55,7 @@ create table SYGAL_ETABLISSEMENT
     STRUCTURE_ID VARCHAR2(8),
     ID VARCHAR2(8),
     CODE VARCHAR2(8),
-    INSERTED_ON DATE default sysdate not null
+    SOURCE_INSERT_DATE DATE default sysdate not null
 )
 /
 
@@ -70,7 +70,7 @@ create table SYGAL_FINANCEMENT
     QUOTITE_FINANCEMENT NUMBER(3),
     DATE_DEBUT_FINANCEMENT DATE,
     DATE_FIN_FINANCEMENT DATE,
-    INSERTED_ON DATE default sysdate not null
+    SOURCE_INSERT_DATE DATE default sysdate not null
 )
 /
 
@@ -90,7 +90,7 @@ create table SYGAL_INDIVIDU
     DATE_NAI_IND DATE,
     COD_PAY_NAT VARCHAR2(3),
     LIB_NAT VARCHAR2(40),
-    INSERTED_ON DATE default sysdate not null
+    SOURCE_INSERT_DATE DATE default sysdate not null
 )
 /
 
@@ -101,7 +101,7 @@ create table SYGAL_ORIGINE_FINANCEMENT
     COD_OFI CHAR(2),
     LIC_OFI VARCHAR2(10),
     LIB_OFI VARCHAR2(40),
-    INSERTED_ON DATE default sysdate not null
+    SOURCE_INSERT_DATE DATE default sysdate not null
 )
 /
 
@@ -111,7 +111,7 @@ create table SYGAL_ROLE
     ID CHAR,
     LIB_ROJ VARCHAR2(21),
     LIC_ROJ VARCHAR2(10),
-    INSERTED_ON DATE default sysdate not null
+    SOURCE_INSERT_DATE DATE default sysdate not null
 )
 /
 
@@ -124,7 +124,7 @@ create table SYGAL_STRUCTURE
     LIBELLE VARCHAR2(100),
     CODE_PAYS VARCHAR2(3),
     LIBELLE_PAYS VARCHAR2(40),
-    INSERTED_ON DATE default sysdate not null
+    SOURCE_INSERT_DATE DATE default sysdate not null
 )
 /
 
@@ -134,7 +134,7 @@ create table SYGAL_THESE_ANNEE_UNIV
     ID VARCHAR2(45),
     THESE_ID NUMBER(8) not null,
     ANNEE_UNIV VARCHAR2(4) not null,
-    INSERTED_ON DATE default sysdate not null
+    SOURCE_INSERT_DATE DATE default sysdate not null
 )
 /
 
@@ -149,7 +149,7 @@ create table SYGAL_TITRE_ACCES
     LIBELLE_ETB_TITRE_ACCES VARCHAR2(100),
     CODE_DEPT_TITRE_ACCES VARCHAR2(100),
     CODE_PAYS_TITRE_ACCES VARCHAR2(3),
-    INSERTED_ON DATE default sysdate not null
+    SOURCE_INSERT_DATE DATE default sysdate not null
 )
 /
 
@@ -158,7 +158,7 @@ create table SYGAL_UNITE_RECH
     SOURCE_ID VARCHAR2(50 char),
     STRUCTURE_ID VARCHAR2(10) not null,
     ID VARCHAR2(10) not null,
-    INSERTED_ON DATE default sysdate not null
+    SOURCE_INSERT_DATE DATE default sysdate not null
 )
 /
 
@@ -171,7 +171,7 @@ create table SYGAL_VARIABLE
     PAR_VAP VARCHAR2(100),
     DATE_DEB_VALIDITE DATE,
     DATE_FIN_VALIDITE DATE,
-    INSERTED_ON DATE default sysdate not null
+    SOURCE_INSERT_DATE DATE default sysdate not null
 )
 /
 
@@ -200,7 +200,7 @@ create table SYGAL_THESE
     ETA_RPD_THS VARCHAR2(1),
     CORRECTION_POSSIBLE VARCHAR2(11),
     COD_ANU_PRM_IAE VARCHAR2(20),
-    INSERTED_ON DATE default sysdate not null
+    SOURCE_INSERT_DATE DATE default sysdate not null
 )
 /
 

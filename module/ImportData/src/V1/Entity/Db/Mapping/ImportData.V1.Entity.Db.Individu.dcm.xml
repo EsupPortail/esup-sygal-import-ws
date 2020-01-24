@@ -16,5 +16,7 @@
         <field name="email" column="EMAIL"/>
         <field name="dateNaissance" type="datetime" column="DATE_NAI_IND"/>
         <field name="nationalite" column="LIB_NAT"/>
+
+        <field name="sourceInsertDate" type="datetime" column="SOURCE_INSERT_DATE"/>
     </entity>
 </doctrine-mapping>

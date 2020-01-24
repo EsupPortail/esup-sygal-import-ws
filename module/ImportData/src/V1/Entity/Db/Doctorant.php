@@ -17,6 +17,8 @@ class Doctorant
     protected $sourceId;
     protected $individuId;
 
+    private $sourceInsertDate;
+
     /**
      * @var string
      */
@@ -31,27 +33,11 @@ class Doctorant
     }
 
     /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
      * @return mixed
      */
     public function getSourceId()
     {
         return $this->sourceId;
-    }
-
-    /**
-     * @param mixed $sourceId
-     */
-    public function setSourceId($sourceId)
-    {
-        $this->sourceId = $sourceId;
     }
 
     /**
@@ -63,18 +49,18 @@ class Doctorant
     }
 
     /**
-     * @param mixed $individuId
-     */
-    public function setIndividuId($individuId)
-    {
-        $this->individuId = $individuId;
-    }
-
-    /**
      * @return string
      */
     public function getIne()
     {
         return $this->ine;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSourceInsertDate()
+    {
+        return $this->sourceInsertDate;
     }
 }

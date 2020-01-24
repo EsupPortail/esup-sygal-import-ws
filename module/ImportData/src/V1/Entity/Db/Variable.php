@@ -20,20 +20,14 @@ class Variable
     protected $dateDebValidite;
     protected $dateFinValidite;
 
+    private $sourceInsertDate;
+
     /**
      * @return int
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
@@ -45,27 +39,11 @@ class Variable
     }
 
     /**
-     * @param mixed $libEtablissement
-     */
-    public function setLibEtablissement($libEtablissement)
-    {
-        $this->libEtablissement = $libEtablissement;
-    }
-
-    /**
      * @return mixed
      */
     public function getLibResponsable()
     {
         return $this->libResponsable;
-    }
-
-    /**
-     * @param mixed $libResponsable
-     */
-    public function setLibResponsable($libResponsable)
-    {
-        $this->libResponsable = $libResponsable;
     }
 
     /**
@@ -77,27 +55,11 @@ class Variable
     }
 
     /**
-     * @param mixed $libTitre
-     */
-    public function setLibTitre($libTitre)
-    {
-        $this->libTitre = $libTitre;
-    }
-
-    /**
      * @return mixed
      */
     public function getDateDebValidite()
     {
         return $this->dateDebValidite;
-    }
-
-    /**
-     * @param mixed $dateDebValidite
-     */
-    public function setDateDebValidite($dateDebValidite)
-    {
-        $this->dateDebValidite = $dateDebValidite;
     }
 
     /**
@@ -109,14 +71,6 @@ class Variable
     }
 
     /**
-     * @param mixed $dateFinValidite
-     */
-    public function setDateFinValidite($dateFinValidite)
-    {
-        $this->dateFinValidite = $dateFinValidite;
-    }
-
-    /**
      * @return mixed
      */
     public function getSourceId()
@@ -125,10 +79,10 @@ class Variable
     }
 
     /**
-     * @param mixed $sourceId
+     * @return mixed
      */
-    public function setSourceId($sourceId)
+    public function getSourceInsertDate()
     {
-        $this->sourceId = $sourceId;
+        return $this->sourceInsertDate;
     }
 }

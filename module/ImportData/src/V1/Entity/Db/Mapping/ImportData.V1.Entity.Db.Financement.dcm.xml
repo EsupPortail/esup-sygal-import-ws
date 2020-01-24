@@ -12,5 +12,7 @@
         <field name="quotiteFinancement" type="integer" column="QUOTITE_FINANCEMENT" nullable="true"/>
         <field name="dateDebutFinancement" type="datetime" column="DATE_DEBUT_FINANCEMENT" nullable="true"/>
         <field name="dateFinFinancement" type="datetime" column="DATE_FIN_FINANCEMENT" nullable="true"/>
+
+        <field name="sourceInsertDate" type="datetime" column="SOURCE_INSERT_DATE"/>
     </entity>
 </doctrine-mapping>

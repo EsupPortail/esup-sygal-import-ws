@@ -7,5 +7,7 @@
         <field name="sourceId" column="SOURCE_ID"/>
         <field name="theseId" column="THESE_ID"/>
         <field name="anneeUniv" column="ANNEE_UNIV"/>
+
+        <field name="sourceInsertDate" type="datetime" column="SOURCE_INSERT_DATE"/>
     </entity>
 </doctrine-mapping>
