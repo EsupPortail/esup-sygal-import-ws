@@ -9,28 +9,30 @@ namespace ImportData\V1\Entity\Db;
  */
 class These
 {
-    protected $id;
-    protected $sourceId;
-    protected $etatThese;
-    protected $doctorantId;
-    protected $codeDiscipline;
-    protected $libDiscipline;
-    protected $title;
-    protected $codeLNG;
-    protected $datePremiereInsc;
-    protected $uniteRechId;
-    protected $ecoleDoctId;
-    protected $libPaysCotut;
-    protected $libEtabCotut;
-    protected $temAvenant;
-    protected $dateSoutenancePrev;
-    protected $temSoutenanceAutorisee;
-    protected $dateSoutenanceAutorisee;
-    protected $dateSoutenance;
-    protected $dateConfidFin;
-    protected $resultat;
-    protected $etatReporduction;
-    protected $correctionAutorisee;
+    private $id;
+    private $sourceId;
+    private $etatThese;
+    private $doctorantId;
+    private $codeDiscipline;
+    private $libDiscipline;
+    private $title;
+    private $codeLNG;
+    private $datePremiereInsc;
+    private $uniteRechId;
+    private $ecoleDoctId;
+    private $libPaysCotut;
+    private $libEtabCotut;
+    private $temAvenant;
+    private $dateSoutenancePrev;
+    private $temSoutenanceAutorisee;
+    private $dateSoutenanceAutorisee;
+    private $dateSoutenance;
+    private $dateConfidFin;
+    private $resultat;
+    private $etatReporduction;
+    private $correctionAutorisee;
+    private $dateAbandon;
+    private $dateTransfert;
 
     /**
      * @return mixed
@@ -206,5 +208,21 @@ class These
     public function getCorrectionAutorisee()
     {
         return $this->correctionAutorisee;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateAbandon()
+    {
+        return $this->dateAbandon;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateTransfert()
+    {
+        return $this->dateTransfert;
     }
 }

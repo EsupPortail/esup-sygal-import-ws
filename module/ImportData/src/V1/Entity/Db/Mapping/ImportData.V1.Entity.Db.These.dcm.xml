@@ -25,5 +25,7 @@
         <field name="resultat"                type="string"   column="COD_NEG_TRE"          length="1"      nullable="true"/>
         <field name="etatReporduction"        type="string"   column="ETA_RPD_THS"          length="1"      nullable="true"/>
         <field name="correctionAutorisee"     type="string"   column="CORRECTION_POSSIBLE"  length="1"      nullable="true"/>
+        <field name="dateAbandon"             type="datetime" column="DAT_ABANDON"                          nullable="true"/>
+        <field name="dateTransfert"           type="datetime" column="DAT_TRANSFERT_DEP"                    nullable="true"/>
     </entity>
 </doctrine-mapping>
