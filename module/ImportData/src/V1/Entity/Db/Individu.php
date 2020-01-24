@@ -24,20 +24,14 @@ class Individu
     protected $dateNaissance;
     protected $nationalite;
 
+    private $sourceInsertDate;
+
     /**
      * @return mixed
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
@@ -49,27 +43,11 @@ class Individu
     }
 
     /**
-     * @param mixed $sourceId
-     */
-    public function setSourceId($sourceId)
-    {
-        $this->sourceId = $sourceId;
-    }
-
-    /**
      * @return string
      */
     public function getSupannId()
     {
         return $this->supannId;
-    }
-
-    /**
-     * @param string $supannId
-     */
-    public function setSupannId($supannId)
-    {
-        $this->supannId = $supannId;
     }
 
     /**
@@ -81,27 +59,11 @@ class Individu
     }
 
     /**
-     * @param mixed $type
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
-
-    /**
      * @return mixed
      */
     public function getCivilite()
     {
         return $this->civilite;
-    }
-
-    /**
-     * @param mixed $civilite
-     */
-    public function setCivilite($civilite)
-    {
-        $this->civilite = $civilite;
     }
 
     /**
@@ -113,27 +75,11 @@ class Individu
     }
 
     /**
-     * @param mixed $nomUsuel
-     */
-    public function setNomUsuel($nomUsuel)
-    {
-        $this->nomUsuel = $nomUsuel;
-    }
-
-    /**
      * @return mixed
      */
     public function getNomPatronymique()
     {
         return $this->nomPatronymique;
-    }
-
-    /**
-     * @param mixed $nomPatronymique
-     */
-    public function setNomPatronymique($nomPatronymique)
-    {
-        $this->nomPatronymique = $nomPatronymique;
     }
 
     /**
@@ -145,27 +91,11 @@ class Individu
     }
 
     /**
-     * @param mixed $prenom1
-     */
-    public function setPrenom1($prenom1)
-    {
-        $this->prenom1 = $prenom1;
-    }
-
-    /**
      * @return mixed
      */
     public function getPrenom2()
     {
         return $this->prenom2;
-    }
-
-    /**
-     * @param mixed $prenom2
-     */
-    public function setPrenom2($prenom2)
-    {
-        $this->prenom2 = $prenom2;
     }
 
     /**
@@ -177,27 +107,11 @@ class Individu
     }
 
     /**
-     * @param mixed $prenom3
-     */
-    public function setPrenom3($prenom3)
-    {
-        $this->prenom3 = $prenom3;
-    }
-
-    /**
      * @return mixed
      */
     public function getEmail()
     {
         return $this->email;
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
     }
 
     /**
@@ -209,14 +123,6 @@ class Individu
     }
 
     /**
-     * @param mixed $dateNaissance
-     */
-    public function setDateNaissance($dateNaissance)
-    {
-        $this->dateNaissance = $dateNaissance;
-    }
-
-    /**
      * @return mixed
      */
     public function getNationalite()
@@ -225,10 +131,10 @@ class Individu
     }
 
     /**
-     * @param mixed $nationalite
+     * @return mixed
      */
-    public function setNationalite($nationalite)
+    public function getSourceInsertDate()
     {
-        $this->nationalite = $nationalite;
+        return $this->sourceInsertDate;
     }
 }

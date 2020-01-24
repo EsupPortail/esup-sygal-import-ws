@@ -23,6 +23,15 @@ class TableService
     private $servicesToEntityClassesConfig;
 
     /**
+     * Liste des colonnes à exclure lors de la mise à jour des tables sources.
+     *
+     * @var array
+     */
+    private $excludedColumnNames = [
+        'SOURCE_INSERT_DATE',
+    ];
+
+    /**
      * @param EntityManager $entityManager
      */
     public function setEntityManager(EntityManager $entityManager)
@@ -109,6 +118,9 @@ class TableService
             $metadata = $this->entityManager->getClassMetadata($className);
             $tableName = $metadata->getTableName();
             $columnNames = $metadata->getColumnNames();
+
+            // exclusion éventuelle de certaines colonnes
+            $columnNames = array_diff($columnNames, $this->excludedColumnNames);
 
             $sqlParts[] = sprintf($deleteTemplate, $tableName);
             $sqlParts[] = sprintf($updateTemplate, $tableName, $cols = implode(', ', $columnNames), $cols, $tableName);

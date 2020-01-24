@@ -24,20 +24,14 @@ class EcoleDoctorale
      */
     private $structureId;
 
+    private $sourceInsertDate;
+
     /**
      * @return string
      */
     public function getId(): string
     {
         return $this->id;
-    }
-
-    /**
-     * @param string $id
-     */
-    public function setId(string $id)
-    {
-        $this->id = $id;
     }
 
     /**
@@ -49,14 +43,6 @@ class EcoleDoctorale
     }
 
     /**
-     * @param string $sourceId
-     */
-    public function setSourceId(string $sourceId)
-    {
-        $this->sourceId = $sourceId;
-    }
-
-    /**
      * @return string
      */
     public function getStructureId(): string
@@ -65,10 +51,10 @@ class EcoleDoctorale
     }
 
     /**
-     * @param string $structureId
+     * @return mixed
      */
-    public function setStructureId(string $structureId)
+    public function getSourceInsertDate()
     {
-        $this->structureId = $structureId;
+        return $this->sourceInsertDate;
     }
 }

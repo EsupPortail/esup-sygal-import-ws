@@ -44,20 +44,8 @@ class Structure
      */
     private $libellePays;
 
+    private $sourceInsertDate;
 
-    /**
-     * Set id
-     *
-     * @param string $id
-     *
-     * @return Structure
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * Get id
@@ -67,20 +55,6 @@ class Structure
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set sourceId
-     *
-     * @param string $sourceId
-     *
-     * @return Structure
-     */
-    public function setSourceId($sourceId)
-    {
-        $this->sourceId = $sourceId;
-
-        return $this;
     }
 
     /**
@@ -94,20 +68,6 @@ class Structure
     }
 
     /**
-     * Set typeStructureId
-     *
-     * @param string $typeStructureId
-     *
-     * @return Structure
-     */
-    public function setTypeStructureId($typeStructureId)
-    {
-        $this->typeStructureId = $typeStructureId;
-
-        return $this;
-    }
-
-    /**
      * Get typeStructureId
      *
      * @return string
@@ -115,20 +75,6 @@ class Structure
     public function getTypeStructureId()
     {
         return $this->typeStructureId;
-    }
-
-    /**
-     * Set sigle
-     *
-     * @param string $sigle
-     *
-     * @return Structure
-     */
-    public function setSigle($sigle)
-    {
-        $this->sigle = $sigle;
-
-        return $this;
     }
 
     /**
@@ -142,20 +88,6 @@ class Structure
     }
 
     /**
-     * Set libelle
-     *
-     * @param string $libelle
-     *
-     * @return Structure
-     */
-    public function setLibelle($libelle)
-    {
-        $this->libelle = $libelle;
-
-        return $this;
-    }
-
-    /**
      * Get libelle
      *
      * @return string
@@ -163,20 +95,6 @@ class Structure
     public function getLibelle()
     {
         return $this->libelle;
-    }
-
-    /**
-     * Set codePays
-     *
-     * @param string $codePays
-     *
-     * @return Structure
-     */
-    public function setCodePays($codePays)
-    {
-        $this->codePays = $codePays;
-
-        return $this;
     }
 
     /**
@@ -190,20 +108,6 @@ class Structure
     }
 
     /**
-     * Set libellePays
-     *
-     * @param string $libellePays
-     *
-     * @return Structure
-     */
-    public function setLibellePays($libellePays)
-    {
-        $this->libellePays = $libellePays;
-
-        return $this;
-    }
-
-    /**
      * Get libellePays
      *
      * @return string
@@ -211,5 +115,13 @@ class Structure
     public function getLibellePays()
     {
         return $this->libellePays;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSourceInsertDate()
+    {
+        return $this->sourceInsertDate;
     }
 }

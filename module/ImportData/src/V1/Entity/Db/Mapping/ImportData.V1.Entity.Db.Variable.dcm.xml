@@ -11,5 +11,6 @@
         <field name="dateDebValidite"       type="date"                         column="DATE_DEB_VALIDITE" nullable="true"/>
         <field name="dateFinValidite"       type="date"                         column="DATE_FIN_VALIDITE" nullable="true"/>
 
+        <field name="sourceInsertDate" type="datetime" column="SOURCE_INSERT_DATE"/>
     </entity>
 </doctrine-mapping>

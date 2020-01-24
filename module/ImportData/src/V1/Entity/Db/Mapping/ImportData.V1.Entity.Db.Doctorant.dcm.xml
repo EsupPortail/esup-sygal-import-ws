@@ -7,5 +7,7 @@
         <field name="sourceId"      type="string"       length="6"      column="SOURCE_ID"      nullable="true"/>
         <field name="individuId"    type="string"                      column="INDIVIDU_ID"    nullable="true"/>
         <field name="ine"           type="string"       length="64"    column="INE"    nullable="true"/>
+
+        <field name="sourceInsertDate" type="datetime" column="SOURCE_INSERT_DATE"/>
     </entity>
 </doctrine-mapping>

@@ -14,6 +14,8 @@ class TheseAnneeUniv
     protected $theseId;
     protected $anneeUniv;
 
+    private $sourceInsertDate;
+
     /**
      * @return mixed
      */
@@ -46,4 +48,11 @@ class TheseAnneeUniv
         return $this->anneeUniv;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getSourceInsertDate()
+    {
+        return $this->sourceInsertDate;
+    }
 }

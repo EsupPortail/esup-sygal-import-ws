@@ -19,6 +19,8 @@ class TitreAcces
     protected $codeDeptTitreAcces;
     protected $codePaysTitreAcces;
 
+    private $sourceInsertDate;
+
     /**
      * @return mixed
      */
@@ -89,5 +91,13 @@ class TitreAcces
     public function getCodePaysTitreAcces()
     {
         return $this->codePaysTitreAcces;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSourceInsertDate()
+    {
+        return $this->sourceInsertDate;
     }
 }
