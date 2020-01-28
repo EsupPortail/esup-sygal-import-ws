@@ -603,7 +603,8 @@ WHERE  A_COT.ASS_CODE = 'D_LAB_THESE'
 
 --------------------------------------------------------------------------------
 
-CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_THESE" ("ID", "SOURCE_ID", "DOCTORANT_ID", "COD_DIS", "DAT_DEB_THS", "DAT_FIN_CFD_THS", "DAT_PREV_SOU", "DAT_SOU_THS", "ETA_THS", "LIB_INT1_DIS", "LIB_THS", "UNITE_RECH_ID", "ECOLE_DOCT_ID", "COD_NEG_TRE", "CORRECTION_POSSIBLE", "DAT_AUT_SOU_THS", "LIB_ETB_COT", "LIB_PAY", "TEM_AVENANT", "TEM_SOU_AUT_THS", "COD_LNG", "ETA_RPD_THS", "COD_ANU_PRM_IAE") AS
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_THESE" ("ID", "SOURCE_ID", "DOCTORANT_ID", "COD_DIS", "DAT_DEB_THS", "DAT_FIN_CFD_THS", "DAT_PREV_SOU", "DAT_SOU_THS", "ETA_THS", "LIB_INT1_DIS", "LIB_THS", "UNITE_RECH_ID", "ECOLE_DOCT_ID", "COD_NEG_TRE", "CORRECTION_POSSIBLE", "DAT_AUT_SOU_THS", "LIB_ETB_COT", "LIB_PAY", "TEM_AVENANT", "TEM_SOU_AUT_THS", "COD_LNG", "ETA_RPD_THS", "COD_ANU_PRM_IAE", "DAT_TRANSFERT_DEP", "DAT_ABANDON") AS 
   select ID,
         SOURCE_ID,
         DOCTORANT_ID,
@@ -626,7 +627,9 @@ CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_THESE" ("ID", 
         TEM_SOU_AUT_THS,
         COD_LNG,
         ETA_RPD_THS,
-        extract (YEAR from DAT_DEB_THS) as COD_ANU_PRM_IAE
+        extract (YEAR from DAT_DEB_THS) as COD_ANU_PRM_IAE,
+        DAT_TRANSFERT_DEP,
+        DAT_ABANDON
         
 FROM
  
@@ -667,7 +670,10 @@ FROM
        '' as COD_LNG,
  null AS ETA_RPD_THS,
        row_number() over(partition by th.ID_THESE order by h.hist_annee_scol desc) as rn,
-        null as COD_ANU_PRM_IAE
+        null as COD_ANU_PRM_IAE,
+        th.DATE_TRANSFERT as DAT_TRANSFERT_DEP,
+        th.DATE_FIN_ANTICIPEE as  DAT_ABANDON
+        
 from RECHERCHE.DOCTORANT_THESE th left outer join  GRHUM.SISE_DOCTORAT_ETAB gd on th.ID_SISE_DOCTORAT_ETAB=gd.ID_SISE_DOCTORAT_ETAB
 left outer join recherche.doctorant d on d.id_doctorant = th.id_doctorant
 left outer join accords.avenant av on av.con_ordre = th.con_ordre
@@ -686,8 +692,7 @@ LEFT OUTER JOIN grhum.structure_ulr etab_cot2 on etab_cot2.pers_id = ra2.pers_id
 LEFT OUTER JOIN ACCORDS.contrat_partenaire cp2 on cp2.con_ordre = con.con_ordre and cp2.pers_id = ra2.pers_id
 
 WHERE  A_COT1.ASS_CODE = 'D_ED_R' AND A_COT2.ASS_CODE = 'D_LAB_THESE' )
-where rn = 1
-;
+where rn = 1;
 
 --------------------------------------------------------------------------------
 
