@@ -131,18 +131,22 @@ composer development-disable
 Base de données
 ---------------
 
-Le WS interroge des vues que vous devez créer dans la base de données de votre logiciel de scolarité (Apogée, Physalis), 
+Le WS interroge des tables que vous allez devoir créer dans la base de données de votre logiciel de scolarité (Apogée ou Physalis), 
 ou autre part si c'est possible, à vous de voir.
 
-En fonction du logiciel de scolarité que votre établissement utilise, intéressez-vous dans le répertoire [`data/sql`](data/sql) 
-à l'un des répertoires suivants :
-- `apogee`
-- `physalis`
+Le répertoire [`dist/SQL`](dist/SQL) contient ceci :
+- Un script `01-tables.sql` pour créer les tables qui contiendront les données retournées par le web service.
+- Un dossier `apogee` concernant les établissements ayant Apogée.
+- Un dossier `physalis` concernant les établissements ayant Physalis (Cocktail).
 
-Chacun des répertoires contient :
-- Un script pour créer les vues communes à tous les établissements ayant le logiciel de scolarité en question.
-- Un script pour créer les vues propres à un établissement en particulier.
-  Si votre établissement ne figure pas dans la liste, il faudra écrire les vues adaptées à votre contexte.
+Quelque soit votre logiciel de scolarité, utilisez le script `01-tables.sql` pour créer les tables qui contiendront 
+bientôt les données retournées par le web service.
+
+Prenons maintenant l'exemple d'Apogée. Le répertoire `apogee` contient 2 scripts SQL : 
+- `01-vues-apogee-communes.sql` : script de création des vues communes à tous les établissements ayant ce logiciel 
+  de scolarité, ne nécessitant aucune personnalisation.
+- `02-vues-apogee-etab.sql` : script de création des vues contenant des données propres à votre établissement 
+  en particulier, nécessitant donc une personnalisation de votre part.
 
 
 
@@ -151,6 +155,7 @@ Réseau
 
 Vous devez autoriser le serveur sur lequel est installé le WS à être interrogé par le serveur sur lequel est installé 
 SyGAL. 
+
 Il est conseillé de restreindre cette autorisation à cette seule adresse IP d'origine.
 
 
