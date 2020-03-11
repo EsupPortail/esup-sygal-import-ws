@@ -18,6 +18,8 @@ class Financement
     protected $quotiteFinancement;
     protected $dateDebutFinancement;
     protected $dateFinFinancement;
+    protected $codeTypeFinancement;
+    protected $libelleTypeFinancement;
 
     private $sourceInsertDate;
 
@@ -99,5 +101,21 @@ class Financement
     public function getSourceInsertDate()
     {
         return $this->sourceInsertDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCodeTypeFinancement()
+    {
+        return $this->codeTypeFinancement;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLibelleTypeFinancement()
+    {
+        return $this->libelleTypeFinancement;
     }
 }
