@@ -1,6 +1,11 @@
 Journal des modifications
 =========================
 
+1.3.3 (11/03/2020)
+------------------
+
+- Financement de thèse : ajout du code et du libellé des types de financement.
+
 1.3.2 (24/01/2020)
 ------------------
 
