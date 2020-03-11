@@ -644,45 +644,48 @@ with acteur as (
 create view V_SYGAL_FINANCEMENT as
 with inscription_admin as (
     select
-      iae.cod_ind,
-      iae.cod_dip,
-      iae.cod_vrs_vdi,
-      dip.lib_dip,
-      min ( iae.cod_anu ) cod_anu_prm_iae
+        iae.cod_ind,
+        iae.cod_dip,
+        iae.cod_vrs_vdi,
+        dip.lib_dip,
+        min ( iae.cod_anu ) cod_anu_prm_iae
     from ins_adm_etp iae
-           join diplome     dip on dip.cod_dip     = iae.cod_dip
-           join typ_diplome tpd on tpd.cod_tpd_etb = dip.cod_tpd_etb
+             join diplome     dip on dip.cod_dip     = iae.cod_dip
+             join typ_diplome tpd on tpd.cod_tpd_etb = dip.cod_tpd_etb
     where iae.eta_iae         =  'E'  -- Inscription administrative non annulee
       and iae.eta_pmt_iae     =  'P'  -- Inscription administrative payee
       and dip.cod_tpd_etb     in ( '39', '40' )
       and tpd.eta_ths_hdr_drt =  'T'  -- Inscription en these
       and tpd.tem_sante       =  'N'  -- Exclusion des theses d exercice
     group by
-      iae.cod_ind,
-      iae.cod_dip,
-      iae.cod_vrs_vdi,
-      dip.lib_dip
-    )
-    select
-      min ( tfi.cod_seq_tfi )                          as id,       -- Premier numero de sequence du financement
-      'apogee'                                         as source_id,
-      tfi.cod_ths                                      as these_id,
-      min ( nvl ( tfi.cod_anu, iae.cod_anu_prm_iae ) ) as annee_id, -- Identifiant de l annee universitaire (ex. 2018 pour 2018/2019)
-      tfi.cod_ofi                                      as origine_financement_id,
-      listagg ( tfi.compl_tfi, ' / ' ) within group ( order by tfi.cod_ths, tfi.cod_ofi, tfi.quotite_tfi, nvl ( tfi.cod_anu, iae.cod_anu_prm_iae ), tfi.cod_seq_tfi ) as complement_financement,
-      tfi.quotite_tfi                                  as quotite_financement,
-      min ( tfi.dat_deb_tfi )                          as date_debut_financement,
-      max ( tfi.dat_fin_tfi )                          as date_fin_financement
-    from inscription_admin   iae
-           join these_hdr_sout      ths on ths.cod_ind     = iae.cod_ind and ths.cod_dip = iae.cod_dip and ths.cod_vrs_vdi = iae.cod_vrs_vdi
-           join ths_financement     tfi on tfi.cod_ths     = ths.cod_ths
-           join origine_financement ofi on ofi.cod_ofi     = tfi.cod_ofi
-    where ths.cod_ths_trv     = '1'     -- Exclusion des travaux
-      and ofi.tem_en_sve_ofi  = 'O'     -- Exclusion des anciens codes des origines de financements
-    group by
-      tfi.cod_ths,
-      tfi.cod_ofi,
-      tfi.quotite_tfi
+        iae.cod_ind,
+        iae.cod_dip,
+        iae.cod_vrs_vdi,
+        dip.lib_dip
+)
+select
+    min ( tfi.cod_seq_tfi )                          as id,       -- Premier numero de sequence du financement
+    'apogee'                                         as source_id,
+    tfi.cod_ths                                      as these_id,
+    min ( nvl ( tfi.cod_anu, iae.cod_anu_prm_iae ) ) as annee_id, -- Identifiant de l annee universitaire (ex. 2018 pour 2018/2019)
+    min ( tfi.cod_afi ) keep ( dense_rank first order by tfi.cod_ths, tfi.cod_ofi, tfi.quotite_tfi ) as code_type_financement,
+    min ( afi.lib_afi ) keep ( dense_rank first order by tfi.cod_ths, tfi.cod_ofi, tfi.quotite_tfi ) as libelle_type_financement,
+    tfi.cod_ofi                                      as origine_financement_id,
+    listagg ( tfi.compl_tfi, ' / ' ) within group ( order by tfi.cod_ths, tfi.cod_ofi, tfi.quotite_tfi, nvl ( tfi.cod_anu, iae.cod_anu_prm_iae ), tfi.cod_seq_tfi ) as complement_financement,
+    tfi.quotite_tfi                                  as quotite_financement,
+    min ( tfi.dat_deb_tfi )                          as date_debut_financement,
+    max ( tfi.dat_fin_tfi )                          as date_fin_financement
+from inscription_admin    iae
+         join these_hdr_sout       ths on ths.cod_ind     = iae.cod_ind and ths.cod_dip = iae.cod_dip and ths.cod_vrs_vdi = iae.cod_vrs_vdi
+         join ths_financement      tfi on tfi.cod_ths     = ths.cod_ths
+         join origine_financement  ofi on ofi.cod_ofi     = tfi.cod_ofi
+         left join aide_financiere afi on afi.cod_afi     = tfi.cod_afi
+where ths.cod_ths_trv     = '1'     -- Exclusion des travaux
+  and ofi.tem_en_sve_ofi  = 'O'     -- Exclusion des anciens codes des origines de financements
+group by
+    tfi.cod_ths,
+    tfi.cod_ofi,
+    tfi.quotite_tfi
 /
 
 create view V_SYGAL_ORIGINE_FINANCEMENT as
