@@ -23,6 +23,11 @@ class TableService
     private $servicesToEntityClassesConfig;
 
     /**
+     * @var array
+     */
+    private $servicesPreSql = [];
+
+    /**
      * Liste des colonnes à exclure lors de la mise à jour des tables sources.
      *
      * @var array
@@ -45,6 +50,14 @@ class TableService
     public function setServicesToEntityClassesConfig(array $servicesToEntityClassesConfig)
     {
         $this->servicesToEntityClassesConfig = $servicesToEntityClassesConfig;
+    }
+
+    /**
+     * @param array $servicesPreSql
+     */
+    public function setServicesPreSql(array $servicesPreSql)
+    {
+        $this->servicesPreSql = $servicesPreSql;
     }
 
     /**
@@ -122,14 +135,17 @@ class TableService
             // exclusion éventuelle de certaines colonnes
             $columnNames = array_diff($columnNames, $this->excludedColumnNames);
 
+            // SQL à exécuter au préalable ?
+            if (isset($this->servicesPreSql[$service])) {
+                $sqlParts[] = $this->servicesPreSql[$service];
+            }
+
             $sqlParts[] = sprintf($deleteTemplate, $tableName);
             $sqlParts[] = sprintf($updateTemplate, $tableName, $cols = implode(', ', $columnNames), $cols, $tableName);
         }
         $sqlParts[] = 'end;';
 
-        $sql = implode(PHP_EOL, $sqlParts);
-
-        return $sql;
+        return implode(PHP_EOL, $sqlParts);
     }
 
     /**
