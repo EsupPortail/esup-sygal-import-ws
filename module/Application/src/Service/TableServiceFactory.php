@@ -15,10 +15,12 @@ class TableServiceFactory
         /** @var array $config */
         $config = $container->get('config');
         $servicesToEntityClassesConfig = $config['services_to_entity_classes'];
+        $servicesPreSql = $config['services_pre_sql'] ?? [];
 
         $service = new TableService();
         $service->setEntityManager($entityManager);
         $service->setServicesToEntityClassesConfig($servicesToEntityClassesConfig);
+        $service->setServicesPreSql($servicesPreSql);
 
         return $service;
     }

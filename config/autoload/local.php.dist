@@ -1,5 +1,14 @@
 <?php
 return [
+    /**
+     * Eventuelles instructions SQL à exécuter avant la mise à jour d'une table de service.
+     */
+    'services_pre_sql' => [
+        //'individu' => "begin DBMS_MVIEW.REFRESH('SYGAL_MV_EMAIL', 'C'); end;",
+    ],
+    /**
+     * Connexion à la base de données.
+     */
     'doctrine' => [
         'connection' => [
             'orm_default' => [
@@ -15,6 +24,9 @@ return [
             ],
         ],
     ],
+    /**
+     * Config du mode d'authentification.
+     */
     'zf-mvc-auth' => [
         'authentication' => [
             'adapters' => [

@@ -1,6 +1,13 @@
 Journal des modifications
 =========================
 
+1.3.4 (06/07/2020)
+------------------
+
+- Possibilité d'exécuter du SQL avant la mise à jour d'une table associée à un service.
+  Exemple : mise à jour de la vue matérialisée SYGAL_MV_EMAIL interrogée par la vue V_SYGAL_INDIVIDU avant que la table 
+  SYGAL_INDIVIDU soit peuplée à partir de V_SYGAL_INDIVIDU.
+
 1.3.3 (11/03/2020)
 ------------------
 
