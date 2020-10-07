@@ -53,17 +53,19 @@ Par exemple, `0.0.0.0:443->8443/tcp` indique que le ws est accessible sur la mac
 ## Les services fournis
  
 Chaque vue en base de données peut être interrogée via un service dédié :
-* Acteur :              https://localhost:8443/acteur
-* Doctorant :           https://localhost:8443/doctorant
-* Individu :            https://localhost:8443/individu
-* Role :                https://localhost:8443/role
-* Source :              https://localhost:8443/source
-* These :               https://localhost:8443/these
-* Variable :            https://localhost:8443/variable
-* Structure :           https://localhost:8443/structure
-* Etablissement :       https://localhost:8443/etablissement
-* Ecole doctorale :     https://localhost:8443/ecole-doctorale
-* Unite de recherche :  https://localhost:8443/unite-recherche
+* `/structure` 
+* `/etablissement` 
+* `/ecole-doctorale` 
+* `/unite-recherche` 
+* `/individu` 
+* `/doctorant` 
+* `/these` 
+* `/these-annee-univ` 
+* `/role` 
+* `/acteur` 
+* `/financement` 
+* `/titre-acces`
+* `/variable`
 
 Exemple :
 ```bash
