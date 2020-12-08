@@ -1,6 +1,13 @@
 Journal des modifications
 =========================
 
+1.3.5
+-----
+
+- Prise en compte du témoin "corrections effectuées" de chaque thèse.
+- Mise à jour de la vue Apogée `V_SYGAL_INDIVIDU` : inclusion des co-encadrants (i.e. individus rattachés à une composante fictive 'COE').
+- Mise à jour de la vue Apogée `V_SYGAL_THESE` : renommage du témoin "corrections effectuées".
+
 1.3.4 (06/07/2020)
 ------------------
 
