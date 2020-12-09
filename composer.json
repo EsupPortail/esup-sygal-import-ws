@@ -57,6 +57,16 @@
         "development-enable": "zf-development-mode enable",
         "development-status": "zf-development-mode status",
         "serve": "php -S 0.0.0.0:8000 -t public/ public/index.php",
-        "test": "phpunit"
+        "test": "phpunit",
+
+        "post-install-cmd": [
+            "mkdir -p data/cache && chmod -R 777 data/cache && rm -rf data/cache/*",
+            "mkdir -p data/DoctrineModule/cache && chmod -R 777 data/DoctrineModule/cache && rm -rf data/DoctrineModule/cache/*",
+            "mkdir -p data/DoctrineORMModule/Proxy && chmod -R 777 data/DoctrineORMModule/Proxy && rm -rf data/DoctrineORMModule/Proxy/*",
+            "vendor/bin/doctrine-module orm:clear-cache:query &",
+            "vendor/bin/doctrine-module orm:clear-cache:metadata &",
+            "vendor/bin/doctrine-module orm:clear-cache:result &",
+            "vendor/bin/doctrine-module orm:generate-proxies &"
+        ]
     }
 }
