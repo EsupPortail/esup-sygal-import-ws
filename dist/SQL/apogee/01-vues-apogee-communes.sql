@@ -84,94 +84,106 @@ select distinct
     ind.date_nai_ind                                    as date_nai_ind,    -- Date naissance etudiant
     ind.cod_pay_nat                                     as cod_pay_nat,     -- Code nationalite
     pay.lib_nat                                         as lib_nat          -- Libelle nationalite
-  from these_hdr_sout ths
+from these_hdr_sout ths
          join diplome        dip on dip.cod_dip     = ths.cod_dip
          join typ_diplome    tpd on tpd.cod_tpd_etb = dip.cod_tpd_etb
          join individu       ind on ind.cod_ind     = ths.cod_ind --and ind.cod_etu != 21009539 -- Exclusion du compte de test Aaron AAABA
          join pays           pay on pay.cod_pay     = ind.cod_pay_nat
          left join SYGAL_MV_EMAIL emails on emails.id = ind.cod_etu
-  where ths.cod_ths_trv     =  '1'  --  Exclusion des travaux
-    and dip.cod_tpd_etb     in ( '39', '40' )
-    and tpd.eta_ths_hdr_drt =  'T'  -- Inscription en these
-    and tpd.tem_sante       =  'N'  -- Exclusion des theses d exercice
-    and ind.cod_etu is not null         -- oui, oui, ça arrive
-  union
-    -- acteurs
-  select "SOURCE_ID","TYPE","ID","SUPANN_ID","CIV","LIB_NOM_PAT_IND","LIB_NOM_USU_IND","LIB_PR1_IND","LIB_PR2_IND","LIB_PR3_IND","EMAIL","DATE_NAI_IND","COD_PAY_NAT","LIB_NAT" from (
-    with acteur as (
-      select
-        ths.cod_ths,
-        'D'              as cod_roj,
-        ths.cod_per_dir  as cod_per,
-        ths.cod_etb_dir  as cod_etb,
-        ths.cod_cps_dir  as cod_cps,
-        null             as tem_rap_recu,
-        null             as cod_roj_compl
-      from these_hdr_sout ths
-      where ths.cod_ths_trv = '1' and ths.cod_per_dir is not null
-      union
-      select
-        ths.cod_ths,
-        'D'              as cod_roj,
-        ths.cod_per_cdr  as cod_per,
-        ths.cod_etb_cdr  as cod_etb,
-        ths.cod_cps_cdr  as cod_cps,
-        null             as tem_rap_recu,
-        null             as cod_roj_compl
-      from these_hdr_sout ths
-      where ths.cod_ths_trv = '1' and ths.cod_per_cdr is not null
-      union
-      select
-        ths.cod_ths,
-        'D'              as cod_roj,
-        ths.cod_per_cdr2 as cod_per,
-        ths.cod_etb_cdr2 as cod_etb,
-        ths.cod_cps_cdr2 as cod_cps,
-        null             as tem_rap_recu,
-        null             as cod_roj_compl
-      from these_hdr_sout ths
-      where ths.cod_ths_trv = '1' and ths.cod_per_cdr2 is not null
-      union
-      select
-        trs.cod_ths,
-        'R'              as cod_roj,
-        trs.cod_per,
-        null             as cod_etb,
-        null             as cod_cps,
-        trs.tem_rap_recu,
-        null             as cod_roj_compl
-      from ths_rap_sou trs
-      union
-      select
-        tjp.cod_ths,
-        'M'              as cod_roj,
-        tjp.cod_per,
-        tjp.cod_etb,
-        tjp.cod_cps,
-        null             as tem_rap_recu,
-        case when tjp.cod_roj in ( 'P', 'B', 'A' ) then tjp.cod_roj else null end as cod_roj_compl
-      from ths_jur_per tjp
-      )
-      select distinct
-        'apogee'                                                                                                as source_id,
-        'acteur'                                                                                                as type,
-        coalesce(regexp_replace(per.num_dos_har_per,'[^0-9]',''), 'COD_PER_'||act.cod_per)                      as id,     -- Code Harpege ou Apogee de l acteur
-        regexp_replace(per.num_dos_har_per,'[^0-9]','')                                                         as supann_id, -- Code Harpege de l acteur
-        initcap(per.cod_civ_per)                                                                                as civ,             -- Civilite acteur
-        per.LIB_NOM_PAT_PER                                                                                     as lib_nom_pat_ind, -- Nom de famille acteur
-        per.lib_nom_usu_per                                                                                     as lib_nom_usu_ind, -- Nom d'usage acteur
-        per.lib_pr1_per                                                                                         as lib_pr1_ind,     -- Prenom 1 acteur
-        null                                                                                                    as lib_pr2_ind,     -- Prenom 2 acteur
-        null                                                                                                    as lib_pr3_ind,     -- Prenom 3 acteur
-        emails.email                                                                                            as email,           -- Mail acteur
-        per.dat_nai_per                                                                                         as date_nai_ind,    -- Date naissance acteur
-        null                                                                                                    as cod_pay_nat,     -- Code nationalite
-        null                                                                                                    as lib_nat          -- Libelle nationalite
-      from acteur               act
-             join role_jury            roj on roj.cod_roj = act.cod_roj
-             join personnel            per on per.cod_per = act.cod_per
-             left join SYGAL_MV_EMAIL emails on emails.id = per.num_dos_har_per
-  )
+where ths.cod_ths_trv     =  '1'  --  Exclusion des travaux
+  and dip.cod_tpd_etb     in ( '39', '40' )
+  and tpd.eta_ths_hdr_drt =  'T'  -- Inscription en these
+  and tpd.tem_sante       =  'N'  -- Exclusion des theses d exercice
+  and ind.cod_etu is not null         -- oui, oui, ça arrive
+union
+-- acteurs
+select "SOURCE_ID","TYPE","ID","SUPANN_ID","CIV","LIB_NOM_PAT_IND","LIB_NOM_USU_IND","LIB_PR1_IND","LIB_PR2_IND","LIB_PR3_IND","EMAIL","DATE_NAI_IND","COD_PAY_NAT","LIB_NAT"
+from (
+         with acteur as (
+             select
+                 ths.cod_ths,
+                 'D'              as cod_roj,
+                 ths.cod_per_dir  as cod_per,
+                 ths.cod_etb_dir  as cod_etb,
+                 ths.cod_cps_dir  as cod_cps,
+                 null             as tem_rap_recu,
+                 null             as cod_roj_compl
+             from these_hdr_sout ths
+             where ths.cod_ths_trv = '1' and ths.cod_per_dir is not null
+             union
+             select
+                 ths.cod_ths,
+                 'D'              as cod_roj,
+                 ths.cod_per_cdr  as cod_per,
+                 ths.cod_etb_cdr  as cod_etb,
+                 ths.cod_cps_cdr  as cod_cps,
+                 null             as tem_rap_recu,
+                 null             as cod_roj_compl
+             from these_hdr_sout ths
+             where ths.cod_ths_trv = '1' and ths.cod_per_cdr is not null
+             union
+             select
+                 ths.cod_ths,
+                 'D'              as cod_roj,
+                 ths.cod_per_cdr2 as cod_per,
+                 ths.cod_etb_cdr2 as cod_etb,
+                 ths.cod_cps_cdr2 as cod_cps,
+                 null             as tem_rap_recu,
+                 null             as cod_roj_compl
+             from these_hdr_sout ths
+             where ths.cod_ths_trv = '1' and ths.cod_per_cdr2 is not null
+             union
+             select
+                 trs.cod_ths,
+                 'R'              as cod_roj,
+                 trs.cod_per,
+                 null             as cod_etb,
+                 null             as cod_cps,
+                 trs.tem_rap_recu,
+                 null             as cod_roj_compl
+             from ths_rap_sou trs
+             union
+             select
+                 tjp.cod_ths,
+                 'M'              as cod_roj,
+                 tjp.cod_per,
+                 tjp.cod_etb,
+                 tjp.cod_cps,
+                 null             as tem_rap_recu,
+                 case when tjp.cod_roj in ( 'P', 'B', 'A' ) then tjp.cod_roj else null end as cod_roj_compl
+             from ths_jur_per tjp
+             union
+             select
+                 null             as cod_ths,
+                 'B'              as cod_roj,
+                 pic.cod_per,
+                 null             as cod_etb,
+                 null             as cod_cps,
+                 null             as tem_rap_recu,
+                 null             as cod_roj_compl
+             from per_intervenir_cmp pic
+             where pic.cod_cmp = 'COE' -- composante fictive associee aux co-encadrants
+         )
+         select distinct
+             'apogee'                                                                                                as source_id,
+             'acteur'                                                                                                as type,
+             coalesce(regexp_replace(per.num_dos_har_per,'[^0-9]',''), 'COD_PER_'||act.cod_per)                      as id,     -- Code Harpege ou Apogee de l acteur
+             regexp_replace(per.num_dos_har_per,'[^0-9]','')                                                         as supann_id, -- Code Harpege de l acteur
+             initcap(per.cod_civ_per)                                                                                as civ,             -- Civilite acteur
+             per.LIB_NOM_PAT_PER                                                                                     as lib_nom_pat_ind, -- Nom de famille acteur
+             per.lib_nom_usu_per                                                                                     as lib_nom_usu_ind, -- Nom d'usage acteur
+             per.lib_pr1_per                                                                                         as lib_pr1_ind,     -- Prenom 1 acteur
+             null                                                                                                    as lib_pr2_ind,     -- Prenom 2 acteur
+             null                                                                                                    as lib_pr3_ind,     -- Prenom 3 acteur
+             emails.email                                                                                            as email,           -- Mail acteur
+             per.dat_nai_per                                                                                         as date_nai_ind,    -- Date naissance acteur
+             null                                                                                                    as cod_pay_nat,     -- Code nationalite
+             null                                                                                                    as lib_nat          -- Libelle nationalite
+         from acteur               act
+                  join role_jury            roj on roj.cod_roj = act.cod_roj
+                  join personnel            per on per.cod_per = act.cod_per
+                  left join SYGAL_MV_EMAIL emails on emails.id = per.num_dos_har_per
+     )
 /
 
 create view V_SYGAL_DOCTORANT as
@@ -276,7 +288,8 @@ select
     decode(ths.eta_rpd_ths,
            'N', 'obligatoire',
            'C', 'facultative',
-           null) as correction_possible                    -- Témoin de corrections attendues
+           null) as correction_possible,              -- Témoin de corrections attendues
+    ths.tem_cor_ths as correction_effectuee           -- Témoin de corrections effectuees
 
 from inscription_administrative iae
          join individu                   ind on ind.cod_ind = iae.cod_ind

@@ -31,6 +31,7 @@ class These
     private $resultat;
     private $etatReporduction;
     private $correctionAutorisee;
+    private $correctionEffectuee;
     private $dateAbandon;
     private $dateTransfert;
 
@@ -210,6 +211,14 @@ class These
     public function getCorrectionAutorisee()
     {
         return $this->correctionAutorisee;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCorrectionEffectuee()
+    {
+        return $this->correctionEffectuee;
     }
 
     /**
