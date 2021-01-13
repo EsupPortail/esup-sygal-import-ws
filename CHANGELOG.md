@@ -1,6 +1,10 @@
 Journal des modifications
 =========================
 
+1.3.6
+-----
+- Logging possible des requêtes reçues et des temps de traitements (SQL, génération HAL).
+
 1.3.5
 -----
 
