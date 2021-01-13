@@ -25,7 +25,8 @@
         "unicaen/oracle": "^1.2",
         "doctrine/common": "^2.7",
         "zendframework/zend-mvc-console": "^1.2",
-        "zendframework/zend-log": "^2.11"
+        "zendframework/zend-log": "^2.11",
+        "monolog/monolog": "^1.26"
     },
     "require-dev": {
         "zendframework/zend-developer-tools": "^1.1",

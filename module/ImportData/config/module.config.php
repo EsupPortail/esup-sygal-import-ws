@@ -1,5 +1,17 @@
 <?php
+
+use ImportData\ApiLogging;
+use ImportData\ApiLoggingFactory;
+
 return [
+    'logging' => [
+        'enabled' => false,
+        'params' => [
+            'name' => 'fetch_log',
+            'file_path' => '/tmp/api-logging.log',
+            'max_files' => 5,
+        ],
+    ],
     'doctrine' => [
         'driver' => [
             'orm_default_xml_driver' => [
@@ -2713,6 +2725,7 @@ return [
     'service_manager' => [
         'factories' => [
             \ImportData\V1\Rest\Version\VersionResource::class => \ImportData\V1\Rest\Version\VersionResourceFactory::class,
+            ApiLogging::class => ApiLoggingFactory::class,
         ],
     ],
 ];
