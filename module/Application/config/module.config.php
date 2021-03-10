@@ -12,6 +12,7 @@ use ImportData\V1\Entity\Db\EcoleDoctorale;
 use ImportData\V1\Entity\Db\Etablissement;
 use ImportData\V1\Entity\Db\Financement;
 use ImportData\V1\Entity\Db\Individu;
+use ImportData\V1\Entity\Db\OrigineFinancement;
 use ImportData\V1\Entity\Db\Role;
 use ImportData\V1\Entity\Db\Structure;
 use ImportData\V1\Entity\Db\These;
@@ -47,7 +48,7 @@ return [
         'role'             => Role::class,
         'acteur'           => Acteur::class,
         'variable'         => Variable::class,
-        //'origine-financement' => n'est plus importé.
+        'origine-financement' => OrigineFinancement::class,
         'financement'      => Financement::class,
         'titre-acces'      => TitreAcces::class,
     ],

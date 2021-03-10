@@ -63,6 +63,7 @@ Chaque vue en base de données peut être interrogée via un service dédié :
 * `/these-annee-univ` 
 * `/role` 
 * `/acteur` 
+* `/origine-financement` 
 * `/financement` 
 * `/titre-acces`
 * `/variable`
