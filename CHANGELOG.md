@@ -1,6 +1,10 @@
 Journal des modifications
 =========================
 
+1.3.7
+-----
+- Rétablissement de la possibilité d'importer les origines de financement.
+
 1.3.6
 -----
 - Logging possible des requêtes reçues et des temps de traitements (SQL, génération HAL).
