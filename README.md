@@ -1,25 +1,21 @@
-# sygal-import-ws
+sygal-import-ws
+===============
+
+Que fait *sygal-import-ws* ?
+----------------------------
+
+*sygal-import-ws* est un web service (une API REST) qui interroge les données présentes dans un SI (via des vues 
+et des tables en base de données) et les met à disposition pour leur lecture via des requêtes GET.
 
 
-## Que fait *sygal-import-ws* ?
-
-*sygal-import-ws* est un web service (ws) qui interroge les données présentes dans un SI (via des vues en base de données) 
-et les met à disposition pour leur lecture via des requêtes GET.
-
-
-## Outils employés
-
-*sygal-import-ws* repose sur l'utilisation de :
-- [Apigility](https://apigility.org/) pour la fourniture du ws ;
-- [Doctrine](http://www.doctrine-project.org/) pour la gestion de la partie BDD (notamment des schémas des tables).
-
-
-## Installation
+Installation
+------------
 
 Cf. [`INSTALL.md`](INSTALL.md).
 
 
-## Lancement du web service *pour le dévelopement*
+Lancement du web service *pour le dévelopement*
+-----------------------------------------------
 
 ### Solution 1 : le serveur interne PHP
  
@@ -50,7 +46,8 @@ Par exemple, `0.0.0.0:443->8443/tcp` indique que le ws est accessible sur la mac
 à l'adresse `https://localhost:8443`.
 
 
-## Les services fournis
+Les services fournis
+--------------------
  
 Chaque vue en base de données peut être interrogée via un service dédié :
   - `/structure` 
@@ -68,15 +65,19 @@ Chaque vue en base de données peut être interrogée via un service dédié :
   - `/titre-acces`
   - `/variable`
 
+Il y a aussi un service `/version` permettant de connaître le numéro de version du web service (ex : '1.3.7'). 
 
-## Versions
+
+Versions
+--------
 
 L'API existe en plusieurs versions, veillez à spécifier la version correcte dans l'URL.
 Exemple pour la version 1 : `https://localhost:8443/v1/variable`. 
 Exemple pour la version 2 : `https://localhost:8443/v2/variable`. 
 
 
-## Interrogation avec `curl`
+Interrogation avec `curl`
+-------------------------
 
 Exemple :
 ```bash
@@ -107,15 +108,10 @@ curl --insecure --header "Accept: application/json" --header "Authorization: Bas
 ```
 
 
-## Remarques complémentaires
+Services acceptant un paramètre
+-------------------------------
 
-* Le web service ne répond qu'aux requêtes de type GET.
-* Le web service retourne du json seulement.
-
-
-## Services acceptant un paramètre
-
-Aucun service n'accepte de paramètre, sauf ceux qui suivent.
+Aucun service n'accepte de paramètre GET, sauf ceux qui suivent.
 
 ### `/acteur`
 
@@ -133,4 +129,15 @@ le doctorant de cette thèse.
 Exemple :
 ```bash
 curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxxx" https://localhost:8443/v1/doctorant?these_id=13111
+```
+
+
+Ligne de commande
+-----------------
+
+La ligne de commande suivante permet de mettre à jour en base de données les tables `SYGAL_*` à partir des
+vues `V_SYGAL_*` (ces tables sont les sources des données retournées par l'API) :
+
+```bash
+php public/index.php update-service-tables --verbose
 ```

@@ -1,7 +1,6 @@
 Installation du web service `sygal-import-ws`
 =============================================
 
-
 Applicatif
 ----------
 
@@ -49,7 +48,6 @@ créés par le script `Dockerfile.sh` :
 NB: Vérifiez dans le script `Dockerfile.sh` que vous venez de lancer mais normalement 
 `APACHE_CONF_DIR=/etc/apache2` et `PHP_CONF_DIR=/etc/php/7.0`.
 
-
 ### Installation d'une version précise du WS
 
 Normalement, vous ne devez installer que les versions officielles du WS, c'est à dire les versions taguées, du genre `2.0.0`
@@ -66,7 +64,6 @@ sur votre serveur :
 ```bash
 git checkout --force 2.0.0 && bash install.sh
 ```
-
 
 ### Fichier "users.htpasswd"
 
@@ -127,27 +124,53 @@ composer development-disable
 ```
 
 
-
 Base de données
 ---------------
 
-Le WS interroge des tables que vous allez devoir créer dans la base de données de votre logiciel de scolarité (Apogée ou Physalis), 
-ou autre part si c'est possible, à vous de voir.
+### Création des tables et vues sources
+
+Le WS puise dans des tables `SYGAL_*` mises à jour périodiquement à partir de vues `V_SYGAL_*`. Vous devez créer 
+ces tables et vues dans la base de données de votre logiciel de scolarité (Apogée ou Physalis) ou autre part si c'est 
+possible, à vous de voir. 
 
 Le répertoire [`dist/SQL`](dist/SQL) contient ceci :
 - Un script `01-tables.sql` pour créer les tables qui contiendront les données retournées par le web service.
 - Un dossier `apogee` concernant les établissements ayant Apogée.
 - Un dossier `physalis` concernant les établissements ayant Physalis (Cocktail).
 
-Quelque soit votre logiciel de scolarité, utilisez le script `01-tables.sql` pour créer les tables qui contiendront 
-bientôt les données retournées par le web service.
+Quelque soit votre logiciel de scolarité, utilisez le script `01-tables.sql` pour créer les tables `SYGAL_*`.
 
 Prenons maintenant l'exemple d'Apogée. Le répertoire `apogee` contient 2 scripts SQL : 
-- `01-vues-apogee-communes.sql` : script de création des vues communes à tous les établissements ayant ce logiciel 
-  de scolarité, ne nécessitant aucune personnalisation.
-- `02-vues-apogee-etab.sql` : script de création des vues contenant des données propres à votre établissement 
-  en particulier, nécessitant donc une personnalisation de votre part.
+- `01-vues-apogee-communes.sql` : script de création des vues `V_SYGAL_*` communes à tous les établissements
+  ayant ce logiciel de scolarité, ne nécessitant aucune personnalisation.
+- `02-vues-apogee-etab.sql` : script de création des vues `V_SYGAL_*` contenant des données propres à votre 
+  établissement en particulier, nécessitant donc une personnalisation de votre part.
 
+Prenez connaissance de ces scripts, personnalisez ceux qui le requierent puis lancez-vous/les pour créer les 
+tables/vues nécesssaires.
+
+### Mise à jour périodique des tables sources
+
+Le WS puise dans des tables `SYGAL_*` qui doivent être mises à jour périodiquement à partir des vues `V_SYGAL_*`.
+Il s'agit de CRONer l'exécution de la commande chargée de faire cette mise à jour.
+
+- Créez sur le serveur du web service le fichier de config CRON `/etc/cron.d/sygal-import-ws-cron`
+  identique au fichier [dist/cron/sygal-import-ws-cron](dist/cron/sygal-import-ws-cron) fourni
+  puis adaptez si nécessaire son contenu :
+    - `APP_DIR=` : chemin vers le répertoire d'installation du web service.
+    - `LOG_FILE=` : chemin vers le fichier de log.
+    - `*/5` : périodicité d'exécution du script, initialisée à "toutes les 5 minutes".
+
+- Testez que CRON sera en mesure de lancer le script d'après le contenu du fichier de config.
+  Exemple :
+
+```bash
+APP_DIR=/var/www/sygal-import-ws
+/usr/bin/php ${APP_DIR}/public/index.php update-service-tables
+```
+
+- Vérifiez ensuite que le contenu de la table `SYGAL_INDIVIDU` (par exemple) a bien été mis à jour à l'instant 
+  grâce à la colonne `inserted_on`.
 
 
 Réseau
@@ -157,7 +180,6 @@ Vous devez autoriser le serveur sur lequel est installé le WS à être interrog
 ESUP-SyGAL. 
 
 Il est conseillé de restreindre cette autorisation à cette seule adresse IP d'origine.
-
 
 
 Test
