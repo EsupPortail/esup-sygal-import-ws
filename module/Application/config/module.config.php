@@ -6,20 +6,6 @@ use Application\Controller\ConsoleController;
 use Application\Service\TableService;
 use Application\Service\TableServiceFactory;
 use Doctrine\DBAL\Logging\EchoSQLLogger;
-use ImportData\V1\Entity\Db\Acteur;
-use ImportData\V1\Entity\Db\Doctorant;
-use ImportData\V1\Entity\Db\EcoleDoctorale;
-use ImportData\V1\Entity\Db\Etablissement;
-use ImportData\V1\Entity\Db\Financement;
-use ImportData\V1\Entity\Db\Individu;
-use ImportData\V1\Entity\Db\OrigineFinancement;
-use ImportData\V1\Entity\Db\Role;
-use ImportData\V1\Entity\Db\Structure;
-use ImportData\V1\Entity\Db\These;
-use ImportData\V1\Entity\Db\TheseAnneeUniv;
-use ImportData\V1\Entity\Db\TitreAcces;
-use ImportData\V1\Entity\Db\UniteRecherche;
-use ImportData\V1\Entity\Db\Variable;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
@@ -37,20 +23,62 @@ return [
         ],
     ],
     'services_to_entity_classes' => [
-        'structure'        => Structure::class,
-        'etablissement'    => Etablissement::class,
-        'ecole-doctorale'  => EcoleDoctorale::class,
-        'unite-recherche'  => UniteRecherche::class,
-        'individu'         => Individu::class,
-        'doctorant'        => Doctorant::class,
-        'these'            => These::class,
-        'these-annee-univ' => TheseAnneeUniv::class,
-        'role'             => Role::class,
-        'acteur'           => Acteur::class,
-        'variable'         => Variable::class,
-        'origine-financement' => OrigineFinancement::class,
-        'financement'      => Financement::class,
-        'titre-acces'      => TitreAcces::class,
+        'structure' => [
+            \ImportData\V1\Entity\Db\Structure::class,
+            \ImportData\V2\Entity\Db\Structure::class,
+        ],
+        'etablissement' => [
+            \ImportData\V1\Entity\Db\Etablissement::class,
+            \ImportData\V2\Entity\Db\Etablissement::class,
+        ],
+        'ecole-doctorale' => [
+            \ImportData\V1\Entity\Db\EcoleDoctorale::class,
+            \ImportData\V2\Entity\Db\EcoleDoctorale::class,
+        ],
+        'unite-recherche' => [
+            \ImportData\V1\Entity\Db\UniteRecherche::class,
+            \ImportData\V2\Entity\Db\UniteRecherche::class,
+        ],
+        'individu' => [
+            \ImportData\V1\Entity\Db\Individu::class,
+            \ImportData\V2\Entity\Db\Individu::class,
+        ],
+        'doctorant' => [
+            \ImportData\V1\Entity\Db\Doctorant::class,
+            \ImportData\V2\Entity\Db\Doctorant::class,
+        ],
+        'these' => [
+            \ImportData\V1\Entity\Db\These::class,
+            \ImportData\V2\Entity\Db\These::class,
+        ],
+        'these-annee-univ' => [
+            \ImportData\V1\Entity\Db\TheseAnneeUniv::class,
+            \ImportData\V2\Entity\Db\TheseAnneeUniv::class,
+        ],
+        'role' => [
+            \ImportData\V1\Entity\Db\Role::class,
+            \ImportData\V2\Entity\Db\Role::class,
+        ],
+        'acteur' => [
+            \ImportData\V1\Entity\Db\Acteur::class,
+            \ImportData\V2\Entity\Db\Acteur::class,
+        ],
+        'variable' => [
+            \ImportData\V1\Entity\Db\Variable::class,
+            \ImportData\V2\Entity\Db\Variable::class,
+        ],
+        'origine-financement' => [
+            \ImportData\V1\Entity\Db\OrigineFinancement::class,
+            \ImportData\V2\Entity\Db\OrigineFinancement::class,
+        ],
+        'financement' => [
+            \ImportData\V1\Entity\Db\Financement::class,
+            \ImportData\V2\Entity\Db\Financement::class,
+        ],
+        'titre-acces' => [
+            \ImportData\V1\Entity\Db\TitreAcces::class,
+            \ImportData\V2\Entity\Db\TitreAcces::class,
+        ],
     ],
     'doctrine' => [
         'sql_logger_collector' => [

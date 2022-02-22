@@ -1,6 +1,10 @@
 Journal des modifications
 =========================
 
+2.0.0
+-----
+- Ajout d'une V2 à l'API pour permettre l'import avec unicaen/db-import par ESUP-SyGAL ; la V1 demeure.
+
 1.3.7
 -----
 - Rétablissement de la possibilité d'importer les origines de financement.

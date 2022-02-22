@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="ImportData\V2\Entity\Db\Variable" table="SYGAL_VARIABLE_V2">
+        <id name="id" column="ID"/>
+        <field name="sourceCode" length="6" column="SOURCE_CODE"/>
+        <field name="sourceId" column="SOURCE_ID" length="64"/>
+        <field name="libEtablissement" length="20" column="COD_VAP"/>
+        <field name="libResponsable" length="40" column="LIB_VAP"/>
+        <field name="libTitre" length="100" column="PAR_VAP"/>
+        <field name="dateDebValidite" type="date" column="DATE_DEB_VALIDITE"/>
+        <field name="dateFinValidite" type="date" column="DATE_FIN_VALIDITE"/>
+
+        <field name="sourceInsertDate" type="datetime" column="SOURCE_INSERT_DATE"/>
+    </entity>
+</doctrine-mapping>

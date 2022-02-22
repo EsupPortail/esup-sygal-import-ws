@@ -12,6 +12,9 @@ class TableService
 {
     use LoggerAwareTrait;
 
+    const DELETE_TEMPLATE = "delete from %s ;";
+    const INSERT_TEMPLATE = "insert into %s (%s) select %s from V_%s ;";
+
     /**
      * @var EntityManager
      */
@@ -61,17 +64,25 @@ class TableService
     }
 
     /**
-     * Lance la mise à jour des tables sources.
-     *
-     * @param array|string|null $services Liste éventuelle des noms de services dont on veut mettre à jour
-     *                                    les tables sources.
-     *                                    Exemple : ['structure','etablissement','unite-recherche','ecole-doctorale']
+     * Lance la mise à jour des tables sources pour tous les services.
      */
-    public function updateTablesForServices($services = null)
+    public function updateTablesForAllServices()
+    {
+        $services = array_keys($this->servicesToEntityClassesConfig);
+
+        $this->updateTablesForServices($services);
+    }
+
+    /**
+     * Lance la mise à jour des tables sources pour les services spécifiés.
+     *
+     * @param array $services Liste des noms de services dont on veut mettre à jour les tables sources.
+     * Exemple : ['structure', 'etablissement']
+     */
+    public function updateTablesForServices(array $services)
     {
         $conn = $this->entityManager->getConnection();
-        $services = (array)$services ?: array_keys($this->servicesToEntityClassesConfig);
-        $sql = $this->generateTablesUpdateSQLForServices($services);
+        $sql = $this->generateSQLUpdatesForServices($services);
 
         $this->logger->debug("SQL généré : " . $sql);
 
@@ -94,54 +105,37 @@ class TableService
 
         $this->logger->info(
             "Les tables sources des services suivants ont été mises à jour avec succès :" . PHP_EOL .
-            implode(PHP_EOL, $services));
+            implode(PHP_EOL, $services)
+        );
     }
 
     /**
-     * Génère le SQL permettant de mettre à jour le contenu des tables sources.
+     * Génère le SQL permettant de mettre à jour le contenu des tables sources pour les services spécifiés.
      *
-     * @param array|string $services Liste éventuelle des noms de services dont on veut mettre à jour
-     *                              les tables sources.
-     *                              Exemple : ['structure','etablissement','unite-recherche','ecole-doctorale']
-     * @return string SQL généré.
-     *                Exemple :
+     * @param array $services Liste des noms de services dont on veut mettre à jour les tables sources.
+     * Exemple : ['structure', 'etablissement']
+     *
+     * @return string SQL généré, exemple :
      * <pre>
      * begin
      * delete from SYGAL_STRUCTURE ;
-     * insert into SYGAL_STRUCTURE (SOURCE_ID, TYPE_STRUCTURE_ID, SIGLE, LIBELLE, CODE_PAYS, LIBELLE_PAYS, ID) select SOURCE_ID, TYPE_STRUCTURE_ID, SIGLE, LIBELLE, CODE_PAYS, LIBELLE_PAYS, ID from V_SYGAL_STRUCTURE ;
-     * delete from SYGAL_ETABLISSEMENT ;
-     * insert into SYGAL_ETABLISSEMENT (SOURCE_ID, STRUCTURE_ID, CODE, ID) select SOURCE_ID, STRUCTURE_ID, CODE, ID from V_SYGAL_ETABLISSEMENT ;
-     * delete from SYGAL_UNITE_RECH ;
-     * insert into SYGAL_UNITE_RECH (SOURCE_ID, STRUCTURE_ID, ID) select SOURCE_ID, STRUCTURE_ID, ID from V_SYGAL_UNITE_RECH ;
-     * delete from SYGAL_ECOLE_DOCT ;
-     * insert into SYGAL_ECOLE_DOCT (SOURCE_ID, STRUCTURE_ID, ID) select SOURCE_ID, STRUCTURE_ID, ID from V_SYGAL_ECOLE_DOCT ;
+     * insert into SYGAL_STRUCTURE (SOURCE_ID, ...) select SOURCE_ID, ... from V_SYGAL_STRUCTURE ;
+     * delete from SYGAL_STRUCTURE_V2 ;
+     * insert into SYGAL_STRUCTURE_V2 (SOURCE_CODE, ...) select SOURCE_CODE, ... from V_SYGAL_STRUCTURE_V2 ;
+     * delete from SYGAL_ETABLISSEMENT
+     * insert into SYGAL_ETABLISSEMENT (SOURCE_ID, ...) select SOURCE_ID, ... from V_SYGAL_ETABLISSEMENT ;
+     * delete from SYGAL_ETABLISSEMENT_V2 ;
+     * insert into SYGAL_ETABLISSEMENT_V2 (SOURCE_CODE, ...) select SOURCE_CODE, ... from V_SYGAL_ETABLISSEMENT_V2 ;
      * end;
      * </pre>
      */
-    private function generateTablesUpdateSQLForServices(array $services)
+    private function generateSQLUpdatesForServices(array $services): string
     {
-        $deleteTemplate = "delete from %s ;";
-        $updateTemplate = "insert into %s (%s) select %s from V_%s ;";
         $sqlParts = [];
 
         $sqlParts[] = 'begin';
         foreach ($services as $service) {
-            $className = $this->getEntityClassNameForService($service);
-
-            $metadata = $this->entityManager->getClassMetadata($className);
-            $tableName = $metadata->getTableName();
-            $columnNames = $metadata->getColumnNames();
-
-            // exclusion éventuelle de certaines colonnes
-            $columnNames = array_diff($columnNames, $this->excludedColumnNames);
-
-            // SQL à exécuter au préalable ?
-            if (isset($this->servicesPreSql[$service])) {
-                $sqlParts[] = $this->servicesPreSql[$service];
-            }
-
-            $sqlParts[] = sprintf($deleteTemplate, $tableName);
-            $sqlParts[] = sprintf($updateTemplate, $tableName, $cols = implode(', ', $columnNames), $cols, $tableName);
+            $sqlParts[] = $this->generateSQLUpdatesForService($service);
         }
         $sqlParts[] = 'end;';
 
@@ -149,17 +143,60 @@ class TableService
     }
 
     /**
-     * @param string $service
-     * @return string
+     * Génère le SQL permettant de mettre à jour le contenu des tables sources pour un service.
+     *
+     * @param string $service Nom du service dont on veut mettre à jour les tables sources.
+     * Exemple : 'structure'
+     *
+     * @return string SQL généré, exemple :
+     * <pre>
+     * delete from SYGAL_STRUCTURE ;
+     * insert into SYGAL_STRUCTURE (SOURCE_ID, ...) select SOURCE_ID, ... from V_SYGAL_STRUCTURE ;
+     * delete from SYGAL_STRUCTURE_V2 ;
+     * insert into SYGAL_STRUCTURE_V2 (SOURCE_CODE, ...) select SOURCE_CODE, ... from V_SYGAL_STRUCTURE_V2 ;
+     * </pre>
      */
-    private function getEntityClassNameForService($service)
+    private function generateSQLUpdatesForService(string $service): string
     {
-        $className = $this->servicesToEntityClassesConfig[$service] ?? null;
+        $sqlParts = [];
 
-        if ($className === null) {
-            throw new \LogicException("Service inconnu : '$service''");
+        // SQL à exécuter au préalable ?
+        if (isset($this->servicesPreSql[$service])) {
+            $sqlParts[] = $this->servicesPreSql[$service];
         }
 
-        return $className;
+        $classNames = $this->getEntityClassNamesForService($service);
+        // NB : Il y a une classe d'entité Doctrine par version de l'API.
+
+        foreach ($classNames as $className) {
+            $metadata = $this->entityManager->getClassMetadata($className);
+            $tableName = $metadata->getTableName();
+            $columnNames = $metadata->getColumnNames();
+
+            // exclusion éventuelle de certaines colonnes
+            $columnNames = array_diff($columnNames, $this->excludedColumnNames);
+
+            $cols = implode(', ', $columnNames);
+            $sqlParts[] = sprintf(self::DELETE_TEMPLATE, $tableName);
+            $sqlParts[] = sprintf(self::INSERT_TEMPLATE, $tableName, $cols, $cols, $tableName);
+        }
+
+        return implode(PHP_EOL, $sqlParts);
+    }
+
+    /**
+     * Retourne les classes d'entité Doctrine correspondant au service spécifié.
+     * NB : Il y a une classe par version de l'API.
+     *
+     * @param string $service
+     * @return array
+     */
+    private function getEntityClassNamesForService(string $service): array
+    {
+        if (! isset($this->servicesToEntityClassesConfig[$service])) {
+            throw new \LogicException("Service inconnu : '$service'");
+        }
+
+        return $this->servicesToEntityClassesConfig[$service];
     }
 }

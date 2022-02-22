@@ -7,7 +7,7 @@
 et les met à disposition pour leur lecture via des requêtes GET.
 
 
-## Technologies employées
+## Outils employés
 
 *sygal-import-ws* repose sur l'utilisation de :
 - [Apigility](https://apigility.org/) pour la fourniture du ws ;
@@ -53,24 +53,34 @@ Par exemple, `0.0.0.0:443->8443/tcp` indique que le ws est accessible sur la mac
 ## Les services fournis
  
 Chaque vue en base de données peut être interrogée via un service dédié :
-* `/structure` 
-* `/etablissement` 
-* `/ecole-doctorale` 
-* `/unite-recherche` 
-* `/individu` 
-* `/doctorant` 
-* `/these` 
-* `/these-annee-univ` 
-* `/role` 
-* `/acteur` 
-* `/origine-financement` 
-* `/financement` 
-* `/titre-acces`
-* `/variable`
+  - `/structure` 
+  - `/etablissement` 
+  - `/ecole-doctorale` 
+  - `/unite-recherche` 
+  - `/individu` 
+  - `/doctorant` 
+  - `/these` 
+  - `/these-annee-univ` 
+  - `/role` 
+  - `/acteur` 
+  - `/origine-financement` 
+  - `/financement` 
+  - `/titre-acces`
+  - `/variable`
+
+
+## Versions
+
+L'API existe en plusieurs versions, veillez à spécifier la version correcte dans l'URL.
+Exemple pour la version 1 : `https://localhost:8443/v1/variable`. 
+Exemple pour la version 2 : `https://localhost:8443/v2/variable`. 
+
+
+## Interrogation avec `curl`
 
 Exemple :
 ```bash
-curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxx" https://localhost:8443/variable
+curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxx" https://localhost:8443/v1/variable
 ```
 
 Remplacer `xxxx` par le token généré grâce à la commande suivante 
@@ -88,12 +98,12 @@ L'interrogation d'un service sans paramètre va retourner l'intégralité des do
 
 Afin d'obtenir les informations spécifiques à une donnée, il est possible d'ajouter son identifiant, exemple :
 ```bash
-curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxx" https://localhost:8443/variable/ETB_LIB_NOM_RESP
+curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxx" https://localhost:8443/v1/variable/ETB_LIB_NOM_RESP
 ```
 
 Pour mettre en forme le JSON retourné et faciliter la lecture, une solution est d'utiliser `python -m json.tool`:
 ```bash
-curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxx" https://localhost:8443/variable | python -m json.tool
+curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxx" https://localhost:8443/v1/variable | python -m json.tool
 ```
 
 
@@ -103,11 +113,24 @@ curl --insecure --header "Accept: application/json" --header "Authorization: Bas
 * Le web service retourne du json seulement.
 
 
-## Service Acteur
+## Services acceptant un paramètre
+
+Aucun service n'accepte de paramètre, sauf ceux qui suivent.
+
+### `/acteur`
 
 Ce service accepte un paramètre supplémentaire : un identifiant de thèse (source code) peut être spécifié pour obtenir 
 les acteurs de cette seule thèse. 
 Exemple :
 ```bash
-curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxxx" https://localhost:8443/acteur?these_id=13111
+curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxxx" https://localhost:8443/v1/acteur?these_id=13111
+```
+
+### `/doctorant`
+
+Ce service accepte un paramètre supplémentaire : un identifiant de thèse (source code) peut être spécifié pour obtenir
+le doctorant de cette thèse.
+Exemple :
+```bash
+curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxxx" https://localhost:8443/v1/doctorant?these_id=13111
 ```

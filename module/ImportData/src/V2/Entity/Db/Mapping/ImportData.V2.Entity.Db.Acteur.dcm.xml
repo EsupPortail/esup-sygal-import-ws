@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="ImportData\V2\Entity\Db\Acteur" table="SYGAL_ACTEUR_V2">
+        <id name="id" column="ID"/>
+        <field name="sourceCode" column="SOURCE_CODE" length="100"/>
+        <field name="sourceId" column="SOURCE_ID" length="64"/>
+        <field name="theseId" type="integer" column="THESE_ID"/>
+        <field name="roleId" column="ROLE_ID" length="1"/>
+        <field name="codeRoleJury" column="COD_ROJ_COMPL" length="1"/>
+        <field name="libRoleJury" column="LIB_ROJ_COMPL" length="40"/>
+        <field name="individuId" column="INDIVIDU_ID" length="40"/>
+        <field name="acteurEtablissementId" column="ACTEUR_ETABLISSEMENT_ID" length="40"/>
+        <field name="codeQualite" column="COD_CPS" length="10"/>
+        <field name="libQualite" column="LIB_CPS" length="40"/>
+        <field name="temoinHDR" column="TEM_HAB_RCH_PER" length="1"/>
+        <field name="temoinRapport" column="TEM_RAP_RECU" length="1"/>
+
+        <field name="sourceInsertDate" type="datetime" column="SOURCE_INSERT_DATE"/>
+    </entity>
+</doctrine-mapping>

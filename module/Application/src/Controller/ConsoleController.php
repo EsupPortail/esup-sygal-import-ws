@@ -34,19 +34,22 @@ class ConsoleController extends AbstractConsoleController
     public function updateServiceTablesAction()
     {
         $request = $this->getRequest();
-
         $services = $request->getParam('services');
-        $services = $services ? explode(',', $services) : null;
-
         $verbose = $request->getParam('verbose');
+
         $priority = $verbose ? Logger::DEBUG : Logger::INFO;
         foreach ($this->logger->getWriters()->toArray() as $writer) {
             /** @var AbstractWriter $writer */
             $writer->addFilter(new Priority($priority));
         }
-
         $this->tableService->setLogger($this->logger);
-        $this->tableService->updateTablesForServices($services);
+
+        if ($services !== null) {
+            $services = explode(',', $services);
+            $this->tableService->updateTablesForServices($services);
+        } else {
+            $this->tableService->updateTablesForAllServices();
+        }
 
         $this->logger->info("Terminé.");
     }
