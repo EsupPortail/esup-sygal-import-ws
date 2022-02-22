@@ -17,7 +17,7 @@
 -- drop materialized view SYGAL_MV_EMAIL
 --/
 
-create materialized view UCBN_SODOCT.SYGAL_MV_EMAIL
+create materialized view SYGAL_MV_EMAIL
     refresh complete on demand using trusted constraints
 as
 select sysdate as last_update, tmp.*

@@ -52,7 +52,7 @@ NB: Vérifiez dans le script `Dockerfile.sh` que vous venez de lancer mais norma
 
 ### Installation d'une version précise du WS
 
-Normalement, vous ne devez installer que les versions officielles du WS, c'est à dire les versions taguées, du genre `1.2.1`
+Normalement, vous ne devez installer que les versions officielles du WS, c'est à dire les versions taguées, du genre `2.0.0`
 par exemple.
 
 Placez-vous dans le répertoire des sources du web service puis lancez les commandes git suivantes pour obtenir la liste des
@@ -61,10 +61,10 @@ versions officielles du WS :
 git fetch && git fetch --tags && git tag
 ```
 
-Si la version la plus récente est par exemple la `1.2.1`, utilisez les commandes suivantes pour "installer" cette version 
+Si la version la plus récente est par exemple la `2.0.0`, utilisez les commandes suivantes pour "installer" cette version 
 sur votre serveur :
 ```bash
-git checkout --force 1.2.1 && bash install.sh
+git checkout --force 2.0.0 && bash install.sh
 ```
 
 
@@ -154,7 +154,7 @@ Réseau
 ------
 
 Vous devez autoriser le serveur sur lequel est installé le WS à être interrogé par le serveur sur lequel est installé 
-SyGAL. 
+ESUP-SyGAL. 
 
 Il est conseillé de restreindre cette autorisation à cette seule adresse IP d'origine.
 
@@ -164,4 +164,4 @@ Test
 ----
 
 Reportez-vous au [README.md](README.md) pour tester l'appel du WS en ligne de commande depuis le serveur
-sur lequel est installé SyGAL.
+sur lequel est installé ESUP-SyGAL.

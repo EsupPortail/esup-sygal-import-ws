@@ -14,99 +14,103 @@
 --
 -- Vue fournissant les "variables d'environnement" requises.
 --
-CREATE OR REPLACE VIEW V_SYGAL_VARIABLE AS
+CREATE OR REPLACE VIEW "API_SCOLARITE"."V_SYGAL_VARIABLE_V2" ("SOURCE_ID", "SOURCE_CODE", "ID", "COD_VAP", "LIB_VAP", "PAR_VAP", "DATE_DEB_VALIDITE", "DATE_FIN_VALIDITE") AS
 select
     'physalis' as source_id,
+    'ETB_LIB' as SOURCE_CODE,
     'ETB_LIB' as id,
     'ETB_LIB' as cod_vap,
     'Nom de l''établissement de référence' as lib_vap,
-    ------------ CORRIGEZ, SVP -----------
-    'L''Étable ISSEMENT' as par_vap,
-    --------------------------------------
+    'Université d''Exemple' as par_vap,
     to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
     to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
 from dual
 union all
 select
     'physalis' as source_id,
+    'ETB_LIB_NOM_RESP' as SOURCE_CODE,
     'ETB_LIB_NOM_RESP' as id,
     'ETB_LIB_NOM_RESP' as cod_vap,
     'Nom du responsable de l''établissement' as lib_vap,
-    ------------ CORRIGEZ, SVP -----------
-    'M. Alain Térieur' as par_vap,
-    --------------------------------------
+    'Paule Hochon' as par_vap,
     to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
     to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
 from dual
 union all
 select
     'physalis' as source_id,
+    'ETB_LIB_TIT_RESP' as SOURCE_CODE,
     'ETB_LIB_TIT_RESP' as id,
     'ETB_LIB_TIT_RESP' as cod_vap,
     'Titre du responsable de l''établissement' as lib_vap,
-    ------------ CORRIGEZ, SVP -----------
-    'Directeur' as par_vap,
-    --------------------------------------
+    'Présidente' as par_vap,
     to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
     to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
 from dual
 union all
 select
     'physalis' as source_id,
+    'ETB_ART_ETB_LIB' as SOURCE_CODE,
     'ETB_ART_ETB_LIB' as id,
     'ETB_ART_ETB_LIB' as cod_vap,
     'Article du nom de l''etb de référence' as lib_vap,
-    ------------ CORRIGEZ, SVP -----------
-    'Le' as par_vap,
-    --------------------------------------
+    'L''' as par_vap,
     to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
     to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
 from dual
 union all
 select
     'physalis' as source_id,
+    'EMAIL_ASSISTANCE' as SOURCE_CODE,
     'EMAIL_ASSISTANCE' as id,
     'EMAIL_ASSISTANCE' as cod_vap,
     'Adresse mail de l''assistance utilisateur' as lib_vap,
-    ------------ CORRIGEZ, SVP -----------
-    'assistance-sygal@etable-issement.fr' as par_vap,
-    --------------------------------------
+    'assistance-sygal@univ-exemple.fr' as par_vap,
     to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
     to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
 from dual
 union all
 select
     'physalis' as source_id,
+    'EMAIL_BU' as SOURCE_CODE,
     'EMAIL_BU' as id,
     'EMAIL_BU' as cod_vap,
     'Adresse mail de contact de la BU' as lib_vap,
-    ------------ CORRIGEZ, SVP -----------
-    'bu@etable-issement.fr' as par_vap,
-    --------------------------------------
+    'bu-sygal@univ-exemple.fr' as par_vap,
     to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
     to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
 from dual
 union all
 select
     'physalis' as source_id,
+    'EMAIL_BDD' as SOURCE_CODE,
     'EMAIL_BDD' as id,
     'EMAIL_BDD' as cod_vap,
-    'Adresse mail de contact de la Maison des doctorats' as lib_vap,
-    ------------ CORRIGEZ, SVP -----------
-    'doctorat@etable-issement.fr' as par_vap,
-    --------------------------------------
+    'Adresse mail de contact du bureau des doctorats' as lib_vap,
+    'doctorat-sygal@univ-exemple.fr' as par_vap,
     to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
     to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
 from dual
-;
+union all
+select
+    'physalis' as source_id,
+    'TRIBUNAL_COMPETENT' as SOURCE_CODE,
+    'TRIBUNAL_COMPETENT' as id,
+    'TRIBUNAL_COMPETENT' as cod_vap,
+    'Tribunal compétent' as lib_vap,
+    'Le Tribunal Administratif d''Exemple' as par_vap,
+    to_date('1900-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
+    to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
+from dual
+/
 
 --------------------------------------------------------------------------------
 
 --
 -- Vues des seules origines de financement à prendre en compte (éventuellement renommées).
 --
-CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_ORIGINE_FINANCEMENT" ("ID", "SOURCE_ID", "COD_OFI", "LIC_OFI", "LIB_OFI") AS
-  with tmp(ID, SOURCE_ID, COD_OFI, LIC_OFI, LIB_OFI) as (
+CREATE OR REPLACE VIEW "API_SCOLARITE"."V_SYGAL_ORIGINE_FINANCEMENT_V2" ("ID", "SOURCE_CODE", "SOURCE_ID", "COD_OFI", "LIC_OFI", "LIB_OFI") AS
+with tmp(ID, SOURCE_ID, COD_OFI, LIC_OFI, LIB_OFI) as (
     select '10', 'physalis', '10', 'SALARIE',     'Etudiant salarié'                         from dual union all
     select '11', 'physalis', '11', 'SANS FIN',    'Sans financement'                         from dual union all
     select '13', 'physalis', '13', 'DOT EPSCP',   'Dotation des EPSCP'                       from dual union all
@@ -140,6 +144,6 @@ CREATE OR REPLACE FORCE EDITIONABLE VIEW "API_SCOLARITE"."V_SYGAL_ORIGINE_FINANC
     select '41', 'physalis', '41', 'ENT ETR',     'Entreprise Etrangère'                     from dual union all
     select '42', 'physalis', '42', 'ORG FC',      'Financements Organismes FC'               from dual union all
     select '43', 'physalis', '43', 'ORG INTER',   'Organismes Internationaux'                from dual
-  )
-select "ID","SOURCE_ID","COD_OFI","LIC_OFI","LIB_OFI" from tmp
-;
+)
+select "ID","ID" as SOURCE_CODE,"SOURCE_ID","COD_OFI","LIC_OFI","LIB_OFI" from tmp
+/
