@@ -5,8 +5,7 @@
 #
 
 # Composer install
-composer install --no-dev --no-suggest --optimize-autoloader
-# NB: 'bin/generate-deploy-info-config.php' est lancé lors d'un composer install.
+composer install --no-dev --no-suggest --prefer-dist --optimize-autoloader
 
 # Désactivation de l'interface d'admin Apigility
 composer development-disable
