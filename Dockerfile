@@ -23,3 +23,5 @@ RUN a2ensite app app-ssl && \
 COPY . /app
 
 WORKDIR /app
+
+RUN composer install
