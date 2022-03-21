@@ -1,7 +1,7 @@
 
 ARG PHP_VERSION
 
-FROM unicaen-dev-php${PHP_VERSION}-apache
+FROM registre.unicaen.fr:5000/unicaen-dev-php${PHP_VERSION}-apache
 
 LABEL maintainer="Bertrand GAUTHIER <bertrand.gauthier at unicaen.fr>"
 
@@ -19,3 +19,7 @@ ADD docker/fpm/conf.d/app.ini   ${PHP_CONF_DIR}/fpm/conf.d/
 
 RUN a2ensite app app-ssl && \
     service php${PHP_VERSION}-fpm reload
+
+COPY . /app
+
+WORKDIR /app
