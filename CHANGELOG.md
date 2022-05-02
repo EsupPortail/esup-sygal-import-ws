@@ -3,6 +3,8 @@ Journal des modifications
 
 2.1.0
 -----
+- Service 'thèse' : inclusion du code SISE de la discipline.
+- Service 'individu' : inclusion du code pays de nationalité.
 - Correction mineure de vues (Oracle ou Physalis).
 
 2.0.0

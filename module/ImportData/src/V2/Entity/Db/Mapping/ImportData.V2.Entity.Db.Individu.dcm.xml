@@ -16,6 +16,7 @@
         <field name="prenom3" column="LIB_PR3_IND"/>
         <field name="email" column="EMAIL"/>
         <field name="dateNaissance" type="datetime" column="DATE_NAI_IND"/>
+        <field name="codePaysNationalite" column="COD_PAY_NAT"/>
         <field name="nationalite" column="LIB_NAT"/>
 
         <field name="sourceInsertDate" type="datetime" column="SOURCE_INSERT_DATE"/>

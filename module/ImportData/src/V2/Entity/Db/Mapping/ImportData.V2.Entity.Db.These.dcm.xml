@@ -8,6 +8,7 @@
         <field name="sourceId" column="SOURCE_ID" length="64"/>
         <field name="etatThese" column="ETA_THS" length="1"/>
         <field name="doctorantId" column="DOCTORANT_ID"/>
+        <field name="codeSiseDiscipline" column="COD_DIS" length="10"/>
         <field name="libDiscipline" column="LIB_INT1_DIS" length="200"/>
         <field name="title" column="LIB_THS" length="800"/>
         <field name="datePremiereInsc" type="datetime" column="DAT_DEB_THS"/>

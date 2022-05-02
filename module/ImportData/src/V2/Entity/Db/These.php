@@ -14,6 +14,7 @@ class These
     private $sourceId;
     private $etatThese;
     private $doctorantId;
+    private $codeSiseDiscipline;
     private $libDiscipline;
     private $title;
     private $datePremiereInsc;
@@ -80,6 +81,14 @@ class These
     public function getDoctorantId()
     {
         return $this->doctorantId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCodeSiseDiscipline()
+    {
+        return $this->codeSiseDiscipline;
     }
 
     /**
