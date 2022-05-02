@@ -1,6 +1,10 @@
 Journal des modifications
 =========================
 
+2.1.0
+-----
+- Correction mineure de vues (Oracle ou Physalis).
+
 2.0.0
 -----
 - Ajout d'une V2 à l'API pour permettre l'import avec unicaen/db-import par ESUP-SyGAL ; la V1 demeure.

@@ -337,7 +337,7 @@ select
     'etablissement' as TYPE_STRUCTURE_ID, -- Type de structure
     etb.cod_etb as id,                    -- Id unique
     null as sigle,                        --
-    etb.lib_etb as libelle,               -- Libelle
+    nvl(etb.lib_web_etb, etb.lib_etb) as libelle, -- Libelle
     pay.cod_pay as code_pays,             -- Code pays
     pay.lib_pay as libelle_pays           -- Libelle pays
 from etablissement etb
@@ -367,7 +367,7 @@ select
     'etablissement' as TYPE_STRUCTURE_ID, -- Type de structure
     etb.cod_etb as id,                    -- Id unique
     null as sigle,                        --
-    etb.lib_etb as libelle,               -- Libelle
+    nvl(etb.lib_web_etb, etb.lib_etb) as libelle, -- Libelle
     pay.cod_pay as code_pays,             -- Code pays
     pay.lib_pay as libelle_pays           -- Libelle pays
 from etablissement etb
@@ -382,7 +382,7 @@ select
     'etablissement' as TYPE_STRUCTURE_ID, -- Type de structure
     etb.cod_etb as id,                    -- Id unique
     null as sigle,                        --
-    etb.lib_etb as libelle,               -- Libelle
+    nvl(etb.lib_web_etb, etb.lib_etb) as libelle, -- Libelle
     pay.cod_pay as code_pays,             -- Code pays
     pay.lib_pay as libelle_pays           -- Libelle pays
 from etablissement etb
@@ -397,7 +397,7 @@ select
     'etablissement' as TYPE_STRUCTURE_ID, -- Type de structure
     etb.cod_etb as id,                    -- Id unique
     null as sigle,                        --
-    etb.lib_etb as libelle,               -- Libelle
+    nvl(etb.lib_web_etb, etb.lib_etb) as libelle, -- Libelle
     pay.cod_pay as code_pays,             -- Code pays
     pay.lib_pay as libelle_pays           -- Libelle pays
 from etablissement etb
@@ -415,7 +415,7 @@ select
     'etablissement' as TYPE_STRUCTURE_ID, -- Type de structure
     etb.cod_etb as id,                    -- Id unique
     null as sigle,                        --
-    etb.lib_etb as libelle,               -- Libelle
+    nvl(etb.lib_web_etb, etb.lib_etb) as libelle, -- Libelle
     pay.cod_pay as code_pays,             -- Code pays
     pay.lib_pay as libelle_pays           -- Libelle pays
 from etablissement etb
