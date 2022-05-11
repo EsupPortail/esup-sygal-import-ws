@@ -2,12 +2,12 @@ version: "2"
 
 services:
   sygal-import-ws:
-#    image: sygal-import-ws-image-php7.0
+#    image: sygal-import-ws-image-php7.3
     build:
       context: .
       args:
-        - PHP_VERSION=7.0
-    container_name: sygal-import-ws-container-php7.0
+        - PHP_VERSION=7.3
+    container_name: sygal-import-ws-container-php7.3
     environment:
       - http_proxy
       - https_proxy
