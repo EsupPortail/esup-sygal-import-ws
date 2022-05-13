@@ -34,7 +34,7 @@ traduit en bash.)
 Lancez le script `Dockerfile.sh` :
 ```bash
 cd /app
-bash Dockerfile.sh 7.0
+bash Dockerfile.sh 7.4
 ```
 
 Ensuite, vérifiez et ajustez si besoin sur votre serveur les fichiers de configs suivants,
@@ -46,11 +46,11 @@ créés par le script `Dockerfile.sh` :
 - ${PHP_CONF_DIR}/fpm/conf.d/90-app.ini
 
 NB: Vérifiez dans le script `Dockerfile.sh` que vous venez de lancer mais normalement 
-`APACHE_CONF_DIR=/etc/apache2` et `PHP_CONF_DIR=/etc/php/7.0`.
+`APACHE_CONF_DIR=/etc/apache2` et `PHP_CONF_DIR=/etc/php/7.4`.
 
 ### Installation d'une version précise du WS
 
-Normalement, vous ne devez installer que les versions officielles du WS, c'est à dire les versions taguées, du genre `2.0.0`
+Normalement, vous ne devez installer que les versions officielles du WS, c'est à dire les versions taguées, du genre `2.1.0`
 par exemple.
 
 Placez-vous dans le répertoire des sources du web service puis lancez les commandes git suivantes pour obtenir la liste des
@@ -59,10 +59,10 @@ versions officielles du WS :
 git fetch && git fetch --tags && git tag
 ```
 
-Si la version la plus récente est par exemple la `2.0.0`, utilisez les commandes suivantes pour "installer" cette version 
+Si la version la plus récente est par exemple la `2.1.0`, utilisez les commandes suivantes pour "installer" cette version 
 sur votre serveur :
 ```bash
-git checkout --force 2.0.0 && bash install.sh
+git checkout --force 2.1.0 && bash install.sh
 ```
 
 ### Fichier "users.htpasswd"
@@ -105,7 +105,7 @@ cp -n database.local.php.dist database.local.php
 ### Configuration PHP pour le WS
 
 Si vous êtes sur un serveur de PROD, corrigez les lignes suivantes du fichier de config PHP 
-`/etc/php/7.0/fpm/conf.d/90-app.ini` :
+`/etc/php/7.4/fpm/conf.d/90-app.ini` :
 
     display_errors = Off
     ...

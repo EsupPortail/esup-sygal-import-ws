@@ -3,9 +3,11 @@ Journal des modifications
 
 2.1.0
 -----
-- Service 'thèse' : inclusion du code SISE de la discipline.
-- Service 'individu' : inclusion du code pays de nationalité.
-- Correction mineure de vues (Oracle ou Physalis).
+- Service 'thèse' : ajout du code SISE de la discipline.
+- Service 'individu' : ajout du code pays de nationalité.
+- Service 'structure' : correction d'un nvl(etb.lib_web_etb, etb.lib_etb)' oublié créant des doublons.
+- Correction d'une vue pour Physalis.
+- Passage à PHP 7.4.
 
 2.0.0
 -----
