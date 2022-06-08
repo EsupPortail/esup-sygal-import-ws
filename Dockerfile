@@ -24,4 +24,4 @@ COPY . /app
 
 WORKDIR /app
 
-RUN composer install
+RUN composer install --no-dev --no-suggest --prefer-dist --optimize-autoloader

@@ -379,10 +379,10 @@ where extract (YEAR from  a.AVT_DATE_DEB_EXEC) >= 2016
 
 
 
-CREATE VIEW "API_SCOLARITE"."V_SYGAL_INDIVIDU_V2" ("ID", "SOURCE_CODE", "TYPE", "SOURCE_ID", "CIV", "LIB_NOM_PAT_IND", "LIB_NOM_USU_IND", "LIB_PR1_IND", "LIB_PR2_IND", "LIB_PR3_IND", "EMAIL", "DATE_NAI_IND", "LIB_NAT", "COD_PAY_NAT", "SUPANN_ID") AS
+CREATE or replace VIEW "API_SCOLARITE"."V_SYGAL_INDIVIDU_V2" ("ID", "SOURCE_CODE", "TYPE", "SOURCE_ID", "CIV", "LIB_NOM_PAT_IND", "LIB_NOM_USU_IND", "LIB_PR1_IND", "LIB_PR2_IND", "LIB_PR3_IND", "EMAIL", "DATE_NAI_IND", "LIB_NAT", "COD_PAY_NAT", "SUPANN_ID") AS
 SELECT
-    distinct( i.pers_id)  AS ID,
-        distinct( i.pers_id)  AS SOURCE_CODE,
+    distinct( i.pers_id) as ID,
+            i.pers_id as SOURCE_CODE,
             'doctorant' as TYPE,
             'physalis' as SOURCE_ID,
 
@@ -414,8 +414,8 @@ FROM RECHERCHE.DOCTORANT D
 union
 --membre d'un jury
 SELECT
-    distinct( i.pers_id) AS ID,
-    distinct( i.pers_id) AS SOURCE_CODE,
+    distinct( i.pers_id) as ID,
+            i.pers_id as SOURCE_CODE,
             'acteur' as TYPE,
             'physalis' as SOURCE_ID,
 
@@ -469,8 +469,8 @@ union
 
 --directeur de these
 SELECT
-    distinct( i.pers_id) AS ID,
-    distinct( i.pers_id) AS SOURCE_CODE,
+    distinct( i.pers_id) as ID,
+            i.pers_id as SOURCE_CODE,
             'acteur' as TYPE,
             'physalis' as SOURCE_ID,
 
@@ -523,7 +523,7 @@ WHERE-- T.ID_THESE = 13 -- a modifier
   --extract(year from d.DATE_INSC_DOCTORAT_ETAB) >= 2016 and
         ASS_ID_PERE = (select ass_id from GRHUM.ASSOCIATION where ass_code = 'D_DIR')
   AND ASS_CODE != 'D_JR_INV'
-/
+;
 
 
 

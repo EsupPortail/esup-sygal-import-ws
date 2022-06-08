@@ -22,6 +22,7 @@ class Individu
     private $prenom3;
     private $email;
     private $dateNaissance;
+    private $codePaysNationalite;
     private $nationalite;
     private $sourceInsertDate;
 
@@ -127,6 +128,14 @@ class Individu
     public function getDateNaissance()
     {
         return $this->dateNaissance;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCodePaysNationalite()
+    {
+        return $this->codePaysNationalite;
     }
 
     /**
