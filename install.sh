@@ -4,6 +4,9 @@
 # This script runs required operations in order to set up the application.
 #
 
+CURDIR=$(cd `dirname $0` && pwd)
+cd ${CURDIR}
+
 # Désactivation de l'interface d'admin Apigility
 composer development-disable
 
