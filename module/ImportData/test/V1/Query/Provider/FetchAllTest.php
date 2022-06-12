@@ -7,7 +7,7 @@ use Doctrine\ORM\QueryBuilder;
 use ImportData\V1\Query\Provider\FetchAll;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use ZF\Rest\ResourceEvent;
+use Laminas\ApiTools\Rest\ResourceEvent;
 
 class FetchAllTest extends TestCase
 {

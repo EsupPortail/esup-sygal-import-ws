@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'zf-mvc-auth' => [
+    'api-tools-mvc-auth' => [
         'authentication' => [
             'adapters' => [
                 'basic' => [
-                    'adapter' => \ZF\MvcAuth\Authentication\HttpAdapter::class,
+                    'adapter' => \Laminas\ApiTools\MvcAuth\Authentication\HttpAdapter::class,
                     'options' => [
                         'accept_schemes' => [
                             0 => 'basic',
@@ -17,7 +17,7 @@ return [
             ],
         ],
     ],
-    'zf-content-negotiation' => [
+    'api-tools-content-negotiation' => [
         'selectors' => [],
     ],
     'db' => [

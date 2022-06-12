@@ -4,8 +4,8 @@
  * @copyright Copyright (c) 2014-2016 Zend Technologies USA Inc. (http://www.zend.com)
  */
 
-use Zend\Stdlib\ArrayUtils;
-use ZF\Apigility\Application;
+use Laminas\Stdlib\ArrayUtils;
+use Laminas\ApiTools\Application;
 
 /**
  * This makes our life easier when dealing with paths. Everything is relative
@@ -22,8 +22,23 @@ if (php_sapi_name() === 'cli'
     // Windows needs to execute the batch scripts that Composer generates,
     // and not the Unix shell version.
     $script = defined('PHP_WINDOWS_VERSION_BUILD') && constant('PHP_WINDOWS_VERSION_BUILD')
-        ? '.\\vendor\\bin\\zf-development-mode.bat'
-        : './vendor/bin/zf-development-mode';
+        ? '.\vendor\bin\laminas-development-mode.bat'
+        : './vendor/bin/laminas-development-mode';
+    system(sprintf('%s %s', $script, $argv[2]), $return);
+    exit($return);
+}
+
+// Redirect legacy requests to enable/disable development mode to new tool
+if (php_sapi_name() === 'cli'
+    && $argc > 2
+    && 'development' == $argv[1]
+    && in_array($argv[2], ['disable', 'enable'])
+) {
+    // Windows needs to execute the batch scripts that Composer generates,
+    // and not the Unix shell version.
+    $script = defined('PHP_WINDOWS_VERSION_BUILD') && constant('PHP_WINDOWS_VERSION_BUILD')
+        ? '.\\vendor\\bin\\laminas-development-mode.bat'
+        : './vendor/bin/laminas-development-mode';
     system(sprintf('%s %s', $script, $argv[2]), $return);
     exit($return);
 }

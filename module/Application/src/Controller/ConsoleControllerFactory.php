@@ -4,7 +4,7 @@ namespace Application\Controller;
 
 use Application\Service\TableService;
 use Interop\Container\ContainerInterface;
-use Zend\Log\Logger;
+use Laminas\Log\Logger;
 
 class ConsoleControllerFactory
 {

@@ -1,6 +1,6 @@
 <?php
 
-use Zend\ServiceManager\Factory\InvokableFactory;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
     'logging' => [
@@ -30,7 +30,7 @@ return [
             ],
         ],
     ],
-    'zf-apigility-doctrine-query-provider' => [
+    'api-tools-doctrine-query-provider' => [
         'aliases' => [
             'default_orm_V1' => \ImportData\V1\Query\Provider\FetchAll::class,
             'acteur_fetch_all_V1' => \ImportData\V1\Rest\Acteur\ActeurFetchAll::class,
@@ -192,7 +192,7 @@ return [
             ],
         ],
     ],
-    'zf-versioning' => [
+    'api-tools-versioning' => [
         'uri' => [
             0 => 'import-data.rest.doctrine.these',
             1 => 'import-data.rest.doctrine.doctorant',
@@ -212,7 +212,7 @@ return [
             15 => 'import-data.rest.doctrine.these-annee-univ',
         ],
     ],
-    'zf-rest' => [
+    'api-tools-rest' => [
         'ImportData\\V1\\Rest\\These\\Controller' => [
             'listener' => \ImportData\V1\Rest\These\TheseResource::class,
             'route_name' => 'import-data.rest.doctrine.these',
@@ -820,7 +820,7 @@ return [
             'service_name' => 'TheseAnneeUniv',
         ],
     ],
-    'zf-content-negotiation' => [
+    'api-tools-content-negotiation' => [
         'controllers' => [
             'ImportData\\V1\\Rest\\These\\Controller' => 'HalJson',
             'ImportData\\V1\\Rest\\Doctorant\\Controller' => 'HalJson',
@@ -1164,7 +1164,7 @@ return [
             ],
         ],
     ],
-    'zf-hal' => [
+    'api-tools-hal' => [
         'metadata_map' => [
             \ImportData\V1\Entity\Db\These::class => [
                 'route_identifier_name' => 'these_id',
@@ -1291,7 +1291,7 @@ return [
                 'entity_identifier_name' => 'id',
                 'route_name' => 'import-data.rest.version',
                 'route_identifier_name' => 'version_id',
-                'hydrator' => \Zend\Hydrator\ClassMethods::class,
+                'hydrator' => \Laminas\Hydrator\ClassMethods::class,
             ],
             \ImportData\V1\Rest\Version\VersionCollection::class => [
                 'entity_identifier_name' => 'id',
@@ -1468,7 +1468,7 @@ return [
                 'entity_identifier_name' => 'id',
                 'route_name' => 'import-data.rest.version',
                 'route_identifier_name' => 'version_id',
-                'hydrator' => \Zend\Hydrator\ClassMethods::class,
+                'hydrator' => \Laminas\Hydrator\ClassMethods::class,
             ],
             \ImportData\V2\Rest\Version\VersionCollection::class => [
                 'entity_identifier_name' => 'id',
@@ -1522,7 +1522,7 @@ return [
             ],
         ],
     ],
-    'zf-apigility' => [
+    'api-tools' => [
         'doctrine-connected' => [
             \ImportData\V1\Rest\These\TheseResource::class => [
                 'object_manager' => 'doctrine.entitymanager.orm_default',
@@ -1866,7 +1866,7 @@ return [
             'use_generated_hydrator' => true,
         ],
     ],
-    'zf-content-validation' => [
+    'api-tools-content-validation' => [
         'ImportData\\V1\\Rest\\These\\Controller' => [
             'input_filter' => 'ImportData\\V1\\Rest\\These\\Validator',
         ],
@@ -1971,15 +1971,15 @@ return [
                 'required' => true,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 800,
@@ -1994,10 +1994,10 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\Digits::class,
+                        'name' => \Laminas\Filter\Digits::class,
                     ],
                 ],
                 'validators' => [],
@@ -2007,10 +2007,10 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\Digits::class,
+                        'name' => \Laminas\Filter\Digits::class,
                     ],
                 ],
                 'validators' => [],
@@ -2020,11 +2020,11 @@ return [
                 'validators' => [],
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                         'options' => [],
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                         'options' => [],
                     ],
                 ],
@@ -2037,15 +2037,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 6,
@@ -2058,15 +2058,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 9,
@@ -2079,15 +2079,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 5,
@@ -2100,15 +2100,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 60,
@@ -2121,15 +2121,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 60,
@@ -2142,15 +2142,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 60,
@@ -2163,15 +2163,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 60,
@@ -2184,15 +2184,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 60,
@@ -2205,15 +2205,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 256,
@@ -2232,15 +2232,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 60,
@@ -2255,15 +2255,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 6,
@@ -2276,15 +2276,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 8,
@@ -2297,15 +2297,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 1,
@@ -2318,15 +2318,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 8,
@@ -2339,15 +2339,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 1,
@@ -2360,15 +2360,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 40,
@@ -2381,15 +2381,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 8,
@@ -2402,15 +2402,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 40,
@@ -2423,15 +2423,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 10,
@@ -2444,15 +2444,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 40,
@@ -2465,15 +2465,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 1,
@@ -2486,15 +2486,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 1,
@@ -2509,15 +2509,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 6,
@@ -2530,15 +2530,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 40,
@@ -2551,15 +2551,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 10,
@@ -2574,15 +2574,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 6,
@@ -2595,10 +2595,10 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\Digits::class,
+                        'name' => \Laminas\Filter\Digits::class,
                     ],
                 ],
                 'validators' => [],
@@ -2610,15 +2610,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 20,
@@ -2631,15 +2631,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 40,
@@ -2652,15 +2652,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 100,
@@ -2675,15 +2675,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 64,
@@ -2696,15 +2696,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 64,
@@ -2717,15 +2717,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 64,
@@ -2738,15 +2738,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 64,
@@ -2759,15 +2759,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 200,
@@ -2780,15 +2780,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 64,
@@ -2801,15 +2801,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 200,
@@ -2824,15 +2824,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 64,
@@ -2845,15 +2845,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 64,
@@ -2868,15 +2868,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 64,
@@ -2889,15 +2889,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 64,
@@ -2912,15 +2912,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 64,
@@ -2933,15 +2933,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 64,
@@ -2966,15 +2966,15 @@ return [
                 'required' => true,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 6,
@@ -2987,15 +2987,15 @@ return [
                 'required' => true,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 8,
@@ -3008,15 +3008,15 @@ return [
                 'required' => true,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 10,
@@ -3029,15 +3029,15 @@ return [
                 'required' => true,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 50,
@@ -3052,15 +3052,15 @@ return [
                 'required' => true,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 6,
@@ -3073,10 +3073,10 @@ return [
                 'required' => true,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\Digits::class,
+                        'name' => \Laminas\Filter\Digits::class,
                     ],
                 ],
                 'validators' => [],
@@ -3086,15 +3086,15 @@ return [
                 'required' => true,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 8,
@@ -3107,15 +3107,15 @@ return [
                 'required' => true,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 8,
@@ -3128,15 +3128,15 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => 1,
                             'max' => 40,
@@ -3149,10 +3149,10 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\Digits::class,
+                        'name' => \Laminas\Filter\Digits::class,
                     ],
                 ],
                 'validators' => [],
@@ -3176,10 +3176,10 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -3189,10 +3189,10 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -3202,10 +3202,10 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -3215,10 +3215,10 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -3228,10 +3228,10 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -3241,10 +3241,10 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -3254,10 +3254,10 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -3267,10 +3267,10 @@ return [
                 'required' => false,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -3282,10 +3282,10 @@ return [
                 'required' => true,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -3295,10 +3295,10 @@ return [
                 'required' => true,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -3308,10 +3308,10 @@ return [
                 'required' => true,
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -3323,15 +3323,15 @@ return [
                 'required' => '1',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '800',
@@ -3346,10 +3346,10 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\Digits::class,
+                        'name' => \Laminas\Filter\Digits::class,
                     ],
                 ],
                 'validators' => [],
@@ -3359,10 +3359,10 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\Digits::class,
+                        'name' => \Laminas\Filter\Digits::class,
                     ],
                 ],
                 'validators' => [],
@@ -3372,11 +3372,11 @@ return [
                 'validators' => [],
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                         'options' => [],
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                         'options' => [],
                     ],
                 ],
@@ -3389,15 +3389,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '6',
@@ -3410,15 +3410,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '9',
@@ -3431,15 +3431,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '5',
@@ -3452,15 +3452,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '60',
@@ -3473,15 +3473,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '60',
@@ -3494,15 +3494,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '60',
@@ -3515,15 +3515,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '60',
@@ -3536,15 +3536,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '60',
@@ -3557,15 +3557,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '256',
@@ -3584,15 +3584,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '60',
@@ -3607,15 +3607,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '6',
@@ -3628,15 +3628,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '8',
@@ -3649,15 +3649,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '1',
@@ -3670,15 +3670,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '8',
@@ -3691,15 +3691,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '1',
@@ -3712,15 +3712,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '40',
@@ -3733,15 +3733,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '8',
@@ -3754,15 +3754,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '40',
@@ -3775,15 +3775,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '10',
@@ -3796,15 +3796,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '40',
@@ -3817,15 +3817,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '1',
@@ -3838,15 +3838,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '1',
@@ -3861,15 +3861,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '6',
@@ -3882,15 +3882,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '40',
@@ -3903,15 +3903,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '10',
@@ -3926,15 +3926,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '6',
@@ -3947,10 +3947,10 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\Digits::class,
+                        'name' => \Laminas\Filter\Digits::class,
                     ],
                 ],
                 'validators' => [],
@@ -3962,15 +3962,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '20',
@@ -3983,15 +3983,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '40',
@@ -4004,15 +4004,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '100',
@@ -4027,15 +4027,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '64',
@@ -4048,15 +4048,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '64',
@@ -4069,15 +4069,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '64',
@@ -4090,15 +4090,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '64',
@@ -4111,15 +4111,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '200',
@@ -4132,15 +4132,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '64',
@@ -4153,15 +4153,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '200',
@@ -4176,15 +4176,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '64',
@@ -4197,15 +4197,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '64',
@@ -4220,15 +4220,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '64',
@@ -4241,15 +4241,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '64',
@@ -4264,15 +4264,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '64',
@@ -4285,15 +4285,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '64',
@@ -4318,15 +4318,15 @@ return [
                 'required' => '1',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '6',
@@ -4339,15 +4339,15 @@ return [
                 'required' => '1',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '8',
@@ -4360,15 +4360,15 @@ return [
                 'required' => '1',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '10',
@@ -4381,15 +4381,15 @@ return [
                 'required' => '1',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '50',
@@ -4404,15 +4404,15 @@ return [
                 'required' => '1',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '6',
@@ -4425,10 +4425,10 @@ return [
                 'required' => '1',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\Digits::class,
+                        'name' => \Laminas\Filter\Digits::class,
                     ],
                 ],
                 'validators' => [],
@@ -4438,15 +4438,15 @@ return [
                 'required' => '1',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '8',
@@ -4459,15 +4459,15 @@ return [
                 'required' => '1',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '8',
@@ -4480,15 +4480,15 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [
                     0 => [
-                        'name' => \Zend\Validator\StringLength::class,
+                        'name' => \Laminas\Validator\StringLength::class,
                         'options' => [
                             'min' => '1',
                             'max' => '40',
@@ -4501,10 +4501,10 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\Digits::class,
+                        'name' => \Laminas\Filter\Digits::class,
                     ],
                 ],
                 'validators' => [],
@@ -4528,10 +4528,10 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -4541,10 +4541,10 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -4554,10 +4554,10 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -4567,10 +4567,10 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -4580,10 +4580,10 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -4593,10 +4593,10 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -4606,10 +4606,10 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -4619,10 +4619,10 @@ return [
                 'required' => '',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -4634,10 +4634,10 @@ return [
                 'required' => '1',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -4647,10 +4647,10 @@ return [
                 'required' => '1',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
@@ -4660,17 +4660,17 @@ return [
                 'required' => '1',
                 'filters' => [
                     0 => [
-                        'name' => \Zend\Filter\StringTrim::class,
+                        'name' => \Laminas\Filter\StringTrim::class,
                     ],
                     1 => [
-                        'name' => \Zend\Filter\StripTags::class,
+                        'name' => \Laminas\Filter\StripTags::class,
                     ],
                 ],
                 'validators' => [],
             ],
         ],
     ],
-    'zf-mvc-auth' => [
+    'api-tools-mvc-auth' => [
         'authorization' => [
             'ImportData\\V1\\Rest\\These\\Controller' => [
                 'collection' => [

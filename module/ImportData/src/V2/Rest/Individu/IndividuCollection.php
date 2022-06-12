@@ -1,7 +1,7 @@
 <?php
 namespace ImportData\V2\Rest\Individu;
 
-use Zend\Paginator\Paginator;
+use Laminas\Paginator\Paginator;
 
 class IndividuCollection extends Paginator
 {

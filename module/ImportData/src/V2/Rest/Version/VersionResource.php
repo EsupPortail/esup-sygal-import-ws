@@ -2,26 +2,22 @@
 
 namespace ImportData\V2\Rest\Version;
 
-use ZF\ApiProblem\ApiProblem;
-use ZF\Rest\AbstractResourceListener;
+use Laminas\ApiTools\Rest\AbstractResourceListener;
 
 class VersionResource extends AbstractResourceListener
 {
-    const VERSION_INCONNUE = 'Inconnue';
+    const INCONNUE = 'Inconnue';
 
-    /**
-     * @var string
-     */
-    private $version;
+    private array $appInfos;
 
     /**
      * VersionResource constructor.
      *
-     * @param string $version
+     * @param array $appInfos
      */
-    public function __construct($version = null)
+    public function __construct(array $appInfos)
     {
-        $this->version = $version ?: self::VERSION_INCONNUE;
+        $this->appInfos = $appInfos;
     }
 
     /**
@@ -30,8 +26,11 @@ class VersionResource extends AbstractResourceListener
      * @param  string $id
      * @return VersionEntity
      */
-    public function fetch($id)
+    public function fetch($id): VersionEntity
     {
-        return new VersionEntity($this->version);
+        return new VersionEntity(
+            $this->appInfos['version'] ?: self::INCONNUE,
+            $this->appInfos['date'] ?: self::INCONNUE
+        );
     }
 }

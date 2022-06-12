@@ -2,21 +2,22 @@
 
 namespace ImportData\V2\Rest\Version;
 
-use Zend\ServiceManager\ServiceLocatorInterface as ContainerInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface as ContainerInterface;
 
 class VersionResourceFactory
 {
     /**
      * @param ContainerInterface $container
      * @return VersionResource
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(ContainerInterface $container): VersionResource
     {
         $config = $container->get('config');
-        $version = isset($config['unicaen-app']['app_infos']['version']) ?
-            $config['unicaen-app']['app_infos']['version'] :
-            null;
 
-        return new VersionResource($version);
+        $appInfos = $config['unicaen-app']['app_infos'] ?? [];
+
+        return new VersionResource($appInfos);
     }
 }

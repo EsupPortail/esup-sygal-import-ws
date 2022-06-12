@@ -2,8 +2,8 @@
 
 namespace ImportData\V1\Rest\Version;
 
-use ZF\ApiProblem\ApiProblem;
-use ZF\Rest\AbstractResourceListener;
+use Laminas\ApiTools\ApiProblem\ApiProblem;
+use Laminas\ApiTools\Rest\AbstractResourceListener;
 
 class VersionResource extends AbstractResourceListener
 {

@@ -4,7 +4,7 @@ namespace ImportDataTest\V1\Rest\Version;
 
 use ImportData\V1\Rest\Version\VersionResource;
 use PHPUnit\Framework\MockObject\MockObject;
-use Zend\ServiceManager\ServiceLocatorInterface as ContainerInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface as ContainerInterface;
 use ImportData\V1\Rest\Version\VersionResourceFactory;
 use PHPUnit\Framework\TestCase;
 

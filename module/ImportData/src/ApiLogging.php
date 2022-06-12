@@ -4,14 +4,14 @@ namespace ImportData;
 
 use Doctrine\DBAL\Logging\SQLLogger;
 use Psr\Log\LoggerAwareTrait;
-use Zend\EventManager\EventInterface;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\EventManager\ListenerAggregateTrait;
-use ZF\Apigility\Doctrine\Server\Event\DoctrineResourceEvent;
-use ZF\ContentNegotiation\Request;
-use ZF\Hal\Plugin\Hal;
-use ZF\Rest\RestController;
+use Laminas\EventManager\EventInterface;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\ListenerAggregateTrait;
+use Laminas\ApiTools\Doctrine\Server\Event\DoctrineResourceEvent;
+use Laminas\ApiTools\ContentNegotiation\Request;
+use Laminas\ApiTools\Hal\Plugin\Hal;
+use Laminas\ApiTools\Rest\RestController;
 
 class ApiLogging implements ListenerAggregateInterface, SQLLogger
 {
