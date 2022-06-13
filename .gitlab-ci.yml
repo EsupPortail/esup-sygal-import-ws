@@ -1,18 +1,11 @@
-image: localhost:5000/unicaen-dev-php7.0-apache
+image: localhost:5000/unicaen-dev-php7.4-apache
   
 stages:
-  - test
   - release
 
 cache:
   paths:
     - vendor/
-
-test:
-  stage: test
-  script:
-    - composer install --dev
-    - composer test module/ImportData
 
 release_job:
   stage: release
