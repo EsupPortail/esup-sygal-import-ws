@@ -1,6 +1,10 @@
 Journal des modifications
 =========================
 
+2.2.0
+-----
+- Migration apigility => laminas-api-tools.
+
 2.1.0
 -----
 - Service 'thèse' : ajout du code SISE de la discipline.
