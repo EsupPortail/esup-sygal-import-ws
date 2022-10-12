@@ -6,7 +6,7 @@ use Doctrine\DBAL\ConnectionException;
 use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\EntityManager;
 use RuntimeException;
-use Zend\Log\LoggerAwareTrait;
+use Laminas\Log\LoggerAwareTrait;
 
 class TableService
 {

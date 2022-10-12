@@ -4,8 +4,35 @@ sygal-import-ws
 Que fait *sygal-import-ws* ?
 ----------------------------
 
-*sygal-import-ws* est un web service (une API REST) qui interroge les données présentes dans un SI (via des vues 
-et des tables en base de données) et les met à disposition pour leur lecture via des requêtes GET.
+*sygal-import-ws* est une API REST qui retourne les données présentes dans des tables `SyGAL_*` 
+d'Apogée ou de Physalis via des requêtes GET.
+
+Docker
+------
+
+- Obtention de l'image de base Unicaen (construite) à jour
+
+```bash
+PHP_VERSION=7.4 ;
+docker pull registre.unicaen.fr:5000/unicaen-dev-php${PHP_VERSION}-apache
+```
+
+- Construction de l'image du web service
+
+```bash
+docker build \
+--build-arg HTTP_PROXY \
+--build-arg HTTPS_PROXY \
+--build-arg NO_PROXY \
+--build-arg PHP_VERSION \
+-t sygal-import-ws-image-php${PHP_VERSION} .
+```
+
+- Lancement du web service
+
+```bash
+docker-compose up
+```
 
 
 Installation
@@ -17,21 +44,10 @@ Cf. [`INSTALL.md`](INSTALL.md).
 Lancement du web service *pour le dévelopement*
 -----------------------------------------------
 
-### Solution 1 : le serveur interne PHP
- 
-En phase de développement, la façon la plus simple consiste en l'utilisation 
-du serveur interne de php :
-
- ```bash
-php -S 0.0.0.0:8080 -ddisplay_errors=0 -t public public/index.php
- ```
-
-### Solution 2 : Docker
-
 Se placer à la racine des sources du ws pour lancer la commande suivante :
 
 ```bash
-docker-compose up -d --build
+docker-compose up --build
 ```
 
 Vérifier que le container `sygal-import-ws-container` figure bien dans la liste des containers
@@ -81,7 +97,7 @@ Interrogation avec `curl`
 
 Exemple :
 ```bash
-curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxx" https://localhost:8443/v1/variable
+curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxx" https://localhost:8443/v2/variable
 ```
 
 Remplacer `xxxx` par le token généré grâce à la commande suivante 
@@ -99,12 +115,12 @@ L'interrogation d'un service sans paramètre va retourner l'intégralité des do
 
 Afin d'obtenir les informations spécifiques à une donnée, il est possible d'ajouter son identifiant, exemple :
 ```bash
-curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxx" https://localhost:8443/v1/variable/ETB_LIB_NOM_RESP
+curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxx" https://localhost:8443/v2/variable/ETB_LIB_NOM_RESP
 ```
 
 Pour mettre en forme le JSON retourné et faciliter la lecture, une solution est d'utiliser `python -m json.tool`:
 ```bash
-curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxx" https://localhost:8443/v1/variable | python -m json.tool
+curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxx" https://localhost:8443/v2/variable | python -m json.tool
 ```
 
 
@@ -119,7 +135,7 @@ Ce service accepte un paramètre supplémentaire : un identifiant de thèse (sou
 les acteurs de cette seule thèse. 
 Exemple :
 ```bash
-curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxxx" https://localhost:8443/v1/acteur?these_id=13111
+curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxxx" https://localhost:8443/v2/acteur?these_id=13111
 ```
 
 ### `/doctorant`
@@ -128,7 +144,7 @@ Ce service accepte un paramètre supplémentaire : un identifiant de thèse (sou
 le doctorant de cette thèse.
 Exemple :
 ```bash
-curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxxx" https://localhost:8443/v1/doctorant?these_id=13111
+curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxxx" https://localhost:8443/v2/doctorant?these_id=13111
 ```
 
 

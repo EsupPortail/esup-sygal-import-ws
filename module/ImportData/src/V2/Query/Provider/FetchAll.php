@@ -3,8 +3,8 @@
 namespace ImportData\V2\Query\Provider;
 
 use Doctrine\ORM\QueryBuilder;
-use ZF\Apigility\Doctrine\Server\Query\Provider\DefaultOrm;
-use ZF\Rest\ResourceEvent;
+use Laminas\ApiTools\Doctrine\Server\Query\Provider\DefaultOrm;
+use Laminas\ApiTools\Rest\ResourceEvent;
 
 class FetchAll extends DefaultOrm
 {

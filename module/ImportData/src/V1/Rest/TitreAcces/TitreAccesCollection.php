@@ -1,7 +1,7 @@
 <?php
 namespace ImportData\V1\Rest\TitreAcces;
 
-use Zend\Paginator\Paginator;
+use Laminas\Paginator\Paginator;
 
 class TitreAccesCollection extends Paginator
 {

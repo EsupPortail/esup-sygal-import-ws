@@ -1,7 +1,7 @@
 <?php
 namespace ImportData\V1\Rest\Acteur;
 
-use Zend\Paginator\Paginator;
+use Laminas\Paginator\Paginator;
 
 class ActeurCollection extends Paginator
 {

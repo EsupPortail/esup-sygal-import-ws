@@ -6,7 +6,7 @@ use Application\Controller\ConsoleController;
 use Application\Service\TableService;
 use Application\Service\TableServiceFactory;
 use Doctrine\DBAL\Logging\EchoSQLLogger;
-use Zend\ServiceManager\Factory\InvokableFactory;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
     'log' => [

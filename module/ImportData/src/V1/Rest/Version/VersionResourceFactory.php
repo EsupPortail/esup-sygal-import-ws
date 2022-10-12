@@ -2,7 +2,7 @@
 
 namespace ImportData\V1\Rest\Version;
 
-use Zend\ServiceManager\ServiceLocatorInterface as ContainerInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface as ContainerInterface;
 
 class VersionResourceFactory
 {

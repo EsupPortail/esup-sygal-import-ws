@@ -3,11 +3,11 @@
 namespace Application\Controller;
 
 use Application\Service\TableService;
-use Zend\Log\Filter\Priority;
-use Zend\Log\Logger;
-use Zend\Log\LoggerAwareTrait;
-use Zend\Log\Writer\AbstractWriter;
-use Zend\Mvc\Console\Controller\AbstractConsoleController;
+use Laminas\Log\Filter\Priority;
+use Laminas\Log\Logger;
+use Laminas\Log\LoggerAwareTrait;
+use Laminas\Log\Writer\AbstractWriter;
+use Laminas\Mvc\Console\Controller\AbstractConsoleController;
 
 /**
  * @property Logger $logger

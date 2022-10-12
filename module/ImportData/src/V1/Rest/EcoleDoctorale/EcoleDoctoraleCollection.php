@@ -1,7 +1,7 @@
 <?php
 namespace ImportData\V1\Rest\EcoleDoctorale;
 
-use Zend\Paginator\Paginator;
+use Laminas\Paginator\Paginator;
 
 class EcoleDoctoraleCollection extends Paginator
 {

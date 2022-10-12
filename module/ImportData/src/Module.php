@@ -2,12 +2,12 @@
 namespace ImportData;
 
 use Interop\Container\ContainerInterface;
-use Zend\EventManager\EventInterface;
-use Zend\ModuleManager\Feature\BootstrapListenerInterface;
-use ZF\Apigility\Application;
-use ZF\Apigility\Provider\ApigilityProviderInterface;
+use Laminas\EventManager\EventInterface;
+use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
+use Laminas\ApiTools\Application;
+use Laminas\ApiTools\Provider\ApiToolsProviderInterface;
 
-class Module implements ApigilityProviderInterface, BootstrapListenerInterface
+class Module implements ApiToolsProviderInterface, BootstrapListenerInterface
 {
     /**
      * @return array

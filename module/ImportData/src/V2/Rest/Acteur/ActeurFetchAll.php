@@ -4,7 +4,7 @@ namespace ImportData\V2\Rest\Acteur;
 
 use Doctrine\ORM\QueryBuilder;
 use ImportData\V2\Query\Provider\FetchAll;
-use ZF\Rest\ResourceEvent;
+use Laminas\ApiTools\Rest\ResourceEvent;
 
 class ActeurFetchAll extends FetchAll
 {
