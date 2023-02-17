@@ -4,7 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <entity name="ImportData\V2\Entity\Db\Doctorant" table="SYGAL_DOCTORANT_V2">
         <id name="id" column="ID"/>
-        <field name="sourceCode" type="integer" column="SOURCE_CODE"/>
+        <field name="sourceCode" column="SOURCE_CODE"/>
         <field name="sourceId" column="SOURCE_ID" length="64"/>
         <field name="individuId" column="INDIVIDU_ID"/>
         <field name="ine" length="64" column="INE"/>
