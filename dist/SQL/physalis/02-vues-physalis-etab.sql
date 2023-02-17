@@ -61,39 +61,6 @@ from dual
 union all
 select
     'physalis' as source_id,
-    'EMAIL_ASSISTANCE' as SOURCE_CODE,
-    'EMAIL_ASSISTANCE' as id,
-    'EMAIL_ASSISTANCE' as cod_vap,
-    'Adresse mail de l''assistance utilisateur' as lib_vap,
-    'assistance-sygal@univ-exemple.fr' as par_vap,
-    to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
-    to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
-from dual
-union all
-select
-    'physalis' as source_id,
-    'EMAIL_BU' as SOURCE_CODE,
-    'EMAIL_BU' as id,
-    'EMAIL_BU' as cod_vap,
-    'Adresse mail de contact de la BU' as lib_vap,
-    'bu-sygal@univ-exemple.fr' as par_vap,
-    to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
-    to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
-from dual
-union all
-select
-    'physalis' as source_id,
-    'EMAIL_BDD' as SOURCE_CODE,
-    'EMAIL_BDD' as id,
-    'EMAIL_BDD' as cod_vap,
-    'Adresse mail de contact du bureau des doctorats' as lib_vap,
-    'doctorat-sygal@univ-exemple.fr' as par_vap,
-    to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
-    to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
-from dual
-union all
-select
-    'physalis' as source_id,
     'TRIBUNAL_COMPETENT' as SOURCE_CODE,
     'TRIBUNAL_COMPETENT' as id,
     'TRIBUNAL_COMPETENT' as cod_vap,

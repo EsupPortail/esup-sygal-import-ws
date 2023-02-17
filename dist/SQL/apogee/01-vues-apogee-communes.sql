@@ -45,19 +45,6 @@ where cod_vap in (
                   'ETB_LIB_TIT_RESP',
                   'ETB_LIB_NOM_RESP'
     )
-      -- + variables définies manuellement :
-union all
-select
-    id as source_code,
-    source_id,  -- identifiant unique de la source
-    id,
-    cod_vap,
-    lib_vap,
-    par_vap,
-    DATE_DEB_VALIDITE,
-    DATE_FIN_VALIDITE
-from
-    V_SYGAL_VARIABLE_MANU
 /
 
 create or replace view V_SYGAL_INDIVIDU_V2 as
