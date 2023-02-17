@@ -1,6 +1,11 @@
 Journal des modifications
 =========================
 
+2.3.0
+-----
+- Correction du mapping de l'entité Doctorant.
+- Mise à jour de vues dans la base de données Apogée/Physalis.
+
 2.2.0
 -----
 - Migration apigility => laminas-api-tools.
