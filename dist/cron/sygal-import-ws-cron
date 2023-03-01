@@ -6,5 +6,5 @@ APP_DIR=/var/www/sygal-import-ws
 LOG_FILE=/tmp/sygal-import-ws.log
 
 ##### Mise à jour des tables sources des services #####
-*/5 * * * *   root /usr/bin/php ${APP_DIR}/public/index.php update-service-tables 1> ${LOG_FILE} 2>&1
-## (toutes les 5 minutes)
+25,55 6-18 * * 1-5 root /usr/bin/php ${APP_DIR}/public/index.php update-service-tables 1> ${LOG_FILE} 2>&1
+## (lun-ven à 6:25, 6:55, 7:25, ..., 18:25, 18:55)
