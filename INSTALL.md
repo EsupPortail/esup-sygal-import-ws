@@ -6,7 +6,7 @@ Applicatif
 
 ### Première obtention des sources et installation du serveur 
 
-*NB: la procédure proposée ici part d'un serveur *Debian Stretch* tout nu et couvre l'installation de tous les packages 
+*NB: la procédure proposée ici part d'un serveur *Debian* tout nu et couvre l'installation de tous les packages 
 requis.* Si ce n'était pas le cas, merci de le signaler.
 
 En `root` sur votre serveur, pour obtenir les sources du WS, lancez l'une des commandes suivantes en fonction 
@@ -50,8 +50,8 @@ NB: Vérifiez dans le script `Dockerfile.sh` que vous venez de lancer mais norma
 
 ### Installation d'une version précise du WS
 
-Normalement, vous ne devez installer que les versions officielles du WS, c'est à dire les versions taguées, du genre `2.1.0`
-par exemple.
+Normalement, vous ne devez installer que les versions officielles du WS, c'est à dire les versions taguées, du genre `2.3.0`
+par exemple. Si vous partez de zéro, choisissez bien-sûr la version la plus récente !
 
 Placez-vous dans le répertoire des sources du web service puis lancez les commandes git suivantes pour obtenir la liste des
 versions officielles du WS :
@@ -59,10 +59,10 @@ versions officielles du WS :
 git fetch && git fetch --tags && git tag
 ```
 
-Si la version la plus récente est par exemple la `2.1.0`, utilisez les commandes suivantes pour "installer" cette version 
+Si la version la plus récente est par exemple la `2.3.0`, utilisez les commandes suivantes pour "installer" cette version 
 sur votre serveur :
 ```bash
-git checkout --force 2.1.0 && bash install.sh
+git checkout --force 2.3.0 && bash install.sh
 ```
 
 ### Fichier "users.htpasswd"

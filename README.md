@@ -81,15 +81,16 @@ Chaque vue en base de données peut être interrogée via un service dédié :
   - `/titre-acces`
   - `/variable`
 
-Il y a aussi un service `/version` permettant de connaître le numéro de version du web service (ex : '1.3.7'). 
+Il y a aussi un service `/version` () permettant de connaître le numéro de version du web service (ex : '2.3.0'). 
 
 
-Versions
---------
+Versionning de l'API
+--------------------
 
-L'API existe en plusieurs versions, veillez à spécifier la version correcte dans l'URL.
-Exemple pour la version 1 : `https://localhost:8443/v1/variable`. 
-Exemple pour la version 2 : `https://localhost:8443/v2/variable`. 
+L'API existe en plusieurs versions coexistantes, veillez à spécifier la version correcte dans l'URL.
+Prenez toujours la version la plus récente. 
+
+Exemple de requête pour la version 2 : `https://localhost:8443/v2/version/latest`.
 
 
 Interrogation avec `curl`
