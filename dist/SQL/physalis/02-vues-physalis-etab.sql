@@ -21,7 +21,7 @@ select
     'ETB_LIB' as id,
     'ETB_LIB' as cod_vap,
     'Nom de l''établissement de référence' as lib_vap,
-    'Université d''Exemple' as par_vap,
+    'INSA Rouen Normandie' as par_vap,
     to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
     to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
 from dual
@@ -32,7 +32,7 @@ select
     'ETB_LIB_NOM_RESP' as id,
     'ETB_LIB_NOM_RESP' as cod_vap,
     'Nom du responsable de l''établissement' as lib_vap,
-    'Paule Hochon' as par_vap,
+    'M. Mourad BOUKHALFA' as par_vap,
     to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
     to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
 from dual
@@ -43,7 +43,7 @@ select
     'ETB_LIB_TIT_RESP' as id,
     'ETB_LIB_TIT_RESP' as cod_vap,
     'Titre du responsable de l''établissement' as lib_vap,
-    'Présidente' as par_vap,
+    'Directeur' as par_vap,
     to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
     to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
 from dual
@@ -54,7 +54,7 @@ select
     'ETB_ART_ETB_LIB' as id,
     'ETB_ART_ETB_LIB' as cod_vap,
     'Article du nom de l''etb de référence' as lib_vap,
-    'L''' as par_vap,
+    'Le' as par_vap,
     to_date('2017-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
     to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
 from dual
@@ -65,7 +65,7 @@ select
     'TRIBUNAL_COMPETENT' as id,
     'TRIBUNAL_COMPETENT' as cod_vap,
     'Tribunal compétent' as lib_vap,
-    'Le Tribunal Administratif d''Exemple' as par_vap,
+    'Le Tribunal Administratif de Caen' as par_vap,
     to_date('1900-01-01', 'YYYY-MM-DD') as DATE_DEB_VALIDITE,
     to_date('9999-12-31', 'YYYY-MM-DD') as DATE_FIN_VALIDITE
 from dual
