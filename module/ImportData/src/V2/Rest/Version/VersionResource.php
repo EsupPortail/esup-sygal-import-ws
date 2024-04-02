@@ -6,7 +6,10 @@ use Laminas\ApiTools\Rest\AbstractResourceListener;
 
 class VersionResource extends AbstractResourceListener
 {
-    const INCONNUE = 'Inconnue';
+    const DEFAULTS = [
+        'version' => '?',
+        'date' => '?',
+    ];
 
     private array $appInfos;
 
@@ -17,7 +20,7 @@ class VersionResource extends AbstractResourceListener
      */
     public function __construct(array $appInfos)
     {
-        $this->appInfos = $appInfos;
+        $this->appInfos = array_merge(self::DEFAULTS, $appInfos);
     }
 
     /**
@@ -29,8 +32,8 @@ class VersionResource extends AbstractResourceListener
     public function fetch($id): VersionEntity
     {
         return new VersionEntity(
-            $this->appInfos['version'] ?: self::INCONNUE,
-            $this->appInfos['date'] ?: self::INCONNUE
+            $this->appInfos['version'],
+            $this->appInfos['date']
         );
     }
 }

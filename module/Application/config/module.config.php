@@ -24,60 +24,74 @@ return [
     ],
     'services_to_entity_classes' => [
         'structure' => [
-            \ImportData\V1\Entity\Db\Structure::class,
+            //\ImportData\V1\Entity\Db\Structure::class,
             \ImportData\V2\Entity\Db\Structure::class,
+            \ImportData\V3\Entity\Db\Structure::class,
         ],
         'etablissement' => [
-            \ImportData\V1\Entity\Db\Etablissement::class,
+            //\ImportData\V1\Entity\Db\Etablissement::class,
             \ImportData\V2\Entity\Db\Etablissement::class,
+            \ImportData\V3\Entity\Db\Etablissement::class,
         ],
         'ecole-doctorale' => [
-            \ImportData\V1\Entity\Db\EcoleDoctorale::class,
+            //\ImportData\V1\Entity\Db\EcoleDoctorale::class,
             \ImportData\V2\Entity\Db\EcoleDoctorale::class,
+            \ImportData\V3\Entity\Db\EcoleDoctorale::class,
         ],
         'unite-recherche' => [
-            \ImportData\V1\Entity\Db\UniteRecherche::class,
+            //\ImportData\V1\Entity\Db\UniteRecherche::class,
             \ImportData\V2\Entity\Db\UniteRecherche::class,
+            \ImportData\V3\Entity\Db\UniteRecherche::class,
         ],
         'individu' => [
-            \ImportData\V1\Entity\Db\Individu::class,
+            //\ImportData\V1\Entity\Db\Individu::class,
             \ImportData\V2\Entity\Db\Individu::class,
+            \ImportData\V3\Entity\Db\Individu::class,
         ],
         'doctorant' => [
-            \ImportData\V1\Entity\Db\Doctorant::class,
+            //\ImportData\V1\Entity\Db\Doctorant::class,
             \ImportData\V2\Entity\Db\Doctorant::class,
+            \ImportData\V3\Entity\Db\Doctorant::class,
         ],
         'these' => [
-            \ImportData\V1\Entity\Db\These::class,
+            //\ImportData\V1\Entity\Db\These::class,
             \ImportData\V2\Entity\Db\These::class,
+            \ImportData\V3\Entity\Db\These::class,
         ],
         'these-annee-univ' => [
-            \ImportData\V1\Entity\Db\TheseAnneeUniv::class,
+            //\ImportData\V1\Entity\Db\TheseAnneeUniv::class,
             \ImportData\V2\Entity\Db\TheseAnneeUniv::class,
+            \ImportData\V3\Entity\Db\TheseAnneeUniv::class,
         ],
         'role' => [
-            \ImportData\V1\Entity\Db\Role::class,
+            //\ImportData\V1\Entity\Db\Role::class,
             \ImportData\V2\Entity\Db\Role::class,
+            \ImportData\V3\Entity\Db\Role::class,
         ],
         'acteur' => [
-            \ImportData\V1\Entity\Db\Acteur::class,
+            //\ImportData\V1\Entity\Db\Acteur::class,
             \ImportData\V2\Entity\Db\Acteur::class,
+            \ImportData\V3\Entity\Db\Acteur::class,
         ],
         'variable' => [
-            \ImportData\V1\Entity\Db\Variable::class,
+            //\ImportData\V1\Entity\Db\Variable::class,
             \ImportData\V2\Entity\Db\Variable::class,
+            \ImportData\V3\Entity\Db\Variable::class,
         ],
         'origine-financement' => [
-            \ImportData\V1\Entity\Db\OrigineFinancement::class,
+            //\ImportData\V1\Entity\Db\OrigineFinancement::class,
             \ImportData\V2\Entity\Db\OrigineFinancement::class,
+            \ImportData\V3\Entity\Db\OrigineFinancement::class,
         ],
         'financement' => [
-            \ImportData\V1\Entity\Db\Financement::class,
+            //\ImportData\V1\Entity\Db\Financement::class,
             \ImportData\V2\Entity\Db\Financement::class,
+            \ImportData\V3\Entity\Db\Financement::class,
         ],
         'titre-acces' => [
-            \ImportData\V1\Entity\Db\TitreAcces::class,
+            //\ImportData\V1\Entity\Db\TitreAcces::class,
             \ImportData\V2\Entity\Db\TitreAcces::class,
+            \ImportData\V3\Entity\Db\TitreAcces::class,
         ],
     ],
     'doctrine' => [

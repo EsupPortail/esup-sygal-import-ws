@@ -2,24 +2,28 @@
 namespace ImportData;
 
 use Interop\Container\ContainerInterface;
-use Laminas\EventManager\EventInterface;
-use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
 use Laminas\ApiTools\Application;
 use Laminas\ApiTools\Provider\ApiToolsProviderInterface;
+use Laminas\Config\Factory as ConfigFactory;
+use Laminas\EventManager\EventInterface;
+use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
 
 class Module implements ApiToolsProviderInterface, BootstrapListenerInterface
 {
     /**
-     * @return array
-     *
      * @codeCoverageIgnore
      */
-    public function getConfig()
+    public function getConfig(): array
     {
-        return include __DIR__ . '/../config/module.config.php';
+        return ConfigFactory::fromFiles([
+            __DIR__ . '/../config/module.config.php',
+            __DIR__ . '/../config/v1.config.php',
+            __DIR__ . '/../config/v2.config.php',
+            __DIR__ . '/../config/v3.config.php',
+        ]);
     }
 
-    public function onBootstrap(EventInterface $e)
+    public function onBootstrap(EventInterface $e): void
     {
         /** @var Application $application */
         $application = $e->getTarget();

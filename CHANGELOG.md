@@ -1,6 +1,12 @@
 Journal des modifications
 =========================
 
+3.0.0
+-----
+- Passage à PHP 8.0.
+- Ajout d'une V3 à l'API ; les V1 et V2 demeurent.
+- Ajout de la colonne V_SYGAL_DOCTORANT_V2.code_apprenant_in_source contenant le numéro étudiant (API V3).
+
 2.3.0
 -----
 - Correction du mapping de l'entité Doctorant.

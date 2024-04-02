@@ -13,25 +13,27 @@ Docker
 - Obtention de l'image de base Unicaen (construite) à jour
 
 ```bash
-PHP_VERSION=7.4 ;
+PHP_VERSION=8.0 \
 docker pull registre.unicaen.fr:5000/unicaen-dev-php${PHP_VERSION}-apache
 ```
 
 - Construction de l'image du web service
 
 ```bash
+PHP_VERSION=8.0 \
 docker build \
 --build-arg HTTP_PROXY \
 --build-arg HTTPS_PROXY \
 --build-arg NO_PROXY \
 --build-arg PHP_VERSION \
--t sygal-import-ws-image-php${PHP_VERSION} .
+-t sygal-import-ws-image-php${PHP_VERSION} \
+.
 ```
 
 - Lancement du web service
 
 ```bash
-docker-compose up
+docker-compose up sygal-import-ws
 ```
 
 
@@ -47,10 +49,10 @@ Lancement du web service *pour le dévelopement*
 Se placer à la racine des sources du ws pour lancer la commande suivante :
 
 ```bash
-docker-compose up --build
+docker-compose up --build sygal-import-ws
 ```
 
-Vérifier que le container `sygal-import-ws-container` figure bien dans la liste des containers
+Vérifier que le container `sygal-import-ws-container-php8.0` figure bien dans la liste des containers
 lancés listés par la commande suivante (cf. colonne `NAMES`) :
 
 ```bash
@@ -119,9 +121,9 @@ Afin d'obtenir les informations spécifiques à une donnée, il est possible d'a
 curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxx" https://localhost:8443/v2/variable/ETB_LIB_NOM_RESP
 ```
 
-Pour mettre en forme le JSON retourné et faciliter la lecture, une solution est d'utiliser `python -m json.tool`:
+Pour mettre en forme le JSON retourné et faciliter la lecture, une solution est d'utiliser `python`:
 ```bash
-curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxx" https://localhost:8443/v2/variable | python -m json.tool
+curl --insecure --header "Accept: application/json" --header "Authorization: Basic xxxx" https://localhost:8443/v2/variable | python3 -m json.tool
 ```
 
 

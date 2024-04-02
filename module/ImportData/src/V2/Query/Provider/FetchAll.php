@@ -8,15 +8,8 @@ use Laminas\ApiTools\Rest\ResourceEvent;
 
 class FetchAll extends DefaultOrm
 {
-    /**
-     * @param ResourceEvent $event
-     * @param string        $entityClass
-     * @param array         $parameters
-     * @return QueryBuilder
-     */
-    public function createQuery(ResourceEvent $event, $entityClass, $parameters)
+    public function createQuery(ResourceEvent $event, $entityClass, $parameters): QueryBuilder
     {
-        /** @var QueryBuilder $qb */
         $qb = parent::createQuery($event, $entityClass, $parameters);
 
         $qb->orderBy('row.id', 'asc'); // indispensable car les données sont demandées paginées

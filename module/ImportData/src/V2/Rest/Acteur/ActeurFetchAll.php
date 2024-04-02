@@ -8,13 +8,7 @@ use Laminas\ApiTools\Rest\ResourceEvent;
 
 class ActeurFetchAll extends FetchAll
 {
-    /**
-     * @param ResourceEvent $event
-     * @param string        $entityClass
-     * @param array         $parameters
-     * @return QueryBuilder
-     */
-    public function createQuery(ResourceEvent $event, $entityClass, $parameters)
+    public function createQuery(ResourceEvent $event, $entityClass, $parameters): QueryBuilder
     {
         $qb = parent::createQuery($event, $entityClass, $parameters);
 
