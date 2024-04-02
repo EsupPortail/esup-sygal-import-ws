@@ -2,12 +2,13 @@ version: "2"
 
 services:
   sygal-import-ws:
-    image: sygal-import-ws-image-php7.4
+#    image: registre.unicaen.fr:5000/sygal-import-ws-image-php8.0
+    image: sygal-import-ws-image-php8.0
 #    build:
 #      context: .
 #      args:
-#        - PHP_VERSION=7.4
-    container_name: sygal-import-ws-container-php7.4
+#        - PHP_VERSION=8.0
+    container_name: sygal-import-ws-container-php8.0
     environment:
       - http_proxy
       - https_proxy
@@ -20,5 +21,6 @@ services:
     volumes:
       - .:/app
       - /tmp:/tmp
+      - ~/.config/composer/:/root/.config/composer/:ro
     working_dir: /app
     network_mode: bridge

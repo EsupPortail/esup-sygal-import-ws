@@ -22,7 +22,7 @@ return [
                 ],
             ],
             'orm_default' => [
-                'class' => \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain::class,
+                'class' => \Doctrine\Persistence\Mapping\Driver\MappingDriverChain::class,
                 'drivers' => [
                     'ImportData\\V1\\Entity\\Db' => 'orm_default_xml_driver',
                     'ImportData\\V2\\Entity\\Db' => 'orm_default_xml_driver',

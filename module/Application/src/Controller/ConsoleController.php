@@ -7,7 +7,7 @@ use Laminas\Log\Filter\Priority;
 use Laminas\Log\Logger;
 use Laminas\Log\LoggerAwareTrait;
 use Laminas\Log\Writer\AbstractWriter;
-use Laminas\Mvc\Console\Controller\AbstractConsoleController;
+use Unicaen\Console\Controller\AbstractConsoleController;
 
 /**
  * @property Logger $logger

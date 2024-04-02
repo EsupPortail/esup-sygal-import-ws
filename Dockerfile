@@ -1,7 +1,8 @@
 
 ARG PHP_VERSION
 
-FROM registre.unicaen.fr:5000/unicaen-dev-php${PHP_VERSION}-apache
+#FROM registre.unicaen.fr:5000/unicaen-dev-php${PHP_VERSION}-apache
+FROM unicaen-dev-php${PHP_VERSION}-apache
 
 LABEL maintainer="Bertrand GAUTHIER <bertrand.gauthier at unicaen.fr>"
 

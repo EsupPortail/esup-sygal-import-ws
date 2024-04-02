@@ -7,6 +7,7 @@
  */
 
 return [
+    'ApiSkeletons\DoctrineORMHydrationModule',
     'Laminas\\Cache',
     'Laminas\\Db',
     'Laminas\\Filter',
@@ -28,7 +29,6 @@ return [
     'Laminas\\Filter',
     'Laminas\\Hydrator',
     'Laminas\\InputFilter',
-    'Laminas\\Mvc\\Console',
     'Laminas\\Paginator',
     'Laminas\\Router',
     'Laminas\\Validator',
@@ -46,9 +46,11 @@ return [
     'Laminas\\ApiTools\\Versioning',
     'DoctrineModule',
     'DoctrineORMModule',
-    'Phpro\\DoctrineHydrationModule',
     'Laminas\\ApiTools\\Doctrine\\Server',
+    'Unicaen\Console',
     'UnicaenOracle',
+    'ApiSkeletons\DoctrineORMHydrationModule',
+    'Laminas\ApiTools\Doctrine\QueryBuilder',
     'Application',
     'ImportData',
 ];

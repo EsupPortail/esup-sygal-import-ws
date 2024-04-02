@@ -2,10 +2,9 @@
 
 namespace Application;
 
-use Laminas\Console\Adapter\AdapterInterface as Console;
-use Laminas\ModuleManager\Feature\ConsoleUsageProviderInterface;
+use Unicaen\Console\Adapter\AdapterInterface as Console;
 
-class Module implements ConsoleUsageProviderInterface
+class Module
 {
     public function getConfig()
     {
