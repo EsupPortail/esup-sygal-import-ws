@@ -1,10 +1,6 @@
 --
---
--- SyGAL
--- =====
---
--- Web Service d'import de données
--- -------------------------------
+-- Web Service d'import de données pour SyGAL
+-- ------------------------------------------
 --
 -- Vue matérialisée interrogeant Apogée et l'annuaire LDAP pour obtenir
 -- les adresses électroniques (grâce au package UCBN_LDAP).

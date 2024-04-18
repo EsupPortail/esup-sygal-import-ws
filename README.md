@@ -1,23 +1,20 @@
 sygal-import-ws
 ===============
 
-Que fait *sygal-import-ws* ?
-----------------------------
-
-*sygal-import-ws* est une API REST qui retourne les données présentes dans des tables `SyGAL_*` 
+*sygal-import-ws* est une API REST qui retourne les données présentes dans des tables `SYGAL_*` 
 d'Apogée ou de Physalis via des requêtes GET.
 
-Docker
-------
 
-- Obtention de l'image de base Unicaen (construite) à jour
+Installation
+------------
 
-```bash
-PHP_VERSION=8.0 \
-docker pull registre.unicaen.fr:5000/unicaen-dev-php${PHP_VERSION}-apache
-```
+Cf. [`INSTALL.md`](INSTALL.md).
 
-- Construction de l'image du web service
+
+Lancement du web service *pour le dévelopement*
+-----------------------------------------------
+
+- Construction de l'image
 
 ```bash
 PHP_VERSION=8.0 \
@@ -30,29 +27,13 @@ docker build \
 .
 ```
 
-- Lancement du web service
+- Démarrage du container :
 
 ```bash
 docker-compose up sygal-import-ws
 ```
 
-
-Installation
-------------
-
-Cf. [`INSTALL.md`](INSTALL.md).
-
-
-Lancement du web service *pour le dévelopement*
------------------------------------------------
-
-Se placer à la racine des sources du ws pour lancer la commande suivante :
-
-```bash
-docker-compose up --build sygal-import-ws
-```
-
-Vérifier que le container `sygal-import-ws-container-php8.0` figure bien dans la liste des containers
+- Vérifier que le container `sygal-import-ws-container-php8.0` figure bien dans la liste des containers
 lancés listés par la commande suivante (cf. colonne `NAMES`) :
 
 ```bash
@@ -83,7 +64,8 @@ Chaque vue en base de données peut être interrogée via un service dédié :
   - `/titre-acces`
   - `/variable`
 
-Il y a aussi un service `/version` () permettant de connaître le numéro de version du web service (ex : '2.3.0'). 
+Autres services :
+  - `/version` : permet de connaître le numéro de version du web service (ex : '2.3.0')
 
 
 Versionning de l'API

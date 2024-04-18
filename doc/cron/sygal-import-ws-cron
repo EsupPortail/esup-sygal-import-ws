@@ -2,7 +2,7 @@
 # Web service d'import pour SyGAL.
 #
 
-APP_DIR=/var/www/sygal-import-ws
+APP_DIR=/app
 LOG_FILE=/tmp/sygal-import-ws.log
 
 ##### Mise à jour des tables sources des services #####

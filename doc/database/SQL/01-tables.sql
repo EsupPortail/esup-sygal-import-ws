@@ -1,12 +1,13 @@
 --
+-- Web Service d'import de données pour SyGAL
+-- ------------------------------------------
 --
--- SyGAL
--- =====
+-- Tables à créer par l'établissement.
 --
--- Web Service d'import de données
--- -------------------------------
+
 --
--- Tables à créer par chaque établissement.
+-- NB : Seule la table `SYGAL_DOCTORANT_V3` existe en version "V3", c'est normal.
+--      Les autres tables restent en version "V2".
 --
 
 create table SYGAL_ACTEUR_V2
@@ -31,10 +32,11 @@ create table SYGAL_ACTEUR_V2
 )
 /
 
-create table SYGAL_DOCTORANT_V2
+create table SYGAL_DOCTORANT_V3 -- V3, oui c'est normal !
 (
     SOURCE_INSERT_DATE DATE default sysdate,
     INE VARCHAR2(12),
+    CODE_APPRENANT_IN_SOURCE VARCHAR2(64),
     INDIVIDU_ID NUMBER(8),
     ID NUMBER(8),
     SOURCE_ID CHAR(6),

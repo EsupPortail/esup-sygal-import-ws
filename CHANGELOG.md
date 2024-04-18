@@ -6,6 +6,8 @@ Journal des modifications
 - Passage à PHP 8.0.
 - Ajout d'une V3 à l'API ; les V1 et V2 demeurent.
 - Ajout de la colonne V_SYGAL_DOCTORANT_V2.code_apprenant_in_source contenant le numéro étudiant (API V3).
+- Dockerfile sans dépendance à l'image Unicaen ; traduit en Dockerfile.sh pour l'install manuelle.
+- Mise à jour de la doc d'installation.
 
 2.3.0
 -----
