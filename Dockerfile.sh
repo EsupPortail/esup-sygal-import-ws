@@ -1,14 +1,14 @@
-###########################################################################################
+#########################################################################################################
 #
 #                         Image Docker pour l'API sygal-import-ws
 #           traduite en script sh, pour configurer manuellement un serveur Debian
 #
 # Pré-requis :
-#   - Copier le répertoire local ./docker dans le répertoire /tmp du serveur cible, ex
-#     scp -r ./docker root@ksygal-import-ws.univ.fr:/tmp/
-#   - Etre root.
+#   - Etre root sur le serveur
+#   - Avoir récupéré les sources de l'application et être positionné dans leur répertoire
+#   - Copier le répertoire ./docker dans le répertoire /tmp du serveur : cp -r ./docker /tmp/
 #
-###########################################################################################
+#########################################################################################################
 
 #FROM debian:bullseye AS distrib
 

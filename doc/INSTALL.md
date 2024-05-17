@@ -30,6 +30,22 @@ git clone https://github.com/EsupPortail/sygal-import-ws.git /app
 Si vous êtes à l'aise, libre à vous une fois que tout fonctionne de changer d'emplacement et de modifier en conséquence
 les configs nécessaires sur le serveur.*
 
+Normalement, vous ne devez installer que les versions officielles du WS, c'est à dire les versions taguées, du genre `3.0.0`
+par exemple. Si vous partez de zéro, choisissez bien-sûr la version la plus récente !
+
+Placez-vous dans le répertoire des sources du web service puis lancez les commandes git suivantes pour obtenir la liste des
+versions officielles du WS :
+```bash
+git fetch && git fetch --tags && git tag
+```
+
+Si la version la plus récente est par exemple la `3.0.0`, utilisez les commandes suivantes pour "installer" cette version
+sur votre serveur :
+```bash
+git checkout --force 3.0.0 && bash install.sh
+```
+
+
 ### Configuration du serveur
 
 - Vous trouverez dans le répertoire des sources récupérées à l'instant un script `Dockerfile.sh`,
@@ -49,31 +65,13 @@ créés par le script `Dockerfile.sh` :
 NB: Vérifiez dans le script `Dockerfile.sh` que vous venez de lancer mais normalement 
 `APACHE_CONF_DIR=/etc/apache2` et `PHP_CONF_DIR=/etc/php/${PHP_VERSION}`.
 
-### Installation d'une version précise du WS
 
-Normalement, vous ne devez installer que les versions officielles du WS, c'est à dire les versions taguées, du genre `3.0.0`
-par exemple. Si vous partez de zéro, choisissez bien-sûr la version la plus récente !
+### Fichier `users.htpasswd`
 
-Placez-vous dans le répertoire des sources du web service puis lancez les commandes git suivantes pour obtenir la liste des
-versions officielles du WS :
-```bash
-git fetch && git fetch --tags && git tag
-```
+Ce fichier contient les comptes utilisateurs / mots de passe autorisés à interroger le WS au regard de l'authentification HTTP Basic.
 
-Si la version la plus récente est par exemple la `3.0.0`, utilisez les commandes suivantes pour "installer" cette version 
-sur votre serveur :
-```bash
-git checkout --force 3.0.0 && bash install.sh
-```
-
-### Fichier "users.htpasswd"
-
-Ce fichier contient les utilisateurs/mot de passe autorisés à interroger le WS au regard de l'authentification HTTP Basic.
-
-S'il s'agit d'une simple mise à jour du WS, vous avez déjà fait la manip, inutile de lire ce paragraphe.
-
-S'il s'agit de la première installation du WS, placez-vous dans le répertoire [`config`](config) des sources et lancez la 
-commande suivante pour créer le fichier "users.htpasswd" contenant un utilisateur `sygal-app` dont le mot de passe 
+Placez-vous dans le répertoire [`config`](config) des sources et lancez la 
+commande suivante pour créer le fichier `users.htpasswd` contenant un utilisateur `sygal-app` dont le mot de passe 
 vous sera demandé :
 ```bash
 htpasswd -c users.htpasswd sygal-app
@@ -84,13 +82,10 @@ Si vous manquez d'idée pour le mot de passe, utilsez la commande suivante :
 pwgen 16 1 --symbols --secure
 ```
 
+
 ### Configuration du WS
 
-S'il s'agit d'une mise à jour du WS, vous avez déjà fait la manip, inutile de lire ce paragraphe.
-Reportez-vous aux "release notes" de la version choisie situées dans `doc/release-notes`.
-
-S'il s'agit de la première installation du WS, supprimez l'extension `.dist` des fichiers suivants situés dans le 
-répertoire [`config/autoload`](config/autoload) :
+Supprimez l'extension `.dist` des fichiers suivants situés dans le répertoire [`config/autoload`](config/autoload) :
   - [`local.php.dist`](config/autoload/local.php.dist)
 
 Dans la suite, vous allez adapter le contenu de ces fichiers à votre situation.
