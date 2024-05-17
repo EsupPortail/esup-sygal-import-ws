@@ -550,13 +550,14 @@ select distinct
     join V_SYGAL_ROLE_NOMENC sr on sr.COD_ROJ = rtr.TO_COD_ROJ
 /
 
-create view V_SYGAL_ROLE as
+create or replace view V_SYGAL_ROLE_V2 as
 select
-    'apogee' as source_id, -- Id de la source
+    COD_ROJ as source_code, -- Id unique
+    'apogee' as source_id,  -- identifiant unique de la source
     COD_ROJ as id,         -- Id du rôle
     LIB_ROJ,
     LIC_ROJ
-  from V_SYGAL_ROLE_JURY
+from V_SYGAL_ROLE_JURY
 /
 
 create or replace view V_SYGAL_ACTEUR_V2 as
