@@ -36,6 +36,7 @@
         "laminas/laminas-component-installer": "^2.7",
         "laminas/laminas-log": "^2.9",
         "laminas/laminas-mvc-i18n": "^1.7",
+        "laminas/laminas-text": "^2.10",
         "monolog/monolog": "^1.26",
         "unicaen/console": "^6.0",
         "unicaen/oracle": "dev-release_4.0.0",
