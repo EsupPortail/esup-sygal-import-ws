@@ -87,7 +87,7 @@ RUN apt-get -qq update && \
         php${PHP_VERSION}-memcached \
         php${PHP_VERSION}-opcache \
         php${PHP_VERSION}-soap \
-        php${PHP_VERSION}-xdebug \
+#        php${PHP_VERSION}-xdebug \ --> cf. install à part ci-après
         php${PHP_VERSION}-xml \
         php${PHP_VERSION}-zip \
         php${PHP_VERSION}-cli \
@@ -97,6 +97,11 @@ RUN apt-get -qq update && \
 
 # Forçage de la version de PHP CLI
 RUN update-alternatives --set php /usr/bin/php${PHP_VERSION}
+
+# Installation manuelle de xdebug 3.2.2, car les 3.3.0/1/2 provoquent une "Segmentation fault" au 22/05/2024 (à cause de PHP 8.0 ?)
+pecl install xdebug-3.2.2 && \
+    echo "zend_extension=xdebug" > ${PHP_CONF_DIR}/fpm/conf.d/20-xdebug.ini && \
+    echo "zend_extension=xdebug" > ${PHP_CONF_DIR}/cli/conf.d/20-xdebug.ini
 
 # Package PHP Oracle OCI8
 ENV OCI8_PACKAGE="oci8-3.0.1"
@@ -119,8 +124,8 @@ COPY --from=get-composer /usr/bin/composer /usr/local/bin/composer
 # Configuration PHP, php-fpm.
 ADD ${PHP_CONF_LOCAL_DIR}/fpm/pool.d/www.conf.part /tmp/
 RUN cat /tmp/www.conf.part >> ${PHP_CONF_DIR}/fpm/pool.d/www.conf && rm /tmp/www.conf.part
-ADD ${PHP_CONF_LOCAL_DIR}/fpm/conf.d/99-sygal.ini ${PHP_CONF_DIR}/fpm/conf.d/
-ADD ${PHP_CONF_LOCAL_DIR}/cli/conf.d/99-sygal.ini ${PHP_CONF_DIR}/cli/conf.d/
+ADD ${PHP_CONF_LOCAL_DIR}/fpm/conf.d/99-sygal-import-ws.ini ${PHP_CONF_DIR}/fpm/conf.d/
+ADD ${PHP_CONF_LOCAL_DIR}/cli/conf.d/99-sygal-import-ws.ini ${PHP_CONF_DIR}/cli/conf.d/
 
 # Création du fichier pour les logs FPM (cf. fpm/pool.d/www.conf.part)
 RUN touch ${FPM_PHP_LOG_FILE} && \
@@ -149,10 +154,10 @@ RUN ln -sf /dev/stdout /var/log/apache2/other_vhosts_access.log
 RUN ln -sf /dev/stderr /var/log/apache2/error.log
 
 # Configuration Apache.
-ADD ${APACHE_CONF_LOCAL_DIR}/apache-ports.conf     ${APACHE_CONF_DIR}/ports.conf
-ADD ${APACHE_CONF_LOCAL_DIR}/apache-site.conf      ${APACHE_CONF_DIR}/sites-available/app.conf
-ADD ${APACHE_CONF_LOCAL_DIR}/apache-site-ssl.conf  ${APACHE_CONF_DIR}/sites-available/app-ssl.conf
-RUN a2ensite app app-ssl
+ADD ${APACHE_CONF_LOCAL_DIR}/ports.conf               ${APACHE_CONF_DIR}/ports.conf
+ADD ${APACHE_CONF_LOCAL_DIR}/sygal-import-ws.conf     ${APACHE_CONF_DIR}/sites-available/sygal-import-ws.conf
+ADD ${APACHE_CONF_LOCAL_DIR}/sygal-import-ws-ssl.conf ${APACHE_CONF_DIR}/sites-available/sygal-import-ws-ssl.conf
+RUN a2ensite sygal-import-ws sygal-import-ws-ssl
 
 
 ###########################################################################################
