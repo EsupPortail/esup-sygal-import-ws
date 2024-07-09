@@ -1,12 +1,14 @@
+#!/bin/bash
+
 #########################################################################################################
 #
 #                         Image Docker pour l'API sygal-import-ws
-#           traduite en script sh, pour configurer manuellement un serveur Debian
+#           traduite en script bash, pour configurer manuellement un serveur Debian
 #
 # Pré-requis :
 #   - Etre root sur le serveur
 #   - Avoir récupéré les sources de l'application et être positionné dans leur répertoire
-#   - Copier le répertoire ./docker dans le répertoire /tmp du serveur : cp -r ./docker /tmp/
+#   - Avoir copié le répertoire ./docker dans le répertoire /tmp du serveur : cp -r ./docker /tmp/
 #
 #########################################################################################################
 
@@ -65,8 +67,8 @@ apt-get -qq update && \
 #FROM distrib AS php
 
 export PHP_CONF_LOCAL_DIR=/tmp/docker/configs/php \
-    PHP_CONF_DIR=/etc/php/${PHP_VERSION} \
-    FPM_PHP_LOG_FILE=/var/log/php-fpm.log
+    PHP_CONF_DIR=/etc/php/${PHP_VERSION} #\
+#    FPM_PHP_LOG_FILE=/var/log/php-fpm.log
 
 # Repositories fournissant PHP 5.x, 7.x et 8.x
 apt-get -qq update && \
@@ -93,7 +95,7 @@ apt-get -qq update && \
         php${PHP_VERSION}-memcached \
         php${PHP_VERSION}-opcache \
         php${PHP_VERSION}-soap \
-        php${PHP_VERSION}-xdebug \
+#        php${PHP_VERSION}-xdebug \ --> cf. install à part ci-après
         php${PHP_VERSION}-xml \
         php${PHP_VERSION}-zip \
         php${PHP_VERSION}-cli \
@@ -103,6 +105,11 @@ apt-get -qq update && \
 
 # Forçage de la version de PHP CLI
 update-alternatives --set php /usr/bin/php${PHP_VERSION}
+
+# Installation manuelle de xdebug 3.2.2, car les 3.3.0/1/2 provoquent une "Segmentation fault" au 22/05/2024 (à cause de PHP 8.0 ?)
+pecl install xdebug-3.2.2 && \
+    echo "zend_extension=xdebug" > ${PHP_CONF_DIR}/fpm/conf.d/20-xdebug.ini && \
+    echo "zend_extension=xdebug" > ${PHP_CONF_DIR}/cli/conf.d/20-xdebug.ini
 
 # Package PHP Oracle OCI8
 export OCI8_PACKAGE="oci8-3.0.1"
@@ -136,14 +143,14 @@ rm composer-setup.php
 mv composer.phar /usr/local/bin/composer
 
 # Configuration PHP, php-fpm.
-cp ${PHP_CONF_LOCAL_DIR}/fpm/pool.d/www.conf.part /tmp/
-cat /tmp/www.conf.part >> ${PHP_CONF_DIR}/fpm/pool.d/www.conf && rm /tmp/www.conf.part
-cp ${PHP_CONF_LOCAL_DIR}/fpm/conf.d/99-sygal.ini ${PHP_CONF_DIR}/fpm/conf.d/
-cp ${PHP_CONF_LOCAL_DIR}/cli/conf.d/99-sygal.ini ${PHP_CONF_DIR}/cli/conf.d/
+#cp ${PHP_CONF_LOCAL_DIR}/fpm/pool.d/www.conf.part /tmp/
+#cat /tmp/www.conf.part >> ${PHP_CONF_DIR}/fpm/pool.d/www.conf && rm /tmp/www.conf.part
+cp ${PHP_CONF_LOCAL_DIR}/fpm/conf.d/99-sygal-import-ws.ini ${PHP_CONF_DIR}/fpm/conf.d/
+cp ${PHP_CONF_LOCAL_DIR}/cli/conf.d/99-sygal-import-ws.ini ${PHP_CONF_DIR}/cli/conf.d/
 
-# Création du fichier pour les logs FPM (cf. fpm/pool.d/www.conf.part)
-touch ${FPM_PHP_LOG_FILE} && \
-    chown www-data:www-data ${FPM_PHP_LOG_FILE}
+## Création du fichier pour les logs FPM (cf. fpm/pool.d/www.conf.part)
+#touch ${FPM_PHP_LOG_FILE} && \
+#    chown www-data:www-data ${FPM_PHP_LOG_FILE}
 
 
 ###########################################################################################
@@ -168,12 +175,12 @@ a2disconf security.conf && \
 #RUN ln -sf /dev/stderr /var/log/apache2/error.log
 
 # Configuration Apache.
-cp ${APACHE_CONF_LOCAL_DIR}/apache-ports.conf     ${APACHE_CONF_DIR}/ports.conf
-cp ${APACHE_CONF_LOCAL_DIR}/apache-site.conf      ${APACHE_CONF_DIR}/sites-available/app.conf
-cp ${APACHE_CONF_LOCAL_DIR}/apache-site-ssl.conf  ${APACHE_CONF_DIR}/sites-available/app-ssl.conf
-sed -i -re 's/SetEnv APPLICATION_ENV "(development|test)"/SetEnv APPLICATION_ENV "production"/' \
-    ${APACHE_CONF_DIR}/sites-available/app-ssl.conf
-a2ensite app app-ssl
+cp ${APACHE_CONF_LOCAL_DIR}/ports.conf     ${APACHE_CONF_DIR}/ports.conf
+cp ${APACHE_CONF_LOCAL_DIR}/sygal-import-ws.conf      ${APACHE_CONF_DIR}/sites-available/sygal-import-ws.conf
+cp ${APACHE_CONF_LOCAL_DIR}/sygal-import-ws-ssl.conf  ${APACHE_CONF_DIR}/sites-available/sygal-import-ws-ssl.conf
+#sed -i -re 's/SetEnv APPLICATION_ENV "(development|test)"/SetEnv APPLICATION_ENV "production"/' \
+#    ${APACHE_CONF_DIR}/sites-available/sygal-import-ws-ssl.conf
+a2ensite sygal-import-ws sygal-import-ws-ssl
 
 
 ###########################################################################################
