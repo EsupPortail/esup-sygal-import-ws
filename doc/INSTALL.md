@@ -56,12 +56,19 @@ git checkout --force 3.0.0 && bash install.sh
 
 ### Script `Dockerfile.sh`
 
-- Vous trouverez dans le répertoire des sources d'ESUP-SyGAL un script `Dockerfile.sh`, sorte de version sh partielle 
-  du Dockerfile, contenant de quoi mettre à niveau et/ou installer les packages nécessaires.
+- À la racine des sources d'ESUP-SyGAL se trouve un répertoire `docker/` qui contient des fichiers de config
+  PHP et Apache par défaut et de quoi installer le driver PHP OCI8 (requis pour requêter une BDD Oracle).
+  Copiez ce répertoire `docker/` dans le répertoire `/tmp` du serveur d'application, exemple :
+```bash
+cp -r ./docker /tmp/
+```
 
-- Vous ne devez pas le lancer d'un seul bloc, ouvrez-le dans un autre terminal pour l'avoir sous la main.
+- À la racine des sources d'ESUP-SyGAL vous trouverez aussi un script `Dockerfile.sh`, sorte de version bash partielle 
+  du Dockerfile, contenant de quoi installer les packages nécessaires.
 
-- Lisez et appliquez les pré-requis mentionnés dans les commentaires en entête du script.
+- **Conseil** : évitez de lancer ce script d'un seul bloc, ouvrez-le dans un autre terminal pour l'avoir sous la main.
+
+- Lisez et vérifiez les pré-requis mentionnés dans les commentaires en entête du script.
 
 - Copiez-collez-lancez les commandes qu'il contient par petits groupes.
 
