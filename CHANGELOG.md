@@ -8,6 +8,12 @@ Journal des modifications
 - Ajout de la colonne V_SYGAL_DOCTORANT_V2.code_apprenant_in_source contenant le numéro étudiant (API V3).
 - Dockerfile sans dépendance à l'image Unicaen ; traduit en Dockerfile.sh pour l'install manuelle.
 - Mise à jour de la doc d'installation.
+- Doc d'install : mention des ressources/config à copier sur le serveur avant de lancer Dockerfile.sh
+- Dockerfile.sh : install manuelle de xdebug 3.2.2 sinon core dump en PHP8.0 ; utilisation du fichier de log FPM par défaut.
+- Possibilité de spécifier la version d'API visée (ex : 'V3') dans la ligne de commande update-service-tables
+- install.sh : tentative de ne plus vider le cache de résultat
+- composer : ajout explicite d'un dépendance avec laminas-text
+- [FIX] SQL : manquait la vue V_SYGAL_ROLE_V2
 
 2.3.0
 -----
