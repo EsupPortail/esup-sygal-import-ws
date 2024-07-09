@@ -2,7 +2,15 @@ Installation du web service `sygal-import-ws`
 =============================================
 
 
-## Installation du serveur Debian Bullseye
+Base de données
+---------------
+
+Reportez-vous au [README consacré à la base de données](database/README.md).
+
+
+
+Installation du serveur d'application
+-------------------------------------
 
 Concernant l'installation du serveur d'application, n'ayant pas à Caen les compétences
 en déploiement Docker (autres que pour le développement), nous documenterons une installation manuelle sur
@@ -46,32 +54,74 @@ git checkout --force 3.0.0 && bash install.sh
 ```
 
 
-### Configuration du serveur
+### Script `Dockerfile.sh`
 
-- Vous trouverez dans le répertoire des sources récupérées à l'instant un script `Dockerfile.sh`,
-  sorte de version sh du Dockerfile, contenant de quoi mettre à niveau et/ou installer les packages nécessaires.
+- Vous trouverez dans le répertoire des sources d'ESUP-SyGAL un script `Dockerfile.sh`, sorte de version sh partielle 
+  du Dockerfile, contenant de quoi mettre à niveau et/ou installer les packages nécessaires.
 
-- Plutôt que de le lancer d'un seul bloc, ouvrez-le dans un autre terminal pour le visualiser, ce qui vous permettra
-  de copier-coller-lancer les commandes qu'il contient par petits groupes.
+- Vous ne devez pas le lancer d'un seul bloc, ouvrez-le dans un autre terminal pour l'avoir sous la main.
 
-- Ensuite, vérifiez et ajustez si besoin sur votre serveur les fichiers de configs suivants,
-créés par le script `Dockerfile.sh` :
-- ${APACHE_CONF_DIR}/ports.conf
-- ${APACHE_CONF_DIR}/sites-available/app.conf
-- ${APACHE_CONF_DIR}/sites-available/app-ssl.conf  
-- ${PHP_CONF_DIR}/fpm/pool.d/99-sygal.conf
-- ${PHP_CONF_DIR}/fpm/conf.d/99-sygal.ini
+- Lisez et appliquez les pré-requis mentionnés dans les commentaires en entête du script.
 
-NB: Vérifiez dans le script `Dockerfile.sh` que vous venez de lancer mais normalement 
-`APACHE_CONF_DIR=/etc/apache2` et `PHP_CONF_DIR=/etc/php/${PHP_VERSION}`.
+- Copiez-collez-lancez les commandes qu'il contient par petits groupes.
 
 
-### Fichier `users.htpasswd`
 
-Ce fichier contient les comptes utilisateurs / mots de passe autorisés à interroger le WS au regard de l'authentification HTTP Basic.
+Configuration du serveur
+------------------------
 
-Placez-vous dans le répertoire [`config`](config) des sources et lancez la 
-commande suivante pour créer le fichier `users.htpasswd` contenant un utilisateur `sygal-app` dont le mot de passe 
+### Apache
+
+- Vérifiez et ajustez si besoin sur votre serveur les fichiers de configs suivants,
+  créés par le script `Dockerfile.sh` (vérifiez dans le script mais normalement
+  `APACHE_CONF_DIR=/etc/apache2`) :
+  - ${APACHE_CONF_DIR}/ports.conf
+  - ${APACHE_CONF_DIR}/sites-available/app.conf
+  - ${APACHE_CONF_DIR}/sites-available/app-ssl.conf
+
+### PHP
+
+- Vérifiez et ajustez si besoin sur votre serveur les fichiers de configs suivants,
+  créés par le script `Dockerfile.sh` (vérifiez dans le script mais normalement
+  `PHP_CONF_DIR=/etc/php/${PHP_VERSION}`) :
+  - ${PHP_CONF_DIR}/fpm/pool.d/99-sygal-import-ws.conf
+  - ${PHP_CONF_DIR}/fpm/conf.d/99-sygal-import-ws.ini
+
+- Si vous êtes sur un serveur de PROD, corrigez les lignes suivantes du fichier de config 
+`/etc/php/${PHP_VERSION}/fpm/conf.d/99-sygal-import-ws.ini` :
+```
+display_errors = Off
+display_startup_errors = Off
+display_errors = Off
+...
+error_reporting = 0
+...
+opcache.enable = 1
+...
+xdebug.mode = off
+```
+
+- Ajoutez ceci à la fin du fichier de config `/etc/php/${PHP_VERSION}/fpm/pool.d/www.conf` et 
+  adaptez les valeurs selon que vous souhaitez activer les logs PHP-FPM ou non :
+```conf
+catch_workers_output = yes
+php_flag[display_errors] = on
+php_admin_value[error_log] = /var/log/php-fpm.log
+php_admin_flag[log_errors] = on
+```
+
+
+
+Configuration du web service
+----------------------------
+
+### Fichier `config/users.htpasswd`
+
+Ce fichier doit contenir les comptes utilisateurs / mots de passe autorisés à interroger le WS au regard de 
+l'authentification HTTP Basic.
+
+Placez-vous dans le répertoire [`config`](config) des sources et lancez la
+commande suivante pour créer le fichier `users.htpasswd` contenant un utilisateur `sygal-app` dont le mot de passe
 vous sera demandé :
 ```bash
 htpasswd -c users.htpasswd sygal-app
@@ -82,17 +132,26 @@ Si vous manquez d'idée pour le mot de passe, utilsez la commande suivante :
 pwgen 16 1 --symbols --secure
 ```
 
+### Fichier `config/autoload/{dev|test|prod}.local.php`
 
-### Configuration du WS
+- Supprimez l'extension `.dist` du fichier [`config/autoload/local.php.dist`](../config/autoload/local.php.dist),
+  et préfixez-le par `prod.`, `test.` ou `dev.` pour bien signifier l'environnement de fonctionnement
+  (*n'utilisez pas le préfixe `development.` qui est réservé*), exemple :
+```bash
+cp local.php.dist prod.local.php
+```
 
-Supprimez l'extension `.dist` des fichiers suivants situés dans le répertoire [`config/autoload`](config/autoload) :
-  - [`local.php.dist`](config/autoload/local.php.dist)
+- Activez si besoin les logs des requêtes HTTP reçues et des temps de traitements (SQL, génération HAL) :
+```php
+    'logging' => [
+        'enabled' => false, // mettre à `true` pour activer les logs
+        'params' => [
+            'file_path' => '/tmp/api-logging.log',
+        ],
+    ],
+```
 
-Dans la suite, vous allez adapter le contenu de ces fichiers à votre situation.
-
-#### Fichier `local.php`
-
-- Vérifiez la valeur de la clé `htpasswd` qui désigne le chemin du fichier "users.htpasswd" évoqué plus haut.
+### Fichier `config/autoload/{dev|test|prod}.secret.local.php`
 
 - Renseignez les infos de connexion à la base de données (Apogée ou Physalis) :
 ```php
@@ -113,37 +172,33 @@ Dans la suite, vous allez adapter le contenu de ces fichiers à votre situation.
     ],
 ```
 
-
-### Configuration PHP
-
-Si vous êtes sur un serveur de PROD, corrigez les lignes suivantes du fichier de config PHP 
-`/etc/php/${PHP_VERSION}/fpm/conf.d/99-sygal.ini` :
-```
-    display_errors = Off
-    display_startup_errors = Off
-    display_errors = Off
-    ...
-    error_reporting = 0
-    ...
-    opcache.enable = 1
-    ...
-    xdebug.mode = off
+- Vérifiez la valeur de la clé `htpasswd` qui désigne le chemin du fichier `config/users.htpasswd` évoqué plus haut :
+```php
+    'zf-mvc-auth' => [
+        'authentication' => [
+            'adapters' => [
+                'basic' => [
+                    'options' => [
+                        'htpasswd' => __DIR__ . '/../users.htpasswd',
+                    ],
+                ],
+            ],
+        ],
+    ],
 ```
 
 
-## Script d'install des dépendances et d'init de l'application
 
-Lancez le script suivant :
+Script `install.sh`
+-------------------
+
+Le script `install.sh` situé à la racine des sources du web service doit être lancé à chaque fois
+qu'une nouvelle version du ws est téléchargée/installée :
 
 ```bash
 bash ./install.sh
 ```
 
-
-Base de données
----------------
-
-Reportez-vous au [README consacré à la base de données](database/README.md).
 
 
 Programmation des tâches périodiques
@@ -152,13 +207,16 @@ Programmation des tâches périodiques
 Vous devez CRONer l'exécution de la commande permettant de mettre à jour le contenu des tables de la bdd dans lesquelles 
 puisent le WS. Normalement, vous avez lancé cette commande une première fois en suivant la doc d'install de la bdd.
 
-- Créez sur le serveur du web service le fichier de config CRON `/etc/cron.d/sygal-import-ws-cron`
-  identique au fichier [cron/sygal-import-ws-cron](cron/sygal-import-ws-cron) fourni.
+- Créez sur le serveur d'application le fichier de config CRON `/etc/cron.d/sygal-import-ws`
+  identique au fichier [doc/cron/sygal-import-ws](cron/sygal-import-ws) fourni.
 
-- Adaptez si nécessaire son contenu :
-  - `APP_DIR` : chemin vers le répertoire d'installation du web service.
-  - `LOG_FILE` : chemin vers le fichier de log.
-  - périodicité d'exécution du script, ex : "lun-ven à 6:25, 6:55, 7:25, ..., 18:25, 18:55".
+- Adaptez obligatoirement les éléments suivants :
+  - variable `APP_DIR` : chemin vers le répertoire d'installation du web service.
+
+- Adaptez éventuellement :
+  - variable `LOG_FILE` : chemin vers le fichier de log.
+  - périodicité d'exécution du script.
+
 
 
 Réseau
@@ -167,6 +225,7 @@ Réseau
 Vous devez autoriser le serveur sur lequel est installé le WS à être interrogé par le serveur sur lequel est installé 
 ESUP-SyGAL.
 Il est conseillé de restreindre cette autorisation à cette seule adresse IP d'origine.
+
 
 
 Test

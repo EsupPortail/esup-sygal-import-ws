@@ -1,4 +1,5 @@
 <?php
+
 return [
     /**
      * Eventuelles instructions SQL à exécuter avant la mise à jour d'une table de service.
@@ -6,36 +7,14 @@ return [
     'services_pre_sql' => [
         //'individu' => "begin DBMS_MVIEW.REFRESH('SYGAL_MV_EMAIL', 'C'); end;",
     ],
+
     /**
-     * Connexion à la base de données.
+     * Logging possible des requêtes reçues et des temps de traitements (SQL, génération HAL).
      */
-    'doctrine' => [
-        'connection' => [
-            'orm_default' => [
-                'driverClass' => 'Doctrine\DBAL\Driver\OCI8\Driver',
-                'params' => [
-                    'host'     => 'XXXXX',
-                    'dbname'   => 'XXXXX',
-                    'port'     => 'XXXXX',
-                    'user'     => 'XXXXX',
-                    'password' => 'XXXXX',
-                    'charset'  => 'AL32UTF8',
-                ],
-            ],
-        ],
-    ],
-    /**
-     * Config du mode d'authentification.
-     */
-    'zf-mvc-auth' => [
-        'authentication' => [
-            'adapters' => [
-                'basic' => [
-                    'options' => [
-                        'htpasswd' => __DIR__ . '/../users.htpasswd',
-                    ],
-                ],
-            ],
+    'logging' => [
+        'enabled' => false,
+        'params' => [
+            'file_path' => '/tmp/api-logging.log',
         ],
     ],
 ];
