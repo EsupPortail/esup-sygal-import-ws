@@ -18,23 +18,19 @@ class ConsoleController extends AbstractConsoleController
 {
     use LoggerAwareTrait;
 
-    /**
-     * @var TableService
-     */
-    private $tableService;
+    private TableService $tableService;
 
-    /**
-     * @param TableService $tableService
-     */
-    public function setTableService(TableService $tableService)
+    public function setTableService(TableService $tableService): void
     {
         $this->tableService = $tableService;
     }
 
-    public function updateServiceTablesAction()
+    public function updateServiceTablesAction(): void
     {
+        /** @var \Unicaen\Console\Request $request */
         $request = $this->getRequest();
         $services = $request->getParam('services');
+        $version = $request->getParam('version');
         $verbose = $request->getParam('verbose');
 
         $priority = $verbose ? Logger::DEBUG : Logger::INFO;
@@ -46,9 +42,9 @@ class ConsoleController extends AbstractConsoleController
 
         if ($services !== null) {
             $services = explode(',', $services);
-            $this->tableService->updateTablesForServices($services);
+            $this->tableService->updateTablesForServices($services, $version);
         } else {
-            $this->tableService->updateTablesForAllServices();
+            $this->tableService->updateTablesForAllServices($version);
         }
 
         $this->logger->info("Terminé.");

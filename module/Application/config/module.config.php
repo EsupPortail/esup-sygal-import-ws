@@ -115,7 +115,7 @@ return [
             'routes' => [
                 'update-service-tables' => [
                     'options' => [
-                        'route'    => 'update-service-tables [--services=] [--verbose]',
+                        'route'    => 'update-service-tables [--services=] [--version=] [--verbose]',
                         'defaults' => [
                             /**
                              * @see ConsoleController::updateServiceTablesAction()
