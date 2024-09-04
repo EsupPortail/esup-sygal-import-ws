@@ -12,7 +12,9 @@ Journal des modifications
 - Dockerfile.sh : install manuelle de xdebug 3.2.2 sinon core dump en PHP8.0 ; utilisation du fichier de log FPM par défaut.
 - Possibilité de spécifier la version d'API visée (ex : 'V3') dans la ligne de commande update-service-tables
 - install.sh : tentative de ne plus vider le cache de résultat
-- composer : ajout explicite d'un dépendance avec laminas-text
+- composer : ajout explicite d'une dépendance avec laminas-text
+- SQL Doctorants Apogée/Physalis : ajout de la colonne "code_apprenant_in_source" (numero étudiant).
+- SQL Origines de financement Apogée : données désormais puisées dans la table "origine_financement" et plus en dur.
 - [FIX] SQL : manquait la vue V_SYGAL_ROLE_V2
 
 2.3.0
