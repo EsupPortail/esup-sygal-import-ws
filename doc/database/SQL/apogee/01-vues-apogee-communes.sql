@@ -6,7 +6,7 @@
 --
 
 --
--- NB : Seule la vue `V_SYGAL_DOCTORANT_V3` existe en version "V3", c'est normal.
+-- NB : Seule les vues `V_SYGAL_DOCTORANT_V3` et `V_SYGAL_ORIGINE_FINANCEMENT_V3` existent en version V3, c'est normal.
 --      Les autres vues/tables restent en version "V2".
 --
 
@@ -648,6 +648,17 @@ from acteur                  act
          left join etablissement    etb on etb.cod_etb = nvl ( act.cod_etb, per.cod_etb )
          left join pays             pay on pay.cod_pay = etb.cod_pay_adr_etb
          left join V_SYGAL_ROLE_JURY  rjc on rjc.cod_roj = act.cod_roj_compl
+/
+
+create or replace view V_SYGAL_ORIGINE_FINANCEMENT_V3 as
+select COD_OFI as ID,
+       COD_OFI as SOURCE_CODE,
+       'apogee' as source_id,
+       COD_OFI,
+       LIC_OFI,
+       LIB_OFI
+from origine_financement
+where TEM_EN_SVE_OFI = 'O'
 /
 
 create or replace view V_SYGAL_FINANCEMENT_V2 as

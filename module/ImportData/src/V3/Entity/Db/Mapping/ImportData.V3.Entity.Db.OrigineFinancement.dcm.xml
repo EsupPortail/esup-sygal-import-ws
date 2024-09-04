@@ -2,8 +2,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <!-- (!) ATTENTION, notez que l'on pointe sur la table de la V2 (!) -->
-    <entity name="ImportData\V3\Entity\Db\OrigineFinancement" table="SYGAL_ORIGINE_FINANCEMENT_V2">
+    <entity name="ImportData\V3\Entity\Db\OrigineFinancement" table="SYGAL_ORIGINE_FINANCEMENT_V3">
         <id name="id" length="8" column="ID"/>
         <field name="sourceCode" length="6" column="SOURCE_CODE"/>
         <field name="sourceId" column="SOURCE_ID" length="64"/>
