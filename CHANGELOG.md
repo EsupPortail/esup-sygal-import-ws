@@ -1,6 +1,11 @@
 Journal des modifications
 =========================
 
+3.0.1
+-----
+- [FIX] Nécessité d'installer laminas-api-tools/api-tools-admin pour corriger l'erreur suivante : 
+  Module "Laminas\ApiTools\Doctrine\Admin" depends on module "Laminas\ApiTools\Admin", which was not initialized before it.
+
 3.0.0
 -----
 - Passage à PHP 8.0.

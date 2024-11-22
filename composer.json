@@ -48,6 +48,7 @@
         "laminas/laminas-test": "^4.0",
         "phpunit/phpunit": "^8.0",
         "squizlabs/php_codesniffer": "^3.3",
+        "laminas-api-tools/api-tools-admin": "^2.1",
         "laminas-api-tools/api-tools-asset-manager": "^1.5",
         "laminas/laminas-composer-autoloading": "^2.0"
     },

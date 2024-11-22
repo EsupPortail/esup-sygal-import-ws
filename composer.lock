@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "79e878d5a4231b1a8fe86f34e3a882cd",
+    "content-hash": "66494a8e461c2479b43352e138d6f1d5",
     "packages": [
         {
             "name": "api-skeletons/doctrine-orm-hydration-module",
@@ -6779,6 +6779,167 @@
     ],
     "packages-dev": [
         {
+            "name": "laminas-api-tools/api-tools-admin",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas-api-tools/api-tools-admin.git",
+                "reference": "f94fafc18a81a95fb5814f3a81ceb65352f1bd44"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas-api-tools/api-tools-admin/zipball/f94fafc18a81a95fb5814f3a81ceb65352f1bd44",
+                "reference": "f94fafc18a81a95fb5814f3a81ceb65352f1bd44",
+                "shasum": ""
+            },
+            "require": {
+                "laminas-api-tools/api-tools": "^1.7",
+                "laminas-api-tools/api-tools-admin-ui": "^2.1",
+                "laminas-api-tools/api-tools-api-problem": "^1.6",
+                "laminas-api-tools/api-tools-configuration": "^1.6",
+                "laminas-api-tools/api-tools-content-negotiation": "^1.8",
+                "laminas-api-tools/api-tools-content-validation": "^1.12",
+                "laminas-api-tools/api-tools-hal": "^1.7",
+                "laminas-api-tools/api-tools-mvc-auth": "^1.8",
+                "laminas-api-tools/api-tools-oauth2": "^1.9",
+                "laminas-api-tools/api-tools-provider": "^1.6",
+                "laminas-api-tools/api-tools-rest": "^1.8",
+                "laminas-api-tools/api-tools-rpc": "^1.8",
+                "laminas-api-tools/api-tools-versioning": "^1.7",
+                "laminas/laminas-code": "^3.5 || ^4.0",
+                "laminas/laminas-eventmanager": "^3.2",
+                "laminas/laminas-filter": "^2.8",
+                "laminas/laminas-http": "^2.8",
+                "laminas/laminas-hydrator": "^3.0 || ^4.0",
+                "laminas/laminas-inputfilter": "^2.8.1",
+                "laminas/laminas-modulemanager": "^2.8.2",
+                "laminas/laminas-mvc": "^2.7.15 || ^3.1.1",
+                "laminas/laminas-servicemanager": "^3.11",
+                "laminas/laminas-stdlib": "^2.7.8 || ^3.2.1",
+                "laminas/laminas-validator": "^2.10.2",
+                "laminas/laminas-view": "^2.10",
+                "php": " ~8.0.0 || ~8.1.0 || ~8.2.0",
+                "webmozart/assert": "^1.10"
+            },
+            "replace": {
+                "zfcampus/zf-apigility-admin": "^1.8.0"
+            },
+            "require-dev": {
+                "ext-sqlite3": "*",
+                "laminas/laminas-coding-standard": "~2.3.0",
+                "laminas/laminas-config": "^2.6 || ^3.2",
+                "laminas/laminas-loader": "^2.6",
+                "phpspec/prophecy-phpunit": "^v2.1.0",
+                "phpunit/phpunit": "^9.6.15",
+                "psalm/plugin-phpunit": "^0.18.4",
+                "vimeo/psalm": "^4.30"
+            },
+            "bin": [
+                "bin/api-tools-upgrade-to-1.5"
+            ],
+            "type": "library",
+            "extra": {
+                "laminas": {
+                    "module": "Laminas\\ApiTools\\Admin"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laminas\\ApiTools\\Admin\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Laminas API Tools Admin module",
+            "homepage": "https://api-tools.getlaminas.org",
+            "keywords": [
+                "api",
+                "api-tools",
+                "framework",
+                "laminas"
+            ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://api-tools.getlaminas.org/documentation",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas-api-tools/api-tools-admin/issues",
+                "rss": "https://github.com/laminas-api-tools/api-tools-admin/releases.atom",
+                "source": "https://github.com/laminas-api-tools/api-tools-admin"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2023-12-15T20:32:24+00:00"
+        },
+        {
+            "name": "laminas-api-tools/api-tools-admin-ui",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas-api-tools/api-tools-admin-ui.git",
+                "reference": "89f48b4feb7bace13d2ca3eb488a8cb158d4e21c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas-api-tools/api-tools-admin-ui/zipball/89f48b4feb7bace13d2ca3eb488a8cb158d4e21c",
+                "reference": "89f48b4feb7bace13d2ca3eb488a8cb158d4e21c",
+                "shasum": ""
+            },
+            "require": {
+                "laminas/laminas-view": "^2.8.1",
+                "laminas/laminas-zendframework-bridge": "^1.0",
+                "php": "~8.0.0 || ~8.1.0 || ~8.2.0"
+            },
+            "replace": {
+                "zfcampus/zf-apigility-admin-ui": "^1.3.13"
+            },
+            "require-dev": {
+                "laminas/laminas-console": "^2.6"
+            },
+            "suggest": {
+                "laminas-api-tools/api-tools-asset-manager": "^1.0, to expose assets under the document root, until rwoverdijk/assetmanager 1.7 is released",
+                "rwoverdijk/assetmanager": "^1.7, to expose assets under the document root (may not yet be released)"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "Module.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Laminas API Tools Admin UI module",
+            "homepage": "https://api-tools.getlaminas.org",
+            "keywords": [
+                "api",
+                "api-tools",
+                "framework",
+                "laminas"
+            ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://api-tools.getlaminas.org/documentation",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas-api-tools/api-tools-admin-ui/issues",
+                "rss": "https://github.com/laminas-api-tools/api-tools-admin-ui/releases.atom",
+                "source": "https://github.com/laminas-api-tools/api-tools-admin-ui"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2023-01-09T13:08:15+00:00"
+        },
+        {
             "name": "laminas-api-tools/api-tools-asset-manager",
             "version": "1.7.0",
             "source": {
@@ -6839,6 +7000,72 @@
                 }
             ],
             "time": "2023-01-09T19:02:22+00:00"
+        },
+        {
+            "name": "laminas/laminas-code",
+            "version": "4.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-code.git",
+                "reference": "91aabc066d5620428120800c0eafc0411e441a62"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-code/zipball/91aabc066d5620428120800c0eafc0411e441a62",
+                "reference": "91aabc066d5620428120800c0eafc0411e441a62",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4, <8.2"
+            },
+            "require-dev": {
+                "doctrine/annotations": "^1.13.2",
+                "ext-phar": "*",
+                "laminas/laminas-coding-standard": "^2.3.0",
+                "laminas/laminas-stdlib": "^3.6.1",
+                "phpunit/phpunit": "^9.5.10",
+                "psalm/plugin-phpunit": "^0.17.0",
+                "vimeo/psalm": "^4.13.1"
+            },
+            "suggest": {
+                "doctrine/annotations": "Doctrine\\Common\\Annotations >=1.0 for annotation features",
+                "laminas/laminas-stdlib": "Laminas\\Stdlib component"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "polyfill/ReflectionEnumPolyfill.php"
+                ],
+                "psr-4": {
+                    "Laminas\\Code\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Extensions to the PHP Reflection API, static code scanning, and code generation",
+            "homepage": "https://laminas.dev",
+            "keywords": [
+                "code",
+                "laminas",
+                "laminasframework"
+            ],
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-code/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-code/issues",
+                "rss": "https://github.com/laminas/laminas-code/releases.atom",
+                "source": "https://github.com/laminas/laminas-code"
+            },
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2022-11-21T01:32:31+00:00"
         },
         {
             "name": "laminas/laminas-composer-autoloading",
